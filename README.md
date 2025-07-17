@@ -1,1749 +1,1749 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergencia K8 - Botón de Pánico Virtual</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-    <style>
-        :root {
-            --primary-blue: #003366;
-            --secondary-blue: #0066cc;
-            --accent-red: #cc0000;
-            --light-red: #ff3333;
-            --white: #ffffff;
-            --dark: #121212;
-            --gray: #f5f5f5;
-            --gray-light: #e0e0e0;
-            --gray-medium: #9e9e9e;
-            --gray-dark: #616161;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--white);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        /* Estilos del header */
-        header {
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-            color: var(--white);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo img {
-            height: 40px;
-            transition: transform 0.3s ease;
-        }
-        
-        .logo:hover img {
-            transform: scale(1.1);
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .logo-text span {
-            color: var(--light-red);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        nav a:hover {
-            color: var(--light-red);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--light-red);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .mobile-menu-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url('imagenes/imagenEncabezado_1.png');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            padding-top: 80px;
-            position: relative;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: var(--gray-light);
-        }
-        
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            top: 0;
-            left: -100%;
-            transition: left 0.4s ease;
-        }
-        
-        .btn:hover::after {
-            left: 100%;
-        }
-        
-        .btn-primary {
-            background-color: var(--light-red);
-            color: var(--white);
-            border: 2px solid var(--light-red);
-        }
-        
-        .btn-primary:hover {
-            background-color: transparent;
-            color: var(--light-red);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--white);
-            color: var(--primary-blue);
-        }
-        
-        /* Features Section */
-        .section {
-            padding: 5rem 2rem;
-            background-color: var(--white);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 3px;
-            background: var(--light-red);
-            bottom: -10px;
-            left: 25%;
-        }
-        
-        .section-title p {
-            color: var(--gray-dark);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .feature-card {
-            background: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--light-red);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--secondary-blue);
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-        
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1);
-            color: var(--light-red);
-        }
-        
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-blue);
-            transition: color 0.3s ease;
-        }
-        
-        .feature-card:hover h3 {
-            color: var(--light-red);
-        }
-        
-        .feature-card p {
-            color: var(--gray-dark);
-        }
-        
-        /* App Showcase Section */
-        .app-showcase {
-            background-color: var(--gray);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .app-showcase::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, rgba(0, 102, 204, 0) 70%);
-            z-index: 1;
-        }
-        
-        .showcase-container {
-            display: flex;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .showcase-text {
-            flex: 1;
-        }
-        
-        .showcase-text h2 {
-            font-size: 2.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 1.5rem;
-        }
-        
-        .showcase-text p {
-            color: var(--gray-dark);
-        }
-        
-        .showcase-text ul {
-            list-style: none;
-            margin: 2rem 0;
-        }
-        
-        .showcase-text li {
-            margin-bottom: 1rem;
-            position: relative;
-            padding-left: 2rem;
-            transition: transform 0.3s ease;
-            color: var(--gray-dark);
-        }
-        
-        .showcase-text li:hover {
-            transform: translateX(10px);
-        }
-        
-        .showcase-text li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--light-red);
-            position: absolute;
-            left: 0;
-        }
-        
-        .showcase-image {
-            flex: 1;
-            position: relative;
-            perspective: 1000px;
-        }
-        
-        .phone-mockup {
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotateY(0deg); }
-            50% { transform: translateY(-20px) rotateY(5deg); }
-        }
-        
-        .phone-mockup img {
-            width: 100%;
-            display: block;
-        }
-        
-        .screen-content {
-            position: absolute;
-            top: 5%;
-            left: 6%;
-            right: 6%;
-            bottom: 5%;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Screenshots Carousel - Optimizado */
-        .screenshots {
-            background-color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .screenshots::before {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            left: -50%;
-            width: 100%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(204, 0, 0, 0.1) 0%, rgba(204, 0, 0, 0) 70%);
-            z-index: 1;
-        }
-        
-        .swiper {
-            width: 100%;
-            max-width: 800px;
-            padding: 2rem 0;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .swiper-slide {
-            text-align: center;
-            background: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            /*border: 1px solid var(--gray-light);*/
-        }
-        
-        .swiper-slide:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .swiper-slide:hover img {
-            transform: scale(1.05);
-        }
-        
-        .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-            background: var(--gray-medium);
-            opacity: 1;
-            transition: all 0.3s ease;
-        }
-        
-        .swiper-pagination-bullet-active {
-            background: var(--light-red);
-            transform: scale(1.2);
-        }
-        
-        .swiper-button-next, .swiper-button-prev {
-            color: var(--light-red);
-            background: rgba(255, 255, 255, 0.8);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            opacity: 0.7;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .swiper-button-next:hover, .swiper-button-prev:hover {
-            background: var(--light-red);
-            color: white;
-            opacity: 1;
-        }
-        
-        .swiper-button-next::after, .swiper-button-prev::after {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        /* Nuevos estilos para optimización del carrusel */
-        .swiper-slide img {
-            will-change: transform;
-        }
-        
-        .swiper-container {
-            backface-visibility: hidden;
-            transform: translate3d(0,0,0);
-        }
-        
-        /* Testimonials Section */
-        .testimonials {
-            background-color: var(--gray);
-            position: relative;
-        }
-        
-        .testimonials::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(0, 51, 102, 0.1) 0%, rgba(0, 51, 102, 0) 70%);
-        }
-        
-        .testimonials::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(204, 0, 0, 0.1) 0%, rgba(204, 0, 0, 0) 70%);
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .testimonial-card {
-            background: var(--white);
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .testimonial-card::before {
-            content: '\f10d';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3rem;
-            color: rgba(0, 102, 204, 0.1);
-            z-index: 1;
-        }
-        
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 1rem;
-            border: 3px solid var(--light-red);
-            transition: transform 0.3s ease;
-        }
-        
-        .testimonial-card:hover .testimonial-avatar {
-            transform: scale(1.1);
-        }
-        
-        .testimonial-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .testimonial-info h4 {
-            color: var(--primary-blue);
-            margin-bottom: 0.2rem;
-        }
-        
-        .testimonial-info p {
-            color: var(--gray-medium);
-            font-size: 0.9rem;
-        }
-        
-        .testimonial-rating {
-            color: gold;
-            margin: 0.5rem 0;
-            font-size: 0.9rem;
-        }
-        
-        .testimonial-card p {
-            color: var(--gray-dark);
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* Download Section */
-        .download {
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .download::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-        }
-        
-        .download h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .download p {
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            position: relative;
-            z-index: 2;
-            color: var(--gray-light);
-        }
-        
-        .download-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .download-btn {
-            display: flex;
-            align-items: center;
-            background: var(--white);
-            color: var(--primary-blue);
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0, 102, 204, 0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-        
-        .download-btn:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .download-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .download-btn i {
-            font-size: 1.8rem;
-            margin-right: 0.8rem;
-        }
-        
-        .download-btn-text {
-            text-align: left;
-        }
-        
-        .download-btn-text span {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--gray-medium);
-        }
-        
-        /* FAQ Section */
-        .faq {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .faq-item:hover {
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .faq-question {
-            background: var(--primary-blue);
-            color: var(--white);
-            padding: 1rem 1.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            transition: background 0.3s ease;
-        }
-        
-        .faq-question:hover {
-            background: var(--secondary-blue);
-        }
-        
-        .faq-question i {
-            transition: transform 0.3s ease;
-        }
-        
-        .faq-question.active i {
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            background: var(--white);
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-        
-        .faq-answer.active {
-            padding: 1rem 1.5rem;
-            max-height: 500px;
-        }
-        
-        .faq-answer p {
-            color: var(--gray-dark);
-        }
-        
-        /* Política de Privacidad Section */
-        .privacy-policy {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
-        }
-        
-        .privacy-policy h1 {
-            color: var(--primary-blue);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        
-        .privacy-policy h2 {
-            color: var(--primary-blue);
-            margin: 2rem 0 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .privacy-policy p {
-            margin-bottom: 1rem;
-            color: var(--gray-dark);
-            line-height: 1.6;
-        }
-        
-        .privacy-policy ul {
-            margin-bottom: 1.5rem;
-            padding-left: 2rem;
-        }
-        
-        .privacy-policy li {
-            margin-bottom: 0.5rem;
-            color: var(--gray-dark);
-        }
-        
-        .privacy-policy .last-updated {
-            font-style: italic;
-            color: var(--gray-medium);
-            text-align: right;
-            margin-top: 2rem;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 2rem;
-            position: relative;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--light-red), var(--secondary-blue));
-        }
-        
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .footer-logo {
-            margin-bottom: 1rem;
-        }
-        
-        .footer-logo img {
-            height: 40px;
-            transition: transform 0.3s ease;
-        }
-        
-        .footer-logo:hover img {
-            transform: scale(1.1);
-        }
-        
-        .footer-about p {
-            margin-bottom: 1rem;
-            color: var(--gray-medium);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .social-links a {
-            color: var(--white);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--gray-dark);
-        }
-        
-        .social-links a:hover {
-            color: var(--light-red);
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-        
-        .footer-links h3 {
-            color: var(--white);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .footer-links h3::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 2px;
-            background: var(--light-red);
-            bottom: -5px;
-            left: 0;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-links a {
-            color: var(--gray-medium);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .footer-links a:hover {
-            color: var(--light-red);
-            transform: translateX(5px);
-        }
-        
-        .footer-contact p {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            color: var(--gray-medium);
-        }
-        
-        .footer-contact i {
-            color: var(--light-red);
-            width: 20px;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--gray-dark);
-            color: var(--gray-medium);
-            font-size: 0.9rem;
-        }
-        
-        /* Scroll to top button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--light-red);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--gray-light);
-        }
-        
-        .scroll-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Pulse animation for CTA */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .showcase-container {
-                flex-direction: column;
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Emergencia K8 - Botón de Pánico Virtual</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+        <style>
+            :root {
+                --primary-blue: #003366;
+                --secondary-blue: #0066cc;
+                --accent-red: #cc0000;
+                --light-red: #ff3333;
+                --white: #ffffff;
+                --dark: #121212;
+                --gray: #f5f5f5;
+                --gray-light: #e0e0e0;
+                --gray-medium: #9e9e9e;
+                --gray-dark: #616161;
             }
             
-            .showcase-text, .showcase-image {
-                flex: none;
-                width: 100%;
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
             
-            .showcase-image {
-                order: -1;
+            body {
+                background-color: var(--white);
+                color: var(--dark);
+                line-height: 1.6;
             }
             
-            .download-buttons {
-                flex-wrap: wrap;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--primary-blue);
-                flex-direction: column;
-                align-items: center;
+            /* Estilos del header */
+            header {
+                background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+                color: var(--white);
                 padding: 1rem 0;
-                gap: 1rem;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
             }
             
-            nav ul.active {
+            .header-container {
                 display: flex;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+            
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .logo img {
+                height: 40px;
+                transition: transform 0.3s ease;
+            }
+            
+            .logo:hover img {
+                transform: scale(1.1);
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+            
+            .logo-text span {
+                color: var(--light-red);
+            }
+            
+            nav ul {
+                display: flex;
+                list-style: none;
+                gap: 2rem;
+            }
+            
+            nav a {
+                color: var(--white);
+                text-decoration: none;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+            
+            nav a:hover {
+                color: var(--light-red);
+            }
+            
+            nav a::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                background: var(--light-red);
+                bottom: -5px;
+                left: 0;
+                transition: width 0.3s ease;
+            }
+            
+            nav a:hover::after {
+                width: 100%;
             }
             
             .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .section {
-                padding: 3rem 1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            .download-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .download-btn {
-                justify-content: center;
-            }
-            
-            .swiper-button-next, .swiper-button-prev {
                 display: none;
+                background: none;
+                border: none;
+                color: var(--white);
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: transform 0.3s ease;
             }
             
-            .privacy-policy {
-                padding: 3rem 1rem;
+            .mobile-menu-btn:hover {
+                transform: scale(1.1);
             }
-        }
-        
-        @media (max-width: 480px) {
+            
+            /* Hero Section */
+            .hero {
+                background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url('imagenes/imagenEncabezado_1.png');
+                background-size: cover;
+                background-position: center;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                color: var(--white);
+                padding-top: 80px;
+                position: relative;
+            }
+            
+            .hero-content {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 0 2rem;
+                position: relative;
+                z-index: 2;
+            }
+            
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             }
             
             .hero p {
-                font-size: 1rem;
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+                color: var(--gray-light);
             }
             
             .cta-buttons {
-                flex-direction: column;
+                display: flex;
+                justify-content: center;
                 gap: 1rem;
+                margin-top: 2rem;
             }
             
             .btn {
+                padding: 0.8rem 1.5rem;
+                border-radius: 30px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .btn::after {
+                content: '';
+                position: absolute;
                 width: 100%;
-                justify-content: center;
+                height: 100%;
+                background: rgba(255, 255, 255, 0.2);
+                top: 0;
+                left: -100%;
+                transition: left 0.4s ease;
+            }
+            
+            .btn:hover::after {
+                left: 100%;
+            }
+            
+            .btn-primary {
+                background-color: var(--light-red);
+                color: var(--white);
+                border: 2px solid var(--light-red);
+            }
+            
+            .btn-primary:hover {
+                background-color: transparent;
+                color: var(--light-red);
+            }
+            
+            .btn-secondary {
+                background-color: transparent;
+                color: var(--white);
+                border: 2px solid var(--white);
+            }
+            
+            .btn-secondary:hover {
+                background-color: var(--white);
+                color: var(--primary-blue);
+            }
+            
+            /* Features Section */
+            .section {
+                padding: 5rem 2rem;
+                background-color: var(--white);
+            }
+            
+            .section-title {
+                text-align: center;
+                margin-bottom: 3rem;
             }
             
             .section-title h2 {
-                font-size: 1.8rem;
+                font-size: 2.5rem;
+                color: var(--primary-blue);
+                margin-bottom: 1rem;
+                position: relative;
+                display: inline-block;
+            }
+            
+            .section-title h2::after {
+                content: '';
+                position: absolute;
+                width: 50%;
+                height: 3px;
+                background: var(--light-red);
+                bottom: -10px;
+                left: 25%;
+            }
+            
+            .section-title p {
+                color: var(--gray-dark);
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .feature-card {
+                background: var(--white);
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                text-align: center;
+                padding: 2rem;
+                position: relative;
+                border: 1px solid var(--gray-light);
+            }
+            
+            .feature-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background: var(--light-red);
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.3s ease;
+            }
+            
+            .feature-card:hover::before {
+                transform: scaleX(1);
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            }
+            
+            .feature-icon {
+                font-size: 3rem;
+                color: var(--secondary-blue);
+                margin-bottom: 1.5rem;
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+            
+            .feature-card:hover .feature-icon {
+                transform: scale(1.1);
+                color: var(--light-red);
+            }
+            
+            .feature-card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                color: var(--primary-blue);
+                transition: color 0.3s ease;
+            }
+            
+            .feature-card:hover h3 {
+                color: var(--light-red);
+            }
+            
+            .feature-card p {
+                color: var(--gray-dark);
+            }
+            
+            /* App Showcase Section */
+            .app-showcase {
+                background-color: var(--gray);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .app-showcase::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -50%;
+                width: 100%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, rgba(0, 102, 204, 0) 70%);
+                z-index: 1;
+            }
+            
+            .showcase-container {
+                display: flex;
+                align-items: center;
+                max-width: 1200px;
+                margin: 0 auto;
+                gap: 3rem;
+                position: relative;
+                z-index: 2;
+            }
+            
+            .showcase-text {
+                flex: 1;
+            }
+            
+            .showcase-text h2 {
+                font-size: 2.5rem;
+                color: var(--primary-blue);
+                margin-bottom: 1.5rem;
+            }
+            
+            .showcase-text p {
+                color: var(--gray-dark);
+            }
+            
+            .showcase-text ul {
+                list-style: none;
+                margin: 2rem 0;
+            }
+            
+            .showcase-text li {
+                margin-bottom: 1rem;
+                position: relative;
+                padding-left: 2rem;
+                transition: transform 0.3s ease;
+                color: var(--gray-dark);
+            }
+            
+            .showcase-text li:hover {
+                transform: translateX(10px);
+            }
+            
+            .showcase-text li::before {
+                content: '\f00c';
+                font-family: 'Font Awesome 6 Free';
+                font-weight: 900;
+                color: var(--light-red);
+                position: absolute;
+                left: 0;
+            }
+            
+            .showcase-image {
+                flex: 1;
+                position: relative;
+                perspective: 1000px;
             }
             
             .phone-mockup {
-                max-width: 250px;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+                position: relative;
+                transform-style: preserve-3d;
+                animation: float 6s ease-in-out infinite;
             }
-        }
-        
-        /* Animaciones */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideInUp {
-            from { 
-                opacity: 0;
-                transform: translateY(50px);
+            
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotateY(0deg); }
+                50% { transform: translateY(-20px) rotateY(5deg); }
             }
-            to { 
+            
+            .phone-mockup img {
+                width: 100%;
+                display: block;
+            }
+            
+            .screen-content {
+                position: absolute;
+                top: 5%;
+                left: 6%;
+                right: 6%;
+                bottom: 5%;
+                border-radius: 25px;
+                overflow: hidden;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* Screenshots Carousel - Optimizado */
+            .screenshots {
+                background-color: var(--white);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .screenshots::before {
+                content: '';
+                position: absolute;
+                bottom: -50%;
+                left: -50%;
+                width: 100%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(204, 0, 0, 0.1) 0%, rgba(204, 0, 0, 0) 70%);
+                z-index: 1;
+            }
+            
+            .swiper {
+                width: 100%;
+                max-width: 800px;
+                padding: 2rem 0;
+                position: relative;
+                z-index: 2;
+            }
+            
+            .swiper-slide {
+                text-align: center;
+                background: var(--white);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                /*border: 1px solid var(--gray-light);*/
+            }
+            
+            .swiper-slide:hover {
+                transform: scale(1.02);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+            
+            .swiper-slide img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+            
+            .swiper-slide:hover img {
+                transform: scale(1.05);
+            }
+            
+            .swiper-pagination-bullet {
+                width: 12px;
+                height: 12px;
+                background: var(--gray-medium);
                 opacity: 1;
-                transform: translateY(0);
+                transition: all 0.3s ease;
             }
-        }
-        
-        .animate-fade {
-            animation: fadeIn 1s ease forwards;
-        }
-        
-        .animate-slide-up {
-            animation: slideInUp 1s ease forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
-    </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
-</head>
-<body>
-    <!-- Scroll to top button -->
-    <div class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-    
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <img src="imagenes/logo.svg" alt="Emergencia K8 Logo">
-                <div class="logo-text">Emergencia <span>K8</span></div>
-            </div>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+            .swiper-pagination-bullet-active {
+                background: var(--light-red);
+                transform: scale(1.2);
+            }
             
-            <nav>
-                <ul id="navMenu">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#caracteristicas">Características</a></li>
-                    <li><a href="#app">App</a></li>
-                    <li><a href="#testimonios">Testimonios</a></li>
-                    <li><a href="#descarga">Descarga</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="politica-privacidad.html">Privacidad</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
-        <div class="hero-content ">
-            <h1 class=" ">Tu seguridad en un solo botón</h1>
-            <p class="animate-slide-up ">Emergencia K8 es el botón de pánico virtual que conecta tu negocio directamente con las autoridades en situaciones de emergencia.</p>
-            <div class="cta-buttons animate-slide-up ">
-                <a href="#descarga" class="btn btn-primary pulse">
-                    <i class="fas fa-download"></i> Descargar ahora
-                </a>
-                <a href="#caracteristicas" class="btn btn-secondary">
-                    <i class="fas fa-info-circle"></i> Más información
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section class="section" id="caracteristicas">
-        <div class="section-title"  data-aos="fade-up">
-            <h2>Características Principales</h2>
-            <p>Descubre todo lo que Emergencia K8 puede hacer por la seguridad de tu negocio</p>
-        </div>
-        
-        <div class="features-grid">
-            <div class="feature-card" animate-slide-up  data-aos="zoom-in">
-                <div class="feature-icon">
-                    <i class="fas fa-bell"></i>
-                </div>
-                <h3>Alerta Inmediata</h3>
-                <p>Envía una señal de emergencia a las autoridades con solo presionar un botón, reduciendo el tiempo de respuesta.</p>
-            </div>
+            .swiper-button-next, .swiper-button-prev {
+                color: var(--light-red);
+                background: rgba(255, 255, 255, 0.8);
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+                opacity: 0.7;
+                border: 1px solid var(--gray-light);
+            }
             
-            <div class="feature-card" animate-slide-up  data-aos="zoom-in">
-                <div class="feature-icon">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <h3>Ubicación Precisa</h3>
-                <p>Proporciona automáticamente la ubicación exacta de tu negocio para una respuesta rápida y efectiva.</p>
-            </div>
+            .swiper-button-next:hover, .swiper-button-prev:hover {
+                background: var(--light-red);
+                color: white;
+                opacity: 1;
+            }
             
-            <div class="feature-card" animate-slide-up  data-aos="zoom-in">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Múltiples Opciones</h3>
-                <p>Elige entre diferentes tipos de emergencia: C5, Cuadrante, Extorsión o contacto de confianza.</p>
-            </div>
+            .swiper-button-next::after, .swiper-button-prev::after {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+            /* Nuevos estilos para optimización del carrusel */
+            .swiper-slide img {
+                will-change: transform;
+            }
             
-            <div class="feature-card" animate-slide-up  data-aos="zoom-in">
-                <div class="feature-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3>Diseño Intuitivo</h3>
-                <p>Interfaz fácil de usar incluso en situaciones de estrés, con botones grandes y claros.</p>
-            </div>
+            .swiper-container {
+                backface-visibility: hidden;
+                transform: translate3d(0,0,0);
+            }
             
-            <div class="feature-card" animate-slide-up  data-aos="zoom-in">
-                <div class="feature-icon">
-                    <i class="fas fa-history"></i>
-                </div>
-                <h3>Registro de Activaciones</h3>
-                <p>Mantén un historial de todas las activaciones realizadas con fecha y hora exactas.</p>
-            </div>
+            /* Testimonials Section */
+            .testimonials {
+                background-color: var(--gray);
+                position: relative;
+            }
             
-            <div class="feature-card" animate-slide-up  data-aos="zoom-in">
-                <div class="feature-icon">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <h3>Seguridad Garantizada</h3>
-                <p>Protege tu información personal y la de tu negocio con nuestros protocolos de seguridad avanzados.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- App Showcase Section -->
-    <section class="section app-showcase" id="app">
-        <div class="showcase-container">
-            <div class="showcase-text">
-                <h2>Conoce la App</h2>
-                <p>Emergencia K8 está diseñada para ser la herramienta de seguridad más confiable para tu negocio. Con una interfaz limpia y funciones intuitivas, podrás solicitar ayuda en segundos cuando más lo necesites.</p>
+            .testimonials::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 200px;
+                height: 200px;
+                background: radial-gradient(circle, rgba(0, 51, 102, 0.1) 0%, rgba(0, 51, 102, 0) 70%);
+            }
+            
+            .testimonials::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 200px;
+                height: 200px;
+                background: radial-gradient(circle, rgba(204, 0, 0, 0.1) 0%, rgba(204, 0, 0, 0) 70%);
+            }
+            
+            .testimonials-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+                position: relative;
+                z-index: 2;
+            }
+            
+            .testimonial-card {
+                background: var(--white);
+                border-radius: 10px;
+                padding: 2rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                position: relative;
+                overflow: hidden;
+                border: 1px solid var(--gray-light);
+            }
+            
+            .testimonial-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            }
+            
+            .testimonial-card::before {
+                content: '\f10d';
+                font-family: 'Font Awesome 6 Free';
+                font-weight: 900;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 3rem;
+                color: rgba(0, 102, 204, 0.1);
+                z-index: 1;
+            }
+            
+            .testimonial-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+                position: relative;
+                z-index: 2;
+            }
+            
+            .testimonial-avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 1rem;
+                border: 3px solid var(--light-red);
+                transition: transform 0.3s ease;
+            }
+            
+            .testimonial-card:hover .testimonial-avatar {
+                transform: scale(1.1);
+            }
+            
+            .testimonial-avatar img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            
+            .testimonial-info h4 {
+                color: var(--primary-blue);
+                margin-bottom: 0.2rem;
+            }
+            
+            .testimonial-info p {
+                color: var(--gray-medium);
+                font-size: 0.9rem;
+            }
+            
+            .testimonial-rating {
+                color: gold;
+                margin: 0.5rem 0;
+                font-size: 0.9rem;
+            }
+            
+            .testimonial-card p {
+                color: var(--gray-dark);
+                position: relative;
+                z-index: 2;
+            }
+            
+            /* Download Section */
+            .download {
+                text-align: center;
+                background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+                color: var(--white);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .download::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            }
+            
+            .download h2 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+                position: relative;
+                z-index: 2;
+            }
+            
+            .download p {
+                max-width: 700px;
+                margin: 0 auto 2rem;
+                position: relative;
+                z-index: 2;
+                color: var(--gray-light);
+            }
+            
+            .download-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                margin-top: 2rem;
+                position: relative;
+                z-index: 2;
+            }
+            
+            .download-btn {
+                display: flex;
+                align-items: center;
+                background: var(--white);
+                color: var(--primary-blue);
+                padding: 0.8rem 1.5rem;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                position: relative;
+                overflow: hidden;
+                border: 1px solid var(--gray-light);
+            }
+            
+            .download-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, transparent, rgba(0, 102, 204, 0.1), transparent);
+                transform: translateX(-100%);
+                transition: transform 0.6s ease;
+            }
+            
+            .download-btn:hover::before {
+                transform: translateX(100%);
+            }
+            
+            .download-btn:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .download-btn i {
+                font-size: 1.8rem;
+                margin-right: 0.8rem;
+            }
+            
+            .download-btn-text {
+                text-align: left;
+            }
+            
+            .download-btn-text span {
+                display: block;
+                font-size: 0.8rem;
+                color: var(--gray-medium);
+            }
+            
+            /* FAQ Section */
+            .faq {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .faq-item {
+                margin-bottom: 1rem;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transition: box-shadow 0.3s ease;
+                border: 1px solid var(--gray-light);
+            }
+            
+            .faq-item:hover {
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            }
+            
+            .faq-question {
+                background: var(--primary-blue);
+                color: var(--white);
+                padding: 1rem 1.5rem;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: 600;
+                transition: background 0.3s ease;
+            }
+            
+            .faq-question:hover {
+                background: var(--secondary-blue);
+            }
+            
+            .faq-question i {
+                transition: transform 0.3s ease;
+            }
+            
+            .faq-question.active i {
+                transform: rotate(180deg);
+            }
+            
+            .faq-answer {
+                background: var(--white);
+                padding: 0 1.5rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+            
+            .faq-answer.active {
+                padding: 1rem 1.5rem;
+                max-height: 500px;
+            }
+            
+            .faq-answer p {
+                color: var(--gray-dark);
+            }
+            
+            /* Política de Privacidad Section */
+            .privacy-policy {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 5rem 2rem;
+            }
+            
+            .privacy-policy h1 {
+                color: var(--primary-blue);
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+            
+            .privacy-policy h2 {
+                color: var(--primary-blue);
+                margin: 2rem 0 1rem;
+                font-size: 1.5rem;
+            }
+            
+            .privacy-policy p {
+                margin-bottom: 1rem;
+                color: var(--gray-dark);
+                line-height: 1.6;
+            }
+            
+            .privacy-policy ul {
+                margin-bottom: 1.5rem;
+                padding-left: 2rem;
+            }
+            
+            .privacy-policy li {
+                margin-bottom: 0.5rem;
+                color: var(--gray-dark);
+            }
+            
+            .privacy-policy .last-updated {
+                font-style: italic;
+                color: var(--gray-medium);
+                text-align: right;
+                margin-top: 2rem;
+            }
+            
+            /* Footer */
+            footer {
+                background-color: var(--dark);
+                color: var(--white);
+                padding: 3rem 2rem;
+                position: relative;
+            }
+            
+            footer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background: linear-gradient(90deg, var(--primary-blue), var(--light-red), var(--secondary-blue));
+            }
+            
+            .footer-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .footer-logo {
+                margin-bottom: 1rem;
+            }
+            
+            .footer-logo img {
+                height: 40px;
+                transition: transform 0.3s ease;
+            }
+            
+            .footer-logo:hover img {
+                transform: scale(1.1);
+            }
+            
+            .footer-about p {
+                margin-bottom: 1rem;
+                color: var(--gray-medium);
+            }
+            
+            .social-links {
+                display: flex;
+                gap: 1rem;
+            }
+            
+            .social-links a {
+                color: var(--white);
+                font-size: 1.2rem;
+                transition: all 0.3s ease;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--gray-dark);
+            }
+            
+            .social-links a:hover {
+                color: var(--light-red);
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-3px);
+            }
+            
+            .footer-links h3 {
+                color: var(--white);
+                margin-bottom: 1.5rem;
+                font-size: 1.2rem;
+                position: relative;
+                display: inline-block;
+            }
+            
+            .footer-links h3::after {
+                content: '';
+                position: absolute;
+                width: 50%;
+                height: 2px;
+                background: var(--light-red);
+                bottom: -5px;
+                left: 0;
+            }
+            
+            .footer-links ul {
+                list-style: none;
+            }
+            
+            .footer-links li {
+                margin-bottom: 0.8rem;
+            }
+            
+            .footer-links a {
+                color: var(--gray-medium);
+                text-decoration: none;
+                transition: all 0.3s ease;
+                display: inline-block;
+            }
+            
+            .footer-links a:hover {
+                color: var(--light-red);
+                transform: translateX(5px);
+            }
+            
+            .footer-contact p {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+                color: var(--gray-medium);
+            }
+            
+            .footer-contact i {
+                color: var(--light-red);
+                width: 20px;
+            }
+            
+            .footer-bottom {
+                text-align: center;
+                padding-top: 2rem;
+                margin-top: 2rem;
+                border-top: 1px solid var(--gray-dark);
+                color: var(--gray-medium);
+                font-size: 0.9rem;
+            }
+            
+            /* Scroll to top button */
+            .scroll-top {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+                background: var(--light-red);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                cursor: pointer;
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                border: 1px solid var(--gray-light);
+            }
+            
+            .scroll-top.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .scroll-top:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+            
+            /* Pulse animation for CTA */
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            
+            .pulse {
+                animation: pulse 2s infinite;
+            }
+            
+            /* Responsive Design */
+            @media (max-width: 992px) {
+                .showcase-container {
+                    flex-direction: column;
+                }
                 
-                <ul>
-                    <li>Botón de emergencia 3D con efectos visuales para fácil identificación</li>
-                    <li>Configuración personalizada de datos de tu negocio</li>
-                    <li>Modo día/noche para mejor visibilidad</li>
-                    <li>Integración con mapas para ubicación precisa</li>
-                    <li>Historial completo de activaciones</li>
-                    <li>Gráficas estadísticas de uso</li>
-                </ul>
+                .showcase-text, .showcase-image {
+                    flex: none;
+                    width: 100%;
+                }
                 
-                <a href="#descarga" class="btn btn-primary">
-                    <i class="fas fa-download"></i> Descargar ahora
-                </a>
+                .showcase-image {
+                    order: -1;
+                }
+                
+                .download-buttons {
+                    flex-wrap: wrap;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                nav ul {
+                    display: none;
+                    position: absolute;
+                    top: 70px;
+                    left: 0;
+                    width: 100%;
+                    background: var(--primary-blue);
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 1rem 0;
+                    gap: 1rem;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                }
+                
+                nav ul.active {
+                    display: flex;
+                }
+                
+                .mobile-menu-btn {
+                    display: block;
+                }
+                
+                .hero h1 {
+                    font-size: 2.2rem;
+                }
+                
+                .section {
+                    padding: 3rem 1rem;
+                }
+                
+                .section-title h2 {
+                    font-size: 2rem;
+                }
+                
+                .download-buttons {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+                
+                .download-btn {
+                    justify-content: center;
+                }
+                
+                .swiper-button-next, .swiper-button-prev {
+                    display: none;
+                }
+                
+                .privacy-policy {
+                    padding: 3rem 1rem;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .hero h1 {
+                    font-size: 1.8rem;
+                }
+                
+                .hero p {
+                    font-size: 1rem;
+                }
+                
+                .cta-buttons {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+                
+                .btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+                
+                .section-title h2 {
+                    font-size: 1.8rem;
+                }
+                
+                .phone-mockup {
+                    max-width: 250px;
+                }
+            }
+            
+            /* Animaciones */
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes slideInUp {
+                from { 
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to { 
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .animate-fade {
+                animation: fadeIn 1s ease forwards;
+            }
+            
+            .animate-slide-up {
+                animation: slideInUp 1s ease forwards;
+            }
+            
+            .delay-1 { animation-delay: 0.2s; }
+            .delay-2 { animation-delay: 0.4s; }
+            .delay-3 { animation-delay: 0.6s; }
+            .delay-4 { animation-delay: 0.8s; }
+        </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    </head>
+    <body>
+        <!-- Scroll to top button -->
+        <div class="scroll-top" id="scrollTop">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <div class="logo">
+                    <img src="imagenes/logo.svg" alt="Emergencia K8 Logo">
+                    <div class="logo-text">Emergencia <span>K8</span></div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav>
+                    <ul id="navMenu">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#caracteristicas">Características</a></li>
+                        <li><a href="#app">App</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#descarga">Descarga</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="politica-privacidad.html">Privacidad</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <div class="hero-content ">
+                <h1 class=" ">Tu seguridad en un solo botón</h1>
+                <p class="animate-slide-up ">Emergencia K8 es el botón de pánico virtual que conecta tu negocio directamente con las autoridades en situaciones de emergencia.</p>
+                <div class="cta-buttons animate-slide-up ">
+                    <a href="#descarga" class="btn btn-primary pulse">
+                        <i class="fas fa-download"></i> Descargar ahora
+                    </a>
+                    <a href="#caracteristicas" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i> Más información
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="section" id="caracteristicas">
+            <div class="section-title"  data-aos="fade-up">
+                <h2>Características Principales</h2>
+                <p>Descubre todo lo que Emergencia K8 puede hacer por la seguridad de tu negocio</p>
             </div>
             
-            <div class="showcase-image">
-                <div class="phone-mockup">
-                    <img src="imagenes/Mockup_1.png" alt="Phone Mockup">
-                    <div class="screen-content">
-                        <!-- Carrusel de imágenes de la app - Optimizado -->
-                        <div class="swiper app-screenshots">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="imagenes/mockupCelular_1.jpg" alt="Pantalla principal de Emergencia K8" loading="lazy">
+            <div class="features-grid">
+                <div class="feature-card" animate-slide-up  data-aos="zoom-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Alerta Inmediata</h3>
+                    <p>Envía una señal de emergencia a las autoridades con solo presionar un botón, reduciendo el tiempo de respuesta.</p>
+                </div>
+                
+                <div class="feature-card" animate-slide-up  data-aos="zoom-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Ubicación Precisa</h3>
+                    <p>Proporciona automáticamente la ubicación exacta de tu negocio para una respuesta rápida y efectiva.</p>
+                </div>
+                
+                <div class="feature-card" animate-slide-up  data-aos="zoom-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Múltiples Opciones</h3>
+                    <p>Elige entre diferentes tipos de emergencia: C5, Cuadrante, Extorsión o contacto de confianza.</p>
+                </div>
+                
+                <div class="feature-card" animate-slide-up  data-aos="zoom-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Diseño Intuitivo</h3>
+                    <p>Interfaz fácil de usar incluso en situaciones de estrés, con botones grandes y claros.</p>
+                </div>
+                
+                <div class="feature-card" animate-slide-up  data-aos="zoom-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Registro de Activaciones</h3>
+                    <p>Mantén un historial de todas las activaciones realizadas con fecha y hora exactas.</p>
+                </div>
+                
+                <div class="feature-card" animate-slide-up  data-aos="zoom-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Seguridad Garantizada</h3>
+                    <p>Protege tu información personal y la de tu negocio con nuestros protocolos de seguridad avanzados.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- App Showcase Section -->
+        <section class="section app-showcase" id="app">
+            <div class="showcase-container">
+                <div class="showcase-text">
+                    <h2>Conoce la App</h2>
+                    <p>Emergencia K8 está diseñada para ser la herramienta de seguridad más confiable para tu negocio. Con una interfaz limpia y funciones intuitivas, podrás solicitar ayuda en segundos cuando más lo necesites.</p>
+                    
+                    <ul>
+                        <li>Botón de emergencia 3D con efectos visuales para fácil identificación</li>
+                        <li>Configuración personalizada de datos de tu negocio</li>
+                        <li>Modo día/noche para mejor visibilidad</li>
+                        <li>Integración con mapas para ubicación precisa</li>
+                        <li>Historial completo de activaciones</li>
+                        <li>Gráficas estadísticas de uso</li>
+                    </ul>
+                    
+                    <a href="#descarga" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Descargar ahora
+                    </a>
+                </div>
+                
+                <div class="showcase-image">
+                    <div class="phone-mockup">
+                        <img src="imagenes/Mockup_1.png" alt="Phone Mockup">
+                        <div class="screen-content">
+                            <!-- Carrusel de imágenes de la app - Optimizado -->
+                            <div class="swiper app-screenshots">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="imagenes/mockupCelular_1.jpg" alt="Pantalla principal de Emergencia K8" loading="lazy">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="imagenes/mockupCelular_2.jpg" alt="Configuración de Emergencia K8" loading="lazy">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="imagenes/mockupCelular_3.jpg" alt="Historial de Emergencia K8" loading="lazy">
+                                    </div>
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="imagenes/mockupCelular_2.jpg" alt="Configuración de Emergencia K8" loading="lazy">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="imagenes/mockupCelular_3.jpg" alt="Historial de Emergencia K8" loading="lazy">
-                                </div>
+                                <div class="swiper-pagination"></div>
                             </div>
-                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Screenshots Section -->
-    <section class="section screenshots">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Capturas de Pantalla</h2>
-            <p>Explora la interfaz intuitiva y las poderosas funciones de Emergencia K8</p>
-        </div>
+        </section>
         
-        <!-- Carrusel principal de screenshots - Optimizado -->
-        <div class="swiper screenshot-carousel">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="imagenes/carruselPrincipal_1.jpg" alt="Pantalla principal" loading="lazy">
-                </div>
-                <div class="swiper-slide">
-                    <img src="imagenes/carruselEmergencia_1.jpg" alt="Botón de emergencia" loading="lazy">
-                </div>
-                <div class="swiper-slide">
-                    <img src="imagenes/carruselMenu_1.jpg" alt="Menú de configuración" loading="lazy">
-                </div>                
-                <div class="swiper-slide">
-                    <img src="imagenes/carruselHist_1.jpg" alt="Historial de activaciones" loading="lazy">
-                </div>
-                <div class="swiper-slide">
-                    <img src="imagenes/carruselUbicacion_1.jpg" alt="Ubicación" loading="lazy">
-                </div>
+        <!-- Screenshots Section -->
+        <section class="section screenshots">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Capturas de Pantalla</h2>
+                <p>Explora la interfaz intuitiva y las poderosas funciones de Emergencia K8</p>
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-    </section>
-    
-    <!-- Testimonials Section -->
-    <section class="section testimonials" id="testimonios">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Lo que dicen nuestros usuarios</h2>
-            <p>Negocios que ya confían en Emergencia K8 para su seguridad</p>
-        </div>
-        
-        <div class="testimonials-grid">
-            <div class="testimonial-card" data-aos="fade-up">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">
-                        <img src="imagenes/opinionSra_1.png" alt="Usuario 1" loading="lazy">
+            
+            <!-- Carrusel principal de screenshots - Optimizado -->
+            <div class="swiper screenshot-carousel">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="imagenes/carruselPrincipal_1.jpg" alt="Pantalla principal" loading="lazy">
                     </div>
-                    <div class="testimonial-info">
-                        <h4>María González</h4>
-                        <p>Encargada de estética</p>
+                    <div class="swiper-slide">
+                        <img src="imagenes/carruselEmergencia_1.jpg" alt="Botón de emergencia" loading="lazy">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="imagenes/carruselMenu_1.jpg" alt="Menú de configuración" loading="lazy">
+                    </div>                
+                    <div class="swiper-slide">
+                        <img src="imagenes/carruselHist_1.jpg" alt="Historial de activaciones" loading="lazy">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="imagenes/carruselUbicacion_1.jpg" alt="Ubicación" loading="lazy">
                     </div>
                 </div>
-                <div class="testimonial-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>"Emergencia K8 me ha dado mucha tranquilidad en mi negocio. Saber que puedo pedir ayuda rápidamente en caso de emergencia es invaluable."</p>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section class="section testimonials" id="testimonios">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Lo que dicen nuestros usuarios</h2>
+                <p>Negocios que ya confían en Emergencia K8 para su seguridad</p>
             </div>
             
-            <div class="testimonial-card" data-aos="fade-up">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">
-                        <img src="imagenes/opinionSrTienda_1.png" alt="Usuario 2" loading="lazy">
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="imagenes/opinionSra_1.png" alt="Usuario 1" loading="lazy">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>María González</h4>
+                            <p>Encargada de estética</p>
+                        </div>
                     </div>
-                    <div class="testimonial-info">
-                        <h4>Carlos Mendoza</h4>
-                        <p>Dueño de tienda de abarrotes</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
+                    <p>"Emergencia K8 me ha dado mucha tranquilidad en mi negocio. Saber que puedo pedir ayuda rápidamente en caso de emergencia es invaluable."</p>
                 </div>
-                <div class="testimonial-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <p>"La facilidad de uso es increíble. En una situación de estrés, poder activar la alerta con un solo botón marca la diferencia."</p>
-            </div>
-            
-            <div class="testimonial-card" data-aos="fade-up">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">
-                        <img src="imagenes/opinionDra_1.png" alt="Usuario 3" loading="lazy">
-                    </div>
-                    <div class="testimonial-info">
-                        <h4>Laura Sánchez</h4>
-                        <p>Dueña de farmacia</p>
-                    </div>
-                </div>
-                <div class="testimonial-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>"Hemos usado Emergencia K8 dos veces en situaciones reales y la respuesta de las autoridades fue inmediata. Totalmente recomendado."</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Download Section -->
-    <section class="section download" id="descarga">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Descarga Emergencia K8</h2>
-            <p>Disponible para dispositivos móviles y computadoras</p>
-        </div>
-        
-        <div class="download-buttons" data-aos="zoom-in">
-            <a href="#" class="download-btn">
-                <i class="fab fa-google-play"></i>
-                <div class="download-btn-text">
-                    Versión para <span>Celulares/Tabletas</span>
-                </div>
-            </a>
-            
-            <a href="#" class="download-btn">
-                <i class="fas fa-desktop"></i>
-                <div class="download-btn-text">
-                    Versión para <span>Windows/Mac</span>
-                </div>
-            </a>
-        </div>
-    </section>
-    
-    <!-- FAQ Section -->
-    <section class="section" id="faq">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Preguntas Frecuentes</h2>
-            <p>Resuelve tus dudas sobre Emergencia K8</p>
-        </div>
-        
-        <div class="faq">
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">
-                    <span>¿Qué es Emergencia K8?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Emergencia K8 es un botón de pánico virtual diseñado para establecimientos comerciales y negocios. Permite enviar una alerta de emergencia a las autoridades correspondientes con solo presionar un botón en tu dispositivo móvil o computadora.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">
-                    <span>¿Cómo funciona Emergencia K8?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Al activar el botón de emergencia, la aplicación envía tu ubicación y datos del negocio a los servicios de emergencia correspondientes. Puedes elegir entre diferentes tipos de emergencia (C5, Cuadrante, Extorsión o contacto de confianza) según la situación.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">
-                    <span>¿Necesito internet para usar la aplicación?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Sí, Emergencia K8 requiere conexión a internet (WiFi o datos móviles) para enviar las alertas de emergencia. La aplicación no funcionará sin conexión a internet.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">
-                    <span>¿Es gratuita la aplicación?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Sí, Emergencia K8 es completamente gratuita. No tiene costos de descarga, suscripción ni uso.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">
-                    <span>¿Qué tipo de emergencias puedo reportar?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Puedes reportar cualquier situación de emergencia que ocurra en tu negocio: robos, asaltos, extorsiones, violencia, incendios, accidentes o cualquier situación que requiera la intervención de las autoridades.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">
-                    <span>¿Cómo configuro mi negocio en la aplicación?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Al descargar la aplicación, deberás ingresar un token único proporcionado al registrar tu negocio. Luego podrás configurar los datos de tu establecimiento (nombre, giro, ubicación) y los números de contacto para emergencias específicas.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-about">
-                <div class="footer-logo">
-                    <img src="imagenes/logo.svg" alt="Emergencia K8 Logo" loading="lazy">
-                </div>
-                <p>Emergencia K8 es el botón de pánico virtual diseñado para proteger negocios y establecimientos en situaciones de emergencia.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-links">
-                <h3>Enlaces Rápidos</h3>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#caracteristicas">Características</a></li>
-                    <li><a href="#app">App</a></li>
-                    <li><a href="#testimonios">Testimonios</a></li>
-                    <li><a href="#descarga">Descarga</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-links">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
-                    <li><a href="#">Aviso Legal</a></li>
-                    <li><a href="#">Términos de Servicio</a></li>
-                    <li><a href="#">Cookies</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-contact">
-                <h3>Contacto</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Ciudad de México, México</p>
-                <p><i class="fas fa-phone-alt"></i> +52 55 1234 5678</p>
-                <p><i class="fas fa-envelope"></i> contacto@emergenciak8.com</p>
-                <p><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 - 18:00</p>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2023 Emergencia K8. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-    
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navMenu = document.getElementById('navMenu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
                 
-                navMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="imagenes/opinionSrTienda_1.png" alt="Usuario 2" loading="lazy">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Carlos Mendoza</h4>
+                            <p>Dueño de tienda de abarrotes</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"La facilidad de uso es increíble. En una situación de estrés, poder activar la alerta con un solo botón marca la diferencia."</p>
+                </div>
                 
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="imagenes/opinionDra_1.png" alt="Usuario 3" loading="lazy">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Laura Sánchez</h4>
+                            <p>Dueña de farmacia</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Hemos usado Emergencia K8 dos veces en situaciones reales y la respuesta de las autoridades fue inmediata. Totalmente recomendado."</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Download Section -->
+        <section class="section download" id="descarga">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Descarga Emergencia K8</h2>
+                <p>Disponible para dispositivos móviles y computadoras</p>
+            </div>
+            
+            <div class="download-buttons" data-aos="zoom-in">
+                <a href="#" class="download-btn">
+                    <i class="fab fa-google-play"></i>
+                    <div class="download-btn-text">
+                        Versión para <span>Celulares/Tabletas</span>
+                    </div>
+                </a>
                 
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                <a href="#" class="download-btn">
+                    <i class="fas fa-desktop"></i>
+                    <div class="download-btn-text">
+                        Versión para <span>Windows/Mac</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="section" id="faq">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Preguntas Frecuentes</h2>
+                <p>Resuelve tus dudas sobre Emergencia K8</p>
+            </div>
+            
+            <div class="faq">
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <span>¿Qué es Emergencia K8?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Emergencia K8 es un botón de pánico virtual diseñado para establecimientos comerciales y negocios. Permite enviar una alerta de emergencia a las autoridades correspondientes con solo presionar un botón en tu dispositivo móvil o computadora.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <span>¿Cómo funciona Emergencia K8?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Al activar el botón de emergencia, la aplicación envía tu ubicación y datos del negocio a los servicios de emergencia correspondientes. Puedes elegir entre diferentes tipos de emergencia (C5, Cuadrante, Extorsión o contacto de confianza) según la situación.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <span>¿Necesito internet para usar la aplicación?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, Emergencia K8 requiere conexión a internet (WiFi o datos móviles) para enviar las alertas de emergencia. La aplicación no funcionará sin conexión a internet.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <span>¿Es gratuita la aplicación?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, Emergencia K8 es completamente gratuita. No tiene costos de descarga, suscripción ni uso.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <span>¿Qué tipo de emergencias puedo reportar?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Puedes reportar cualquier situación de emergencia que ocurra en tu negocio: robos, asaltos, extorsiones, violencia, incendios, accidentes o cualquier situación que requiera la intervención de las autoridades.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <span>¿Cómo configuro mi negocio en la aplicación?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Al descargar la aplicación, deberás ingresar un token único proporcionado al registrar tu negocio. Luego podrás configurar los datos de tu establecimiento (nombre, giro, ubicación) y los números de contacto para emergencias específicas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="imagenes/logo.svg" alt="Emergencia K8 Logo" loading="lazy">
+                    </div>
+                    <p>Emergencia K8 es el botón de pánico virtual diseñado para proteger negocios y establecimientos en situaciones de emergencia.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#caracteristicas">Características</a></li>
+                        <li><a href="#app">App</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#descarga">Descarga</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="#">Aviso Legal</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Ciudad de México, México</p>
+                    <p><i class="fas fa-phone-alt"></i> +52 55 1234 5678</p>
+                    <p><i class="fas fa-envelope"></i> contacto@emergenciak8.com</p>
+                    <p><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 - 18:00</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Emergencia K8. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+        
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+        <script>
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // FAQ Accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isActive = answer.classList.contains('active');
+                    
+                    // Close all answers first
+                    document.querySelectorAll('.faq-answer').forEach(item => {
+                        item.classList.remove('active');
                     });
-                }
-            });
-        });
-        
-        // FAQ Accordion
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const isActive = answer.classList.contains('active');
-                
-                // Close all answers first
-                document.querySelectorAll('.faq-answer').forEach(item => {
-                    item.classList.remove('active');
+                    
+                    document.querySelectorAll('.faq-question').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Open current answer if it was closed
+                    if (!isActive) {
+                        answer.classList.add('active');
+                        question.classList.add('active');
+                    }
                 });
-                
-                document.querySelectorAll('.faq-question').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Open current answer if it was closed
-                if (!isActive) {
-                    answer.classList.add('active');
-                    question.classList.add('active');
-                }
             });
-        });
-        
-        // Initialize Swiper for app screenshots inside phone mockup - Optimizado
-        const appSwiper = new Swiper('.app-screenshots', {
-            loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true
-            },
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            },
-            speed: 800,
-            grabCursor: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                dynamicBullets: true
-            },
-            preloadImages: false,
-            lazy: {
-                loadPrevNext: true,
-                loadOnTransitionStart: true
-            },
-            watchSlidesProgress: true,
-            watchSlidesVisibility: true
-        });
-        
-        // Initialize Swiper for main screenshot carousel - Optimizado
-        const screenshotSwiper = new Swiper('.screenshot-carousel', {
-            loop: true,
-            slidesPerView: 1,
-            spaceBetween: 30,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true
-            },
-            speed: 600,
-            grabCursor: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                dynamicBullets: true
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            preloadImages: false,
-            lazy: {
-                loadPrevNext: true,
-                loadOnTransitionStart: true
-            },
-            watchSlidesProgress: true,
-            watchSlidesVisibility: true,
-            breakpoints: {
-                768: {
-                    slidesPerView: 2,
+            
+            // Initialize Swiper for app screenshots inside phone mockup - Optimizado
+            const appSwiper = new Swiper('.app-screenshots', {
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
                 },
-                992: {
-                    slidesPerView: 3,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                speed: 800,
+                grabCursor: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true
+                },
+                preloadImages: false,
+                lazy: {
+                    loadPrevNext: true,
+                    loadOnTransitionStart: true
+                },
+                watchSlidesProgress: true,
+                watchSlidesVisibility: true
+            });
+            
+            // Initialize Swiper for main screenshot carousel - Optimizado
+            const screenshotSwiper = new Swiper('.screenshot-carousel', {
+                loop: true,
+                slidesPerView: 1,
+                spaceBetween: 30,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+                },
+                speed: 600,
+                grabCursor: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                preloadImages: false,
+                lazy: {
+                    loadPrevNext: true,
+                    loadOnTransitionStart: true
+                },
+                watchSlidesProgress: true,
+                watchSlidesVisibility: true,
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    992: {
+                        slidesPerView: 3,
+                    }
                 }
-            }
-        });
-        
-        // Animation on scroll
-        const animateElements = document.querySelectorAll('.animate-fade, .animate-slide-up');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+            });
+            
+            // Animation on scroll
+            const animateElements = document.querySelectorAll('.animate-fade, .animate-slide-up');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                    header.style.background = 'var(--primary-blue)';
+                } else {
+                    header.style.boxShadow = 'none';
+                    header.style.background = 'linear-gradient(135deg, var(--primary-blue), var(--secondary-blue))';
                 }
             });
-        }, {
-            threshold: 0.1
-        });
-        
-        animateElements.forEach(element => {
-            observer.observe(element);
-        });
-        
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-                header.style.background = 'var(--primary-blue)';
-            } else {
-                header.style.boxShadow = 'none';
-                header.style.background = 'linear-gradient(135deg, var(--primary-blue), var(--secondary-blue))';
-            }
-        });
-        
-        // Scroll to top button
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('active');
-            } else {
-                scrollTopBtn.classList.remove('active');
-            }
-        });
-        
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            
+            // Scroll to top button
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.classList.add('active');
+                } else {
+                    scrollTopBtn.classList.remove('active');
+                }
             });
-        });
-        
-        // Add ripple effect to buttons
-        const buttons = document.querySelectorAll('.btn, .download-btn');
-        
-        buttons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                const x = e.clientX - e.target.getBoundingClientRect().left;
-                const y = e.clientY - e.target.getBoundingClientRect().top;
-                
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 1000);
+            
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
-        });
+            
+            // Add ripple effect to buttons
+            const buttons = document.querySelectorAll('.btn, .download-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const x = e.clientX - e.target.getBoundingClientRect().left;
+                    const y = e.clientY - e.target.getBoundingClientRect().top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 1000);
+                });
+            });
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
-<script>
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
-</script>
-
-</body>
-</html>
+    </body>
+    </html>
