@@ -1010,6 +1010,277 @@
             animation: pulse 2s infinite;
         }
         
+        /* Estilos para el simulador de botón de pánico */
+        
+
+        /* NUEVOS ESTILOS PARA EL BOTÓN NEÓN */
+        .panic-button-neon {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,0,0,0.8) 0%, rgba(200,0,0,0.9) 70%);
+            box-shadow: 
+                0 0 15px rgba(255, 0, 0, 0.8),
+                0 0 30px rgba(255, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            animation: pulsebtn 1.5s infinite alternate;
+            margin: 2rem auto;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes pulsebtn {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
+            100% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 0, 0, 1); }
+        }
+
+        .panic-button-neon .inner-circle {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 1.4rem;
+        }
+
+        /*.panic-button-neon .inner-circle i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }*/
+
+        .panic-button-neon.active {
+            animation: none;
+            transform: scale(0.95);
+            box-shadow: 
+                0 0 20px rgba(255, 0, 0, 0.6),
+                0 0 40px rgba(255, 0, 0, 0.4),
+                inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .panic-button-neon.active .inner-circle {
+            background: rgba(150, 0, 0, 0.9);
+        }
+
+        .panic-button-simulator.active .panic-button-text {
+            color: var(--white);
+        }
+        
+        /* Estilos para los modales del simulador */
+        .panic-button-confirm,
+        .panic-button-countdown,
+        .panic-button-alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .panic-button-confirm {
+            background-color: rgba(0, 51, 102, 0.9);
+        }
+        
+        .panic-button-countdown {
+            background-color: rgba(0, 102, 204, 0.9);
+        }
+        
+        .panic-button-alert {
+            background-color: rgba(204, 0, 0, 0.9);
+        }
+        
+        .panic-button-confirm.active,
+        .panic-button-countdown.active,
+        .panic-button-alert.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .panic-confirm-content,
+        .panic-countdown-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .panic-button-confirm h2,
+        .panic-button-countdown h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .panic-button-alert h2 {
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .panic-button-confirm p,
+        .panic-button-countdown p {
+            color: var(--gray-dark);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: center;
+        }
+                
+        .panic-button-alert p {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .panic-confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .panic-confirm-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .panic-confirm-cancel {
+            background: var(--gray-light);
+            color: var(--dark);
+        }
+        
+        .panic-confirm-ok {
+            background: var(--light-red);
+            color: var(--white);
+        }
+        
+        .panic-confirm-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .panic-countdown-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+        
+        .panic-countdown-circle::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--light-red);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        .panic-countdown-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+        
+        .panic-countdown-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .panic-countdown-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            background: var(--light-red);
+            color: var(--white);
+        }
+        
+        .panic-countdown-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .panic-button-alert-btn {
+            background: var(--white);
+            color: var(--accent-red);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .panic-button-alert-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .panic-button-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: var(--gray);
+            position: relative;
+        }
+        
+        .panic-button-section h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .panic-button-section p {
+            color: var(--gray-dark);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .showcase-container {
@@ -1081,6 +1352,34 @@
             .privacy-policy {
                 padding: 3rem 1rem;
             }
+            
+            .panic-button-simulator {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .panic-button-confirm h2,
+            .panic-button-countdown h2,
+            .panic-button-alert h2 {
+                font-size: 1.8rem;
+            }
+            
+            .panic-button-confirm p,
+            .panic-button-countdown p,
+            .panic-button-alert p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .panic-confirm-buttons,
+            .panic-countdown-buttons {
+                flex-direction: column;
+            }
+            
+            .panic-confirm-btn,
+            .panic-countdown-btn {
+                width: 100%;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1108,6 +1407,15 @@
             
             .phone-mockup {
                 max-width: 250px;
+            }
+            
+            .panic-button-simulator {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .panic-button-text {
+                font-size: 1.2rem;
             }
         }
         
@@ -1141,7 +1449,7 @@
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
     </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
 <body>
     <!-- Scroll to top button -->
@@ -1248,6 +1556,52 @@
             </div>
         </div>
     </section>
+    
+    <!-- Panic Button Simulator Section -->
+    <section class="panic-button-section">
+        <h2 data-aos="fade-up">Prueba el Botón de Pánico</h2>
+        <p data-aos="fade-up">Simula cómo funciona Emergencia K8 en una situación real. Presiona el botón para ver cómo se activa la alerta de emergencia.</p>
+        
+        <div class="panic-button-neon" id="panicButton" data-aos="zoom-in">
+        <div class="inner-circle">
+            <span>EMERGENCIA</span>
+        </div>
+    </div>
+        
+        <p data-aos="fade-up">En la aplicación real, esto enviaría inmediatamente una alerta a las autoridades con tu ubicación exacta.</p>
+    </section>
+    
+    <!-- Confirmation Modal -->
+    <div class="panic-button-confirm" id="panicConfirm">
+        <div class="panic-confirm-content">
+            <h2>Confirmación</h2>
+            <p>¿Estás seguro que deseas activar la alerta de emergencia?</p>
+            <div class="panic-confirm-buttons">
+                <button class="panic-confirm-btn panic-confirm-cancel" id="cancelAlert">Cancelar</button>
+                <button class="panic-confirm-btn panic-confirm-ok" id="confirmAlert">Activar Alerta</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Countdown Modal -->
+    <div class="panic-button-countdown" id="panicCountdown">
+        <div class="panic-countdown-content">
+            <div class="panic-countdown-circle">
+                <div class="panic-countdown-number" id="countdownNumber">3</div>
+            </div>
+            <p>Activando alerta de emergencia...</p>
+            <div class="panic-countdown-buttons">
+                <button class="panic-countdown-btn" id="cancelCountdown">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Alert Modal -->
+    <div class="panic-button-alert" id="panicAlert">
+        <h2>¡ALERTA DE EMERGENCIA ACTIVADA!</h2>
+        <p>En una situación real, las autoridades ya estarían en camino a tu ubicación con todos los datos de tu negocio.</p>
+        <button class="panic-button-alert-btn" id="closeAlert">ENTENDIDO</button>
+    </div>
     
     <!-- App Showcase Section -->
     <section class="section app-showcase" id="app">
@@ -1533,14 +1887,14 @@
             <div class="footer-contact">
                 <h3>Contacto</h3>
                 <p><i class="fas fa-map-marker-alt"></i> Ciudad de México, México</p>
-                <p><i class="fas fa-phone-alt"></i> +52 55 1234 5678</p>
+                <p><i class="fas fa-phone-alt"></i> +52 56 5696 7628</p>
                 <p><i class="fas fa-envelope"></i> contacto@emergenciak8.com</p>
                 <p><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 - 18:00</p>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2023 Emergencia K8. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Emergencia K8. Todos los derechos reservados.</p>
         </div>
     </footer>
     
@@ -1735,15 +2089,87 @@
                 }, 1000);
             });
         });
+        
+        // Panic Button Simulator with confirmation and countdown
+        const panicButton = document.getElementById('panicButton');
+        const panicConfirm = document.getElementById('panicConfirm');
+        const panicCountdown = document.getElementById('panicCountdown');
+        const panicAlert = document.getElementById('panicAlert');
+        const confirmAlert = document.getElementById('confirmAlert');
+        const cancelAlert = document.getElementById('cancelAlert');
+        const cancelCountdown = document.getElementById('cancelCountdown');
+        const closeAlert = document.getElementById('closeAlert');
+        const countdownNumber = document.getElementById('countdownNumber');
+        
+        let countdown;
+        
+        panicButton.addEventListener('mousedown', () => {
+            panicButton.classList.add('active');
+        });
+        
+        panicButton.addEventListener('mouseup', () => {
+            panicButton.classList.remove('active');
+            panicConfirm.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        panicButton.addEventListener('mouseleave', () => {
+            panicButton.classList.remove('active');
+        });
+        
+        panicButton.addEventListener('touchstart', () => {
+            panicButton.classList.add('active');
+        }, {passive: true});
+        
+        panicButton.addEventListener('touchend', () => {
+            panicButton.classList.remove('active');
+            panicConfirm.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }, {passive: true});
+        
+        confirmAlert.addEventListener('click', () => {
+            panicConfirm.classList.remove('active');
+            panicCountdown.classList.add('active');
+            
+            let count = 3;
+            countdownNumber.textContent = count;
+            
+            countdown = setInterval(() => {
+                count--;
+                countdownNumber.textContent = count;
+                
+                if (count <= 0) {
+                    clearInterval(countdown);
+                    panicCountdown.classList.remove('active');
+                    panicAlert.classList.add('active');
+                }
+            }, 1000);
+        });
+        
+        cancelAlert.addEventListener('click', () => {
+            panicConfirm.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        cancelCountdown.addEventListener('click', () => {
+            clearInterval(countdown);
+            panicCountdown.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        closeAlert.addEventListener('click', () => {
+            panicAlert.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
-<script>
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
-</script>
+    <script>
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+    </script>
 
 </body>
 </html>
