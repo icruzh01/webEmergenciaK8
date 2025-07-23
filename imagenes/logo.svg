@@ -1,0 +1,20 @@
+
+<svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000"/>
+      <stop offset="100%" stop-color="#333"/>
+    </radialGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#cc0000"/>
+    </filter>
+  </defs>
+  <!-- Borde exterior -->
+  <circle cx="90" cy="90" r="85" fill="#cc0000"/>
+  <!-- Círculo gris -->
+  <circle cx="90" cy="90" r="70" fill="#666"/>
+  <!-- Centro negro -->
+  <circle cx="90" cy="90" r="55" fill="url(#glow)" filter="url(#shadow)"/>
+  <!-- Texto K8 -->
+  <text x="90" y="105" font-size="36" fill="#fff" font-family="Segoe UI, sans-serif" font-weight="bold" text-anchor="middle">k8</text>
+</svg>
