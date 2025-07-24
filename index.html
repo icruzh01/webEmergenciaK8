@@ -1477,7 +1477,7 @@
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
 
-        /* Estilos del chatbot - Versión mejorada */
+        /* Estilos del chatbot */
         .chatbot-toggle {
             position: fixed;
             bottom: 30px;
@@ -1503,22 +1503,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
-        .chatbot-toggle .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: var(--secondary-blue);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-        
         .chatbot-container {
             position: fixed;
             bottom: 100px;
@@ -1533,7 +1517,6 @@
             flex-direction: column;
             z-index: 1000;
             border: 1px solid var(--gray-light);
-            transition: all 0.3s ease;
         }
         
         .chatbot-container.active {
@@ -1548,24 +1531,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
         }
         
         .chatbot-header h3 {
             margin: 0;
             font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .chatbot-header h3 i {
-            font-size: 1.1rem;
-        }
-        
-        .chatbot-header-actions {
-            display: flex;
-            gap: 10px;
         }
         
         .chatbot-header button {
@@ -1574,11 +1544,6 @@
             color: white;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .chatbot-header button:hover {
-            transform: scale(1.1);
         }
         
         .chatbot-messages {
@@ -1586,20 +1551,15 @@
             padding: 15px;
             overflow-y: auto;
             background-color: var(--gray);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
         }
         
         .chatbot-message {
-            margin-bottom: 5px;
+            margin-bottom: 15px;
             max-width: 80%;
             padding: 10px 15px;
             border-radius: 15px;
             font-size: 0.9rem;
             line-height: 1.4;
-            position: relative;
-            animation: fadeIn 0.3s ease;
         }
         
         .chatbot-message.bot {
@@ -1616,26 +1576,11 @@
             margin-left: auto;
         }
         
-        .chatbot-message-time {
-            display: block;
-            font-size: 0.7rem;
-            opacity: 0.7;
-            margin-top: 5px;
-            text-align: right;
-        }
-        
-        .chatbot-input-container {
+        .chatbot-input {
+            display: flex;
             padding: 10px;
             border-top: 1px solid var(--gray-light);
             background-color: white;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .chatbot-input {
-            display: flex;
-            gap: 10px;
         }
         
         .chatbot-input input {
@@ -1645,12 +1590,6 @@
             border-radius: 30px;
             outline: none;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        
-        .chatbot-input input:focus {
-            border-color: var(--secondary-blue);
-            box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
         }
         
         .chatbot-input button {
@@ -1660,11 +1599,9 @@
             border-radius: 50%;
             width: 40px;
             height: 40px;
+            margin-left: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         
         .chatbot-input button:hover {
@@ -1672,159 +1609,29 @@
             transform: scale(1.1);
         }
         
-        .chatbot-input button:disabled {
-            background-color: var(--gray-medium);
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .chatbot-quick-actions {
+        .chatbot-quick-questions {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 5px 0;
+            flex-direction: column;
+            padding: 10px;
+            background-color: white;
+            border-top: 1px solid var(--gray-light);
         }
         
-        .quick-action {
+        .quick-question {
             background-color: var(--gray);
             color: var(--primary-blue);
             border: none;
             border-radius: 20px;
             padding: 8px 15px;
+            margin-bottom: 8px;
             font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
-            white-space: nowrap;
+            text-align: left;
         }
         
-        .quick-action:hover {
+        .quick-question:hover {
             background-color: var(--gray-light);
-            transform: translateY(-2px);
-        }
-        
-        .quick-action i {
-            margin-right: 5px;
-        }
-        
-        .chatbot-history-btn {
-            background: none;
-            border: none;
-            color: var(--gray-dark);
-            font-size: 0.8rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .chatbot-history-btn:hover {
-            color: var(--secondary-blue);
-        }
-        
-        .chatbot-history-panel {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            z-index: 10;
-            padding: 15px;
-            overflow-y: auto;
-            display: none;
-        }
-        
-        .chatbot-history-panel.active {
-            display: block;
-        }
-        
-        .chatbot-history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-        
-        .chatbot-history-title {
-            font-size: 1.1rem;
-            color: var(--primary-blue);
-            font-weight: bold;
-        }
-        
-        .chatbot-history-close {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--gray-dark);
-        }
-        
-        .chatbot-history-item {
-            padding: 10px;
-            border-bottom: 1px solid var(--gray-light);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .chatbot-history-item:hover {
-            background-color: var(--gray);
-        }
-        
-        .chatbot-history-preview {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 0.9rem;
-            color: var(--gray-dark);
-        }
-        
-        .chatbot-history-date {
-            font-size: 0.7rem;
-            color: var(--gray-medium);
-            margin-top: 5px;
-        }
-        
-        .chatbot-typing-indicator {
-            display: flex;
-            gap: 5px;
-            padding: 10px 15px;
-            background-color: white;
-            border: 1px solid var(--gray-light);
-            border-radius: 15px;
-            width: fit-content;
-            margin-bottom: 5px;
-        }
-        
-        .chatbot-typing-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--gray-medium);
-            border-radius: 50%;
-            animation: typingAnimation 1.4s infinite ease-in-out;
-        }
-        
-        .chatbot-typing-dot:nth-child(1) {
-            animation-delay: 0s;
-        }
-        
-        .chatbot-typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .chatbot-typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes typingAnimation {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
         }
         
         @keyframes fadeInUp {
@@ -1843,7 +1650,6 @@
                 width: 90%;
                 left: 5%;
                 bottom: 80px;
-                max-height: 70vh;
             }
             
             .chatbot-toggle {
@@ -2317,52 +2123,31 @@
         </div>
     </footer>
 
-    <!-- Chatbot Widget - Versión mejorada -->
+    <!-- Chatbot Widget -->
     <div class="chatbot-container" id="chatbotContainer">
-        <!-- Panel principal del chat -->
         <div class="chatbot-header">
-            <h3><i class="fas fa-robot"></i> Asistente de Seguridad K8</h3>
-            <div class="chatbot-header-actions">
-                <button id="chatbotHistoryBtn" title="Historial de conversación"><i class="fas fa-history"></i></button>
-                <button id="closeChatbot" title="Cerrar chat"><i class="fas fa-times"></i></button>
-            </div>
+            <h3>Asistente de Seguridad K8</h3>
+            <button id="closeChatbot"><i class="fas fa-times"></i></button>
         </div>
-        
         <div class="chatbot-messages" id="chatbotMessages">
-            <!-- Mensajes se añadirán aquí dinámicamente -->
+            <div class="chatbot-message bot">
+                <p>¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?</p>
+            </div>
         </div>
-        
-        <div class="chatbot-input-container">
-            <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="Escribe tu pregunta..." autocomplete="off">
-                <button id="sendMessage" disabled><i class="fas fa-paper-plane"></i></button>
-            </div>
-            
-            <div class="chatbot-quick-actions" id="quickActions">
-                <!-- Botones de acción rápida se añadirán aquí dinámicamente -->
-            </div>
-            
-            <button class="chatbot-history-btn" id="showHistoryBtn">
-                <i class="fas fa-history"></i> Ver historial de conversación
-            </button>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Escribe tu pregunta...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
         </div>
-        
-        <!-- Panel de historial de conversación -->
-        <div class="chatbot-history-panel" id="chatbotHistoryPanel">
-            <div class="chatbot-history-header">
-                <div class="chatbot-history-title">Historial de conversación</div>
-                <button class="chatbot-history-close" id="closeHistoryPanel">&times;</button>
-            </div>
-            <div id="chatbotHistoryList">
-                <!-- Elementos del historial se añadirán aquí dinámicamente -->
-            </div>
+        <div class="chatbot-quick-questions">
+            <button class="quick-question">¿Cómo funciona la app?</button>
+            <button class="quick-question">¿Es gratuita?</button>
+            <button class="quick-question">¿Qué tipo de emergencias cubre?</button>
         </div>
     </div>
 
     <!-- Chatbot Toggle Button -->
     <button class="chatbot-toggle" id="chatbotToggle">
         <i class="fas fa-robot"></i>
-        <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
     </button>
     
     <!-- Scripts -->
@@ -2699,389 +2484,320 @@
             document.body.style.overflow = 'auto';
         });
 
-        // Chatbot mejorado con JSON externo
+        // Chatbot functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Elementos del DOM
             const chatbotToggle = document.getElementById('chatbotToggle');
             const chatbotContainer = document.getElementById('chatbotContainer');
             const closeChatbot = document.getElementById('closeChatbot');
             const sendMessageBtn = document.getElementById('sendMessage');
             const chatbotInput = document.getElementById('chatbotInput');
             const chatbotMessages = document.getElementById('chatbotMessages');
-            const quickActions = document.getElementById('quickActions');
-            const chatbotHistoryBtn = document.getElementById('chatbotHistoryBtn');
-            const showHistoryBtn = document.getElementById('showHistoryBtn');
-            const chatbotHistoryPanel = document.getElementById('chatbotHistoryPanel');
-            const closeHistoryPanel = document.getElementById('closeHistoryPanel');
-            const chatbotHistoryList = document.getElementById('chatbotHistoryList');
-            const notificationBadge = document.getElementById('notificationBadge');
+            const quickQuestions = document.querySelectorAll('.quick-question');
             
-            // Estado del chatbot
-            let chatHistory = [];
-            let isTyping = false;
-            let unreadMessages = 0;
-            let chatbotResponses = {};
-            
-            // Cargar respuestas desde JSON externo
-            function loadChatbotResponses() {
-                fetch('chatbot_emergencia_k8.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        chatbotResponses = data;
-                        // Mostrar mensaje inicial después de cargar las respuestas
-                        showInitialMessage();
-                    })
-                    .catch(error => {
-                        console.error('Error al cargar el archivo JSON:', error);
-                        // Usar respuestas de respaldo si falla la carga
-                        chatbotResponses = getFallbackResponses();
-                        showInitialMessage();
-                    });
-            }
-            
-            // Respuestas de respaldo en caso de que falle la carga del JSON
-            function getFallbackResponses() {
-                return {
-                    "saludos": {
-                        "patterns": ["hola", "buenos días", "buenas tardes", "buenas noches", "saludos"],
-                        "responses": [
-                            "¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?",
-                            "¡Buen día! Estoy aquí para ayudarte con cualquier duda sobre Emergencia K8.",
-                            "¡Hola! ¿Cómo puedo ayudarte con la seguridad de tu negocio hoy?"
-                        ],
-                        "quick_actions": [
-                            {"text": "¿Cómo funciona?", "icon": "question-circle"},
-                            {"text": "¿Es gratuita?", "icon": "dollar-sign"},
-                            {"text": "Consejos de seguridad", "icon": "shield-alt"}
-                        ]
-                    },
-                    "default": {
-                        "responses": [
-                            "Lo siento, no puedo acceder a mis respuestas completas en este momento. Por favor, intenta más tarde.",
-                            "Estoy teniendo problemas para cargar mis respuestas. ¿Puedes intentar preguntarme de nuevo más tarde?"
-                        ],
-                        "quick_actions": [
-                            {"text": "Recargar", "icon": "sync"},
-                            {"text": "Contactar soporte", "icon": "headset"}
-                        ]
-                    }
-                };
-            }
-            
-            // Cargar historial desde localStorage
-            function loadChatHistory() {
-                const savedHistory = localStorage.getItem('emergenciaK8ChatHistory');
-                if (savedHistory) {
-                    chatHistory = JSON.parse(savedHistory);
-                    renderHistoryList();
-                }
-            }
-            
-            // Guardar historial en localStorage
-            function saveChatHistory() {
-                localStorage.setItem('emergenciaK8ChatHistory', JSON.stringify(chatHistory));
-            }
-            
-            // Renderizar lista de historial
-            function renderHistoryList() {
-                chatbotHistoryList.innerHTML = '';
-                
-                if (chatHistory.length === 0) {
-                    chatbotHistoryList.innerHTML = '<p style="text-align: center; color: var(--gray-medium); padding: 20px;">No hay conversaciones recientes</p>';
-                    return;
-                }
-                
-                chatHistory.forEach((conversation, index) => {
-                    const historyItem = document.createElement('div');
-                    historyItem.className = 'chatbot-history-item';
-                    historyItem.innerHTML = `
-                        <div class="chatbot-history-preview">${conversation.preview}</div>
-                        <div class="chatbot-history-date">${formatDate(conversation.date)}</div>
-                    `;
-                    
-                    historyItem.addEventListener('click', () => {
-                        loadConversation(index);
-                        chatbotHistoryPanel.classList.remove('active');
-                    });
-                    
-                    chatbotHistoryList.appendChild(historyItem);
-                });
-            }
-            
-            // Cargar una conversación específica del historial
-            function loadConversation(index) {
-                if (index >= 0 && index < chatHistory.length) {
-                    chatbotMessages.innerHTML = '';
-                    chatHistory[index].messages.forEach(msg => {
-                        addMessageToChat(msg.text, msg.sender, msg.timestamp, false);
-                    });
-                    
-                    // Mover el scroll al final
-                    setTimeout(() => {
-                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                    }, 100);
-                }
-            }
-            
-            // Formatear fecha para mostrar en el historial
-            function formatDate(dateString) {
-                const date = new Date(dateString);
-                return date.toLocaleDateString('es-MX', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            }
-            
-            // Formatear hora para los mensajes
-            function formatTime(date) {
-                return date.toLocaleTimeString('es-MX', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            }
-            
-            // Añadir mensaje al chat
-            function addMessage(text, sender, showTime = true, saveToHistory = true) {
-                const timestamp = new Date();
-                addMessageToChat(text, sender, timestamp, showTime);
-                
-                if (saveToHistory) {
-                    // Actualizar el historial de la conversación actual
-                    if (chatHistory.length === 0 || chatHistory[chatHistory.length - 1].isClosed) {
-                        // Nueva conversación
-                        chatHistory.push({
-                            date: timestamp.toISOString(),
-                            preview: text.length > 50 ? text.substring(0, 50) + '...' : text,
-                            messages: [],
-                            isClosed: false
-                        });
-                    }
-                    
-                    const currentConversation = chatHistory[chatHistory.length - 1];
-                    currentConversation.messages.push({
-                        text,
-                        sender,
-                        timestamp: timestamp.toISOString()
-                    });
-                    
-                    // Actualizar preview con el último mensaje
-                    currentConversation.preview = text.length > 50 ? text.substring(0, 50) + '...' : text;
-                    currentConversation.date = timestamp.toISOString();
-                    
-                    saveChatHistory();
-                }
-                
-                // Si el chat está cerrado y es un mensaje del bot, mostrar notificación
-                if (sender === 'bot' && !chatbotContainer.classList.contains('active')) {
-                    unreadMessages++;
-                    updateNotificationBadge();
-                }
-            }
-            
-            // Añadir mensaje al DOM del chat
-            function addMessageToChat(text, sender, timestamp, showTime) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `chatbot-message ${sender}`;
-                
-                const messageText = document.createElement('div');
-                messageText.textContent = text;
-                
-                messageDiv.appendChild(messageText);
-                
-                if (showTime) {
-                    const timeDiv = document.createElement('div');
-                    timeDiv.className = 'chatbot-message-time';
-                    timeDiv.textContent = formatTime(new Date(timestamp));
-                    messageDiv.appendChild(timeDiv);
-                }
-                
-                chatbotMessages.appendChild(messageDiv);
-                
-                // Scroll al final
-                setTimeout(() => {
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                }, 100);
-            }
-            
-            // Mostrar indicador de que el bot está escribiendo
-            function showTypingIndicator() {
-                if (isTyping) return;
-                
-                isTyping = true;
-                const typingDiv = document.createElement('div');
-                typingDiv.className = 'chatbot-typing-indicator';
-                
-                for (let i = 0; i < 3; i++) {
-                    const dot = document.createElement('div');
-                    dot.className = 'chatbot-typing-dot';
-                    typingDiv.appendChild(dot);
-                }
-                
-                chatbotMessages.appendChild(typingDiv);
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            }
-            
-            // Ocultar indicador de que el bot está escribiendo
-            function hideTypingIndicator() {
-                isTyping = false;
-                const typingIndicator = document.querySelector('.chatbot-typing-indicator');
-                if (typingIndicator) {
-                    typingIndicator.remove();
-                }
-            }
-            
-            // Actualizar badge de notificaciones
-            function updateNotificationBadge() {
-                if (unreadMessages > 0) {
-                    notificationBadge.textContent = unreadMessages;
-                    notificationBadge.style.display = 'flex';
-                } else {
-                    notificationBadge.style.display = 'none';
-                }
-            }
-            
-            // Generar botones de acción rápida
-            function generateQuickActions(actions) {
-                quickActions.innerHTML = '';
-                
-                actions.forEach(action => {
-                    const actionBtn = document.createElement('button');
-                    actionBtn.className = 'quick-action';
-                    actionBtn.innerHTML = `<i class="fas fa-${action.icon}"></i> ${action.text}`;
-                    
-                    actionBtn.addEventListener('click', () => {
-                        addMessage(action.text, 'user');
-                        setTimeout(() => {
-                            getBotResponse(action.text);
-                        }, 500);
-                    });
-                    
-                    quickActions.appendChild(actionBtn);
-                });
-            }
-            
-            // Obtener respuesta del bot
-            function getBotResponse(message) {
-                const lowerMessage = message.toLowerCase();
-                let responseCategory = null;
-                
-                // Buscar la categoría que coincida
-                for (const category in chatbotResponses) {
-                    if (category === 'default') continue;
-                    
-                    const patterns = chatbotResponses[category].patterns;
-                    if (patterns && patterns.some(pattern => lowerMessage.includes(pattern))) {
-                        responseCategory = category;
-                        break;
-                    }
-                }
-                
-                // Usar categoría default si no se encontró coincidencia
-                if (!responseCategory) {
-                    responseCategory = 'default';
-                }
-                
-                const responses = chatbotResponses[responseCategory].responses;
-                const quickActions = chatbotResponses[responseCategory].quick_actions || (chatbotResponses['default'] ? chatbotResponses['default'].quick_actions : []);
-                
-                // Seleccionar respuesta aleatoria
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                let finalResponse = randomResponse;
-                
-                // Reemplazar marcadores de posición
-                if (finalResponse.includes('{input}')) {
-                    finalResponse = finalResponse.replace('{input}', message);
-                }
-                
-                // Mostrar respuesta después de un pequeño retraso
-                setTimeout(() => {
-                    hideTypingIndicator();
-                    addMessage(finalResponse, 'bot');
-                    if (quickActions) {
-                        generateQuickActions(quickActions);
-                    }
-                }, 1000 + Math.random() * 1000);
-            }
-            
-            // Manejar envío de mensaje
-            function sendMessage() {
-                const message = chatbotInput.value.trim();
-                if (message === '') return;
-                
-                addMessage(message, 'user');
-                chatbotInput.value = '';
-                sendMessageBtn.disabled = true;
-                
-                showTypingIndicator();
-                getBotResponse(message);
-            }
-            
-            // Mostrar mensaje inicial del bot
-            function showInitialMessage() {
-                if (chatbotResponses['saludos']) {
-                    const initialResponse = chatbotResponses['saludos'].responses[0];
-                    const initialActions = chatbotResponses['saludos'].quick_actions;
-                    
-                    addMessage(initialResponse, 'bot', true, false);
-                    if (initialActions) {
-                        generateQuickActions(initialActions);
-                    }
-                }
-            }
-            
-            // Event listeners
+            // Toggle chatbot visibility
             chatbotToggle.addEventListener('click', () => {
                 chatbotContainer.classList.toggle('active');
-                
-                // Resetear notificaciones cuando se abre el chat
-                if (chatbotContainer.classList.contains('active')) {
-                    unreadMessages = 0;
-                    updateNotificationBadge();
-                }
             });
             
             closeChatbot.addEventListener('click', () => {
                 chatbotContainer.classList.remove('active');
+            });
+            
+            // Send message function
+            function sendMessage() {
+                const message = chatbotInput.value.trim();
+                if (message === '') return;
                 
-                // Marcar la conversación actual como cerrada
-                if (chatHistory.length > 0) {
-                    chatHistory[chatHistory.length - 1].isClosed = true;
-                    saveChatHistory();
-                }
-            });
+                // Add user message
+                addMessage(message, 'user');
+                chatbotInput.value = '';
+                
+                // Simulate typing
+                setTimeout(() => {
+                    const botResponse = getBotResponse(message);
+                    addMessage(botResponse, 'bot');
+                    
+                    // Scroll to bottom
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, 500);
+            }
             
-            chatbotInput.addEventListener('input', () => {
-                sendMessageBtn.disabled = chatbotInput.value.trim() === '';
-            });
+            // Send message on button click
+            sendMessageBtn.addEventListener('click', sendMessage);
             
+            // Send message on Enter key
             chatbotInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !sendMessageBtn.disabled) {
+                if (e.key === 'Enter') {
                     sendMessage();
                 }
             });
             
-            sendMessageBtn.addEventListener('click', sendMessage);
-            
-            chatbotHistoryBtn.addEventListener('click', () => {
-                chatbotHistoryPanel.classList.add('active');
+            // Quick questions
+            quickQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const message = question.textContent;
+                    addMessage(message, 'user');
+                    
+                    setTimeout(() => {
+                        const botResponse = getBotResponse(message);
+                        addMessage(botResponse, 'bot');
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    }, 500);
+                });
             });
             
-            showHistoryBtn.addEventListener('click', () => {
-                chatbotHistoryPanel.classList.add('active');
-            });
+            // Add message to chat
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('chatbot-message', sender);
+                
+                const messageText = document.createElement('p');
+                messageText.textContent = text;
+                
+                messageDiv.appendChild(messageText);
+                chatbotMessages.appendChild(messageDiv);
+                
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
             
-            closeHistoryPanel.addEventListener('click', () => {
-                chatbotHistoryPanel.classList.remove('active');
-            });
-            
-            // Cargar historial al iniciar
-            loadChatHistory();
-            
-            // Cargar respuestas del chatbot desde JSON
-            loadChatbotResponses();
+            // Bot responses
+            function getBotResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                if (lowerMessage.includes('hola') || lowerMessage.includes('buenos días') || lowerMessage.includes('buenas tardes')) {
+                    return '¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?';
+                }
+                
+                if (lowerMessage.includes('cómo funciona') || lowerMessage.includes('funcionamiento')) {
+                    return 'Emergencia K8 es un botón de pánico virtual. Al activarlo, envía tu ubicación y datos del negocio a las autoridades. Puedes elegir entre diferentes tipos de emergencia (C5, Cuadrante, Extorsión o contacto de confianza).';
+                }
+                
+                if (lowerMessage.includes('gratis') || lowerMessage.includes('cuesta') || lowerMessage.includes('precio')) {
+                    return '¡Sí! Emergencia K8 es completamente gratuita. No tiene costos de descarga, suscripción ni uso.';
+                }
+                
+                if (lowerMessage.includes('emergencia') || lowerMessage.includes('cubre') || lowerMessage.includes('protege')) {
+                    return 'Puedes reportar cualquier situación de emergencia: robos, asaltos, extorsiones, violencia, incendios o accidentes que requieran intervención de autoridades.';
+                }
+                
+                if (lowerMessage.includes('internet') || lowerMessage.includes('conexión') || lowerMessage.includes('datos')) {
+                    return 'Emergencia K8 requiere conexión a internet (WiFi o datos móviles) para enviar alertas. La app no funciona sin conexión.';
+                }
+                
+                if (lowerMessage.includes('configurar') || lowerMessage.includes('registrar') || lowerMessage.includes('token')) {
+                    return 'Al descargar la app, necesitarás un token único que se proporciona al registrar tu negocio. Luego podrás configurar los datos de tu establecimiento (nombre, giro, ubicación).';
+                }
+                
+                if (lowerMessage.includes('seguridad') || lowerMessage.includes('consejos') || lowerMessage.includes('recomendaciones')) {
+                    const tips = [
+                        "Mantén siempre visible el área de atención al público.",
+                        "Instala cámaras de seguridad en puntos estratégicos.",
+                        "Establece un código de palabra clave con empleados para alertar discretamente.",
+                        "Mantén solo el efectivo indispensable en caja y realiza depósitos frecuentes.",
+                        "Conoce a tus vecinos comerciales para apoyo mutuo en emergencias."
+                    ];
+                    return 'Consejos de seguridad:\n\n' + tips.join('\n• ');
+                }
+                
+                if (lowerMessage.includes('descargar') || lowerMessage.includes('instalar') || lowerMessage.includes('disponible')) {
+                    return 'Puedes descargar Emergencia K8 desde nuestra sección de Descargas. Está disponible para celulares/tabletas (Android) y computadoras (Windows/Mac).';
+                }
+                
+                if (lowerMessage.includes('gracias') || lowerMessage.includes('agradezco')) {
+                    return '¡De nada! Estoy aquí para ayudarte. ¿Hay algo más sobre lo que necesites información?';
+                }
+                
+                if (lowerMessage.includes('adiós') || lowerMessage.includes('chao') || lowerMessage.includes('hasta luego')) {
+                    return '¡Hasta luego! Recuerda que puedes volver a abrir este chat cuando lo necesites. ¡Cuídate!';
+                }
+
+                if (lowerMessage.includes('hola') || lowerMessage.includes('hi') || lowerMessage.includes('hello') || lowerMessage.includes('buenas noches') || lowerMessage.includes('buenos días') || lowerMessage.includes('buen día') || lowerMessage.includes('buenas tardes')) {
+                    return '¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?';
+                }
+
+                if (lowerMessage.includes('adiós') || lowerMessage.includes('gracias') || lowerMessage.includes('hasta luego') || lowerMessage.includes('chao') || lowerMessage.includes('agradezco')) {
+                    return '¡Hasta luego! Recuerda que puedes volver a abrir este chat cuando lo necesites. ¡Cuídate!';
+                }
+
+                if (lowerMessage.includes('qué es emergencia k8') || lowerMessage.includes('definición')) {
+                    return 'Emergencia K8 es un sistema de alerta policial inmediata para negocios en la CDMX. ¡Es gratuito!';
+                }
+
+                if (lowerMessage.includes('cómo funciona') || lowerMessage.includes('funcionamiento') || lowerMessage.includes('proceso de emergencia k8')) {
+                    return '1) Activación desde el establecimiento, 2) C5 recibe alerta y despliega información, 3) Policía más cercano atiende en ~3 minutos.';
+                }
+
+                if (lowerMessage.includes('gratis') || lowerMessage.includes('cuesta') || lowerMessage.includes('precio') || lowerMessage.includes('emergencia k8 tiene costo') || lowerMessage.includes('es gratuito')) {
+                    return '¡Sí! Emergencia K8 es completamente gratuita. No tiene costos de descarga, suscripción ni uso.';
+                }
+
+                if (lowerMessage.includes('emergencia') || lowerMessage.includes('cubre') || lowerMessage.includes('protege') || lowerMessage.includes('qué emergencias atiende') || lowerMessage.includes('para qué sirve el botón')) {
+                    return 'Puedes reportar cualquier situación de emergencia: robos, asaltos, extorsiones, violencia, incendios o accidentes que requieran intervención de autoridades.';
+                }
+
+                if (lowerMessage.includes('internet') || lowerMessage.includes('conexión') || lowerMessage.includes('datos') || lowerMessage.includes('emergencia k8 funciona sin internet') || lowerMessage.includes('necesita datos móviles')) {
+                    return 'Emergencia K8 requiere conexión a internet (WiFi o datos móviles) para enviar alertas. No funciona sin conexión.';
+                }
+
+                if (lowerMessage.includes('configurar') || lowerMessage.includes('registrar') || lowerMessage.includes('token') || lowerMessage.includes('cómo configurar en celular') || lowerMessage.includes('guía de configuración')) {
+                    return 'Al descargar la app, necesitarás un token único que se proporciona al registrar tu negocio. Luego podrás configurar los datos de tu establecimiento (nombre, giro, ubicación).';
+                }
+
+                if (lowerMessage.includes('seguridad') || lowerMessage.includes('consejos') || lowerMessage.includes('recomendaciones') || lowerMessage.includes('recomendaciones para usar') || lowerMessage.includes('consejos para emergencia k8')) {
+                    return 'Consejos de seguridad:\n\n• Mantén siempre visible el área de atención al público.\n• Instala cámaras de seguridad en puntos estratégicos.\n• Establece un código de palabra clave con empleados para alertar discretamente.\n• Mantén solo el efectivo indispensable en caja y realiza depósitos frecuentes.\n• Conoce a tus vecinos comerciales para apoyo mutuo en emergencias.';
+                }
+
+                if (lowerMessage.includes('descargar') || lowerMessage.includes('instalar') || lowerMessage.includes('disponible')) {
+                    return 'Puedes descargar Emergencia K8 desde nuestra sección de Descargas. Está disponible para celulares/tabletas (Android) y computadoras (Windows/Mac).';
+                }
+
+                if (lowerMessage.includes('cuál es el objetivo') || lowerMessage.includes('para qué sirve')) {
+                    return 'El objetivo de Emergencia K8 es dar una respuesta inmediata a emergencias en establecimientos registrados en la Ciudad de México.';
+                }
+
+                if (lowerMessage.includes('cómo está dividida la cdmx en seguridad') || lowerMessage.includes('división seguridad cdmx')) {
+                    return 'La CDMX está dividida en: 5 Zonas Generales, 16 Regiones, 76 Sectores y 847 cuadrantes.';
+                }
+
+                if (lowerMessage.includes('qué es un cuadrante') || lowerMessage.includes('definición de cuadrante')) {
+                    return 'Un cuadrante es una delimitación territorial con personal policial asignado, vehículos y equipo de comunicación para vigilancia las 24 horas.';
+                }
+
+                if (lowerMessage.includes('cómo nació') || lowerMessage.includes('origen de emergencia k8')) {
+                    return 'Emergencia K8 nació en 2014 para reforzar el programa de Cuadrantes y facilitar la solicitud de ayuda policial ante emergencias.';
+                }
+
+                if (lowerMessage.includes('ventajas') || lowerMessage.includes('beneficios')) {
+                    return 'Las ventajas incluyen: es gratuito, comunicación directa con SSC, respuesta rápida, múltiples opciones de activación y configuración en varios dispositivos.';
+                }
+
+                if (lowerMessage.includes('qué datos se necesitan') || lowerMessage.includes('requisitos')) {
+                    return 'Se necesitan: datos del establecimiento (nombre, giro, teléfono), ubicación (dirección, coordenadas) y datos del solicitante (nombre, contacto).';
+                }
+
+                if (lowerMessage.includes('cómo obtener latitud y longitud') || lowerMessage.includes('conseguir coordenadas')) {
+                    return 'Usando Google Maps: 1) Busca tu ubicación, 2) Haz clic derecho en el globo rojo, 3) Selecciona las coordenadas. El positivo es latitud, negativo es longitud.';
+                }
+
+                if (lowerMessage.includes('qué es una url') || lowerMessage.includes('para qué sirve la url')) {
+                    return 'La URL de Emergencia K8 es un enlace único para cada establecimiento que permite configurar los dispositivos para enviar alertas de emergencia.';
+                }
+
+                if (lowerMessage.includes('cómo activar') || lowerMessage.includes('modos de activación')) {
+                    return 'Se puede activar de forma virtual (celular/computadora) o con botones físicos (botón rojo, control remoto o sensores). Siempre se necesita internet.';
+                }
+
+                if (lowerMessage.includes('qué veo al activar') || lowerMessage.includes('mensaje de activación')) {
+                    return 'Verás "Enviada" (fondo azul marino) si es real o "Prueba enviada. 210. ok" (azul turquesa) si es prueba. Los botones físicos muestran luces LED.';
+                }
+
+                if (lowerMessage.includes('qué ve c5 al activar') || lowerMessage.includes('información que recibe c5')) {
+                    return 'C5 ve: nombre y dirección del establecimiento, ubicación exacta, patrulla más cercana (200m) y cámaras C2 cercanas.';
+                }
+
+                if (lowerMessage.includes('responsabilidades') || lowerMessage.includes('obligaciones')) {
+                    return 'Usar Emergencia K8 responsablemente, controlar quién tiene acceso a la URL, reportar anomalías y atender al personal policial que responda.';
+                }
+
+                if (lowerMessage.includes('cuántos dispositivos configurar') || lowerMessage.includes('límite de equipos')) {
+                    return 'No hay límite; puedes configurar todos los celulares y computadoras que necesites.';
+                }
+
+                if (lowerMessage.includes('tiempo de respuesta') || lowerMessage.includes('cuánto tardan en llegar')) {
+                    return 'El tiempo promedio es de 3 minutos, pero puede variar por factores como ubicación, tráfico o disponibilidad policial.';
+                }
+
+                if (lowerMessage.includes('dónde funciona') || lowerMessage.includes('emergencia k8 en edomex')) {
+                    return 'Solo funciona para establecimientos ubicados en la Ciudad de México.';
+                }
+
+                if (lowerMessage.includes('activación falsa') || lowerMessage.includes('multas')) {
+                    return 'No hay multas, pero el servicio puede suspenderse si se detecta mal uso recurrente.';
+                }
+
+                if (lowerMessage.includes('cómo incorporarse') || lowerMessage.includes('registrarse')) {
+                    return 'Debes enviar una solicitud escrita a la SSC con los datos del establecimiento y solicitante. También hay formatos disponibles.';
+                }
+
+                if (lowerMessage.includes('botón físico') || lowerMessage.includes('cómo conseguir botón')) {
+                    return 'La SSC proporciona listas de materiales para armarlo. Debes adquirirlos con un proveedor y luego la SSC lo configura gratuitamente.';
+                }
+
+                if (lowerMessage.includes('quién puede usar') || lowerMessage.includes('requisitos para usar')) {
+                    return 'Todos los negocios y establecimientos ubicados en la CDMX pueden registrarse. El solicitante debe ser dueño, representante o encargado del lugar.';
+                }
+
+                if (lowerMessage.includes('qué pasa si pierdo mi celular') || lowerMessage.includes('dispositivo perdido')) {
+                    return 'Debes configurar Emergencia K8 en un nuevo dispositivo. La URL sigue siendo la misma, pero la configuración anterior quedará inactiva.';
+                }
+
+                if (lowerMessage.includes('cómo cancelar una alerta') || lowerMessage.includes('detener alerta')) {
+                    return 'Las alertas no se pueden cancelar una vez activadas. El personal policial verificará la emergencia al llegar al lugar.';
+                }
+
+                if (lowerMessage.includes('qué hacer si no funciona') || lowerMessage.includes('problemas técnicos')) {
+                    return 'Verifica tu conexión a internet. Si persiste, reporta al 5242-5100 ext. 5647/5664 o envía un correo a xxxxx@ssc.cdmx.gob.mx.';
+                }
+
+                if (lowerMessage.includes('dónde entregar la solicitud') || lowerMessage.includes('oficina para registro')) {
+                    return 'En Oficialía de Partes de la SSC: Liverpool #136, Col. Juárez, Cuauhtémoc, de 09:00 a 18:00 hrs. También puedes coordinar con tu enlace asignado.';
+                }
+
+                if (lowerMessage.includes('qué es código águila') || lowerMessage.includes('diferencia con emergencia k8')) {
+                    return 'Código Águila es un programa de visitas policiales programadas. Emergencia K8 es para emergencias inmediatas con respuesta en minutos.';
+                }
+
+                if (lowerMessage.includes('puedo tener botón físico y virtual') || lowerMessage.includes('combinar')) {
+                    return 'Sí, puedes configurar ambos. El botón físico (con sensores o control remoto) y el virtual (dispositivos móviles/computadoras) son complementarios.';
+                }
+
+                if (lowerMessage.includes('cada cuánto probar') || lowerMessage.includes('pruebas periódicas')) {
+                    return 'Se recomienda mensual o bimestralmente. Los botones físicos hacen pruebas automáticas periódicamente.';
+                }
+
+                if (lowerMessage.includes('qué incluye el botón físico') || lowerMessage.includes('componentes botón')) {
+                    return 'Según el tipo: botón rojo, control remoto, sensores (magnéticos, PIR) o relevadores. La SSC proporciona listas detalladas de materiales.';
+                }
+
+                if (lowerMessage.includes('dónde comprar materiales') || lowerMessage.includes('proveedores')) {
+                    return 'En la calle República del Salvador (Centro Histórico). Adquiere EXACTAMENTE los materiales de la lista proporcionada por la SSC.';
+                }
+
+                if (lowerMessage.includes('cuánto tarda el registro') || lowerMessage.includes('tiempo de alta')) {
+                    return 'El proceso inicia al entregar la solicitud. La URL se genera después de validar datos. Configuración depende de la disponibilidad del usuario.';
+                }
+
+                if (lowerMessage.includes('puedo cambiar datos después de registrar') || lowerMessage.includes('actualizar información')) {
+                    return 'Sí, debes solicitarlo por escrito o correo electrónico para actualizar dirección, contactos u otros datos relevantes.';
+                }
+
+                if (lowerMessage.includes('qué pasa si me mudo de local') || lowerMessage.includes('cambio de dirección')) {
+                    return 'Debes notificar el cambio para actualizar tu georreferenciación. Se generará una nueva URL si la ubicación cambia de cuadrante policial.';
+                }
+
+                if (lowerMessage.includes('para escuelas') || lowerMessage.includes('emergencia k8 en escuelas')) {
+                    return 'Sí, hay un formato especial para escuelas (públicas/privadas) con datos como nivel escolar, turno y responsable.';
+                }
+
+                if (lowerMessage.includes('atención a cadenas comerciales') || lowerMessage.includes('franquicias')) {
+                    return 'Las cadenas pueden registrar múltiples sucursales con un formato EXCEL especial para agilizar el proceso.';
+                }
+
+                if (lowerMessage.includes('política de privacidad') || lowerMessage.includes('uso de datos')) {
+                    return 'Tus datos solo se usan para emergencias. Están protegidos por la ley y no se comparten con terceros sin consentimiento.';
+                }
+
+                if (lowerMessage.includes('qué hacer si activo por error') || lowerMessage.includes('falsa alarma')) {
+                    return 'Informa al policía que fue accidental. Evita sanciones explicando la situación. No hay multas por primeras incidencias.';
+                }
+
+                if (lowerMessage.includes('tienda de apps') || lowerMessage.includes('tienda') || lowerMessage.includes('descarga la app') || lowerMessage.includes('obtengo') || lowerMessage.includes('app store') || lowerMessage.includes('play store') || lowerMessage.includes('google play')) {
+                    return 'Por el momento solo está disponible para su descarga desde la página web. Puedes ir al apartado de descarga en esta página.';
+                }
+                
+                return 'Entiendo que preguntas sobre: "' + message + '". Como asistente de Emergencia K8, puedo ayudarte con información sobre:\n\n• Funcionamiento de la app\n• Tipos de emergencias\n• Configuración\n• Consejos de seguridad\n\n¿En qué más puedo ayudarte?';
+            }
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
