@@ -1275,11 +1275,6 @@
             margin: 0 auto 2rem;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
         /* Estilos para datos de activación */
         .panic-button-alert p.info-line {
             margin-bottom: 5px;
@@ -1481,6 +1476,384 @@
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
+
+        /* Estilos del chatbot - Versión mejorada */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-red);
+            color: white;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chatbot-toggle .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--secondary-blue);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 350px;
+            max-height: 500px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            border: 1px solid var(--gray-light);
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-container.active {
+            display: flex;
+            animation: fadeInUp 0.3s ease;
+        }
+        
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .chatbot-header h3 i {
+            font-size: 1.1rem;
+        }
+        
+        .chatbot-header-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chatbot-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .chatbot-header button:hover {
+            transform: scale(1.1);
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: var(--gray);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .chatbot-message {
+            margin-bottom: 5px;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .chatbot-message.bot {
+            background-color: white;
+            border: 1px solid var(--gray-light);
+            border-bottom-left-radius: 5px;
+            margin-right: auto;
+        }
+        
+        .chatbot-message.user {
+            background-color: var(--secondary-blue);
+            color: white;
+            border-bottom-right-radius: 5px;
+            margin-left: auto;
+        }
+        
+        .chatbot-message-time {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .chatbot-input-container {
+            padding: 10px;
+            border-top: 1px solid var(--gray-light);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: 30px;
+            outline: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-input input:focus {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+        }
+        
+        .chatbot-input button {
+            background-color: var(--light-red);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .chatbot-input button:hover {
+            background-color: var(--accent-red);
+            transform: scale(1.1);
+        }
+        
+        .chatbot-input button:disabled {
+            background-color: var(--gray-medium);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .chatbot-quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 5px 0;
+        }
+        
+        .quick-action {
+            background-color: var(--gray);
+            color: var(--primary-blue);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .quick-action:hover {
+            background-color: var(--gray-light);
+            transform: translateY(-2px);
+        }
+        
+        .quick-action i {
+            margin-right: 5px;
+        }
+        
+        .chatbot-history-btn {
+            background: none;
+            border: none;
+            color: var(--gray-dark);
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-history-btn:hover {
+            color: var(--secondary-blue);
+        }
+        
+        .chatbot-history-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 10;
+            padding: 15px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .chatbot-history-panel.active {
+            display: block;
+        }
+        
+        .chatbot-history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .chatbot-history-title {
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+        
+        .chatbot-history-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--gray-dark);
+        }
+        
+        .chatbot-history-item {
+            padding: 10px;
+            border-bottom: 1px solid var(--gray-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-history-item:hover {
+            background-color: var(--gray);
+        }
+        
+        .chatbot-history-preview {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+        
+        .chatbot-history-date {
+            font-size: 0.7rem;
+            color: var(--gray-medium);
+            margin-top: 5px;
+        }
+        
+        .chatbot-typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 10px 15px;
+            background-color: white;
+            border: 1px solid var(--gray-light);
+            border-radius: 15px;
+            width: fit-content;
+            margin-bottom: 5px;
+        }
+        
+        .chatbot-typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--gray-medium);
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .chatbot-typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .chatbot-typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .chatbot-typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-container {
+                width: 90%;
+                left: 5%;
+                bottom: 80px;
+                max-height: 70vh;
+            }
+            
+            .chatbot-toggle {
+                left: 15px;
+                bottom: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
@@ -1943,6 +2316,54 @@
             <p>&copy; 2025 Emergencia K8. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- Chatbot Widget - Versión mejorada -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <!-- Panel principal del chat -->
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> Asistente de Seguridad K8</h3>
+            <div class="chatbot-header-actions">
+                <button id="chatbotHistoryBtn" title="Historial de conversación"><i class="fas fa-history"></i></button>
+                <button id="closeChatbot" title="Cerrar chat"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbotMessages">
+            <!-- Mensajes se añadirán aquí dinámicamente -->
+        </div>
+        
+        <div class="chatbot-input-container">
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Escribe tu pregunta..." autocomplete="off">
+                <button id="sendMessage" disabled><i class="fas fa-paper-plane"></i></button>
+            </div>
+            
+            <div class="chatbot-quick-actions" id="quickActions">
+                <!-- Botones de acción rápida se añadirán aquí dinámicamente -->
+            </div>
+            
+            <button class="chatbot-history-btn" id="showHistoryBtn">
+                <i class="fas fa-history"></i> Ver historial de conversación
+            </button>
+        </div>
+        
+        <!-- Panel de historial de conversación -->
+        <div class="chatbot-history-panel" id="chatbotHistoryPanel">
+            <div class="chatbot-history-header">
+                <div class="chatbot-history-title">Historial de conversación</div>
+                <button class="chatbot-history-close" id="closeHistoryPanel">&times;</button>
+            </div>
+            <div id="chatbotHistoryList">
+                <!-- Elementos del historial se añadirán aquí dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-robot"></i>
+        <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+    </button>
     
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
@@ -2160,7 +2581,17 @@
             "Realiza simulacros periódicos con tu personal para que todos sepan cómo actuar en caso de emergencia.",
             "Evita rutinas predecibles en los horarios de apertura, cierre y manejo de efectivo.",
             "Mantén una buena iluminación tanto al interior como en los accesos a tu establecimiento.",
-            "Ten a la mano los números de emergencia locales además de Emergencia K8."
+            "Ten a la mano los números de emergencia locales además de Emergencia K8.",
+            "Mantén áreas bien iluminadas: Instala luces en entradas, pasillos y zonas poco visibles para disuadir robos y facilitar la vigilancia.",
+            "Controla el acceso: Limita las entradas/salidas y usa sistemas de identificación en áreas restringidas.",
+            "Instala cámaras de seguridad: Colócalas en puntos estratégicos (cajas, accesos) y verifica que estén operativas.",
+            "Establece un protocolo de apertura/cierre: Realiza conteo de efectivo fuera de horario público y evita rutinas predecibles.",
+            "Capacita al personal: Enseña cómo actuar ante robos, incendios o emergencias médicas.",
+            "Usa alarmas y botones de pánico: Conecta sistemas de alarma a centrales de monitoreo y ubica botones de emergencia accesibles.",
+            "Evita acumular efectivo: Haz depósitos bancarios frecuentes y mantén solo lo necesario en caja.",
+            "Coloca espejos de vigilancia: En zonas con puntos ciegos (pasillos, estanterías altas) para mejorar la visibilidad.",
+            "Realiza simulacros periódicos: Practica evacuaciones por incendios, sismos o situaciones violentas.",
+            "Fomenta la colaboración vecinal: Coordina con negocios cercanos para alertarse mutuamente sobre actividades sospechosas.",
         ];
 
         // Función para mostrar un consejo aleatorio
@@ -2267,7 +2698,391 @@
             panicAlert.classList.remove('active');
             document.body.style.overflow = 'auto';
         });
-        
+
+        // Chatbot mejorado con JSON externo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatbotContainer = document.getElementById('chatbotContainer');
+            const closeChatbot = document.getElementById('closeChatbot');
+            const sendMessageBtn = document.getElementById('sendMessage');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const quickActions = document.getElementById('quickActions');
+            const chatbotHistoryBtn = document.getElementById('chatbotHistoryBtn');
+            const showHistoryBtn = document.getElementById('showHistoryBtn');
+            const chatbotHistoryPanel = document.getElementById('chatbotHistoryPanel');
+            const closeHistoryPanel = document.getElementById('closeHistoryPanel');
+            const chatbotHistoryList = document.getElementById('chatbotHistoryList');
+            const notificationBadge = document.getElementById('notificationBadge');
+            
+            // Estado del chatbot
+            let chatHistory = [];
+            let isTyping = false;
+            let unreadMessages = 0;
+            let chatbotResponses = {};
+            
+            // Cargar respuestas desde JSON externo
+            function loadChatbotResponses() {
+                fetch('chatbot_emergencia_k8.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        chatbotResponses = data;
+                        // Mostrar mensaje inicial después de cargar las respuestas
+                        showInitialMessage();
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar el archivo JSON:', error);
+                        // Usar respuestas de respaldo si falla la carga
+                        chatbotResponses = getFallbackResponses();
+                        showInitialMessage();
+                    });
+            }
+            
+            // Respuestas de respaldo en caso de que falle la carga del JSON
+            function getFallbackResponses() {
+                return {
+                    "saludos": {
+                        "patterns": ["hola", "buenos días", "buenas tardes", "buenas noches", "saludos"],
+                        "responses": [
+                            "¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?",
+                            "¡Buen día! Estoy aquí para ayudarte con cualquier duda sobre Emergencia K8.",
+                            "¡Hola! ¿Cómo puedo ayudarte con la seguridad de tu negocio hoy?"
+                        ],
+                        "quick_actions": [
+                            {"text": "¿Cómo funciona?", "icon": "question-circle"},
+                            {"text": "¿Es gratuita?", "icon": "dollar-sign"},
+                            {"text": "Consejos de seguridad", "icon": "shield-alt"}
+                        ]
+                    },
+                    "default": {
+                        "responses": [
+                            "Lo siento, no puedo acceder a mis respuestas completas en este momento. Por favor, intenta más tarde.",
+                            "Estoy teniendo problemas para cargar mis respuestas. ¿Puedes intentar preguntarme de nuevo más tarde?"
+                        ],
+                        "quick_actions": [
+                            {"text": "Recargar", "icon": "sync"},
+                            {"text": "Contactar soporte", "icon": "headset"}
+                        ]
+                    }
+                };
+            }
+            
+            // Cargar historial desde localStorage
+            function loadChatHistory() {
+                const savedHistory = localStorage.getItem('emergenciaK8ChatHistory');
+                if (savedHistory) {
+                    chatHistory = JSON.parse(savedHistory);
+                    renderHistoryList();
+                }
+            }
+            
+            // Guardar historial en localStorage
+            function saveChatHistory() {
+                localStorage.setItem('emergenciaK8ChatHistory', JSON.stringify(chatHistory));
+            }
+            
+            // Renderizar lista de historial
+            function renderHistoryList() {
+                chatbotHistoryList.innerHTML = '';
+                
+                if (chatHistory.length === 0) {
+                    chatbotHistoryList.innerHTML = '<p style="text-align: center; color: var(--gray-medium); padding: 20px;">No hay conversaciones recientes</p>';
+                    return;
+                }
+                
+                chatHistory.forEach((conversation, index) => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'chatbot-history-item';
+                    historyItem.innerHTML = `
+                        <div class="chatbot-history-preview">${conversation.preview}</div>
+                        <div class="chatbot-history-date">${formatDate(conversation.date)}</div>
+                    `;
+                    
+                    historyItem.addEventListener('click', () => {
+                        loadConversation(index);
+                        chatbotHistoryPanel.classList.remove('active');
+                    });
+                    
+                    chatbotHistoryList.appendChild(historyItem);
+                });
+            }
+            
+            // Cargar una conversación específica del historial
+            function loadConversation(index) {
+                if (index >= 0 && index < chatHistory.length) {
+                    chatbotMessages.innerHTML = '';
+                    chatHistory[index].messages.forEach(msg => {
+                        addMessageToChat(msg.text, msg.sender, msg.timestamp, false);
+                    });
+                    
+                    // Mover el scroll al final
+                    setTimeout(() => {
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    }, 100);
+                }
+            }
+            
+            // Formatear fecha para mostrar en el historial
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('es-MX', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            
+            // Formatear hora para los mensajes
+            function formatTime(date) {
+                return date.toLocaleTimeString('es-MX', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            
+            // Añadir mensaje al chat
+            function addMessage(text, sender, showTime = true, saveToHistory = true) {
+                const timestamp = new Date();
+                addMessageToChat(text, sender, timestamp, showTime);
+                
+                if (saveToHistory) {
+                    // Actualizar el historial de la conversación actual
+                    if (chatHistory.length === 0 || chatHistory[chatHistory.length - 1].isClosed) {
+                        // Nueva conversación
+                        chatHistory.push({
+                            date: timestamp.toISOString(),
+                            preview: text.length > 50 ? text.substring(0, 50) + '...' : text,
+                            messages: [],
+                            isClosed: false
+                        });
+                    }
+                    
+                    const currentConversation = chatHistory[chatHistory.length - 1];
+                    currentConversation.messages.push({
+                        text,
+                        sender,
+                        timestamp: timestamp.toISOString()
+                    });
+                    
+                    // Actualizar preview con el último mensaje
+                    currentConversation.preview = text.length > 50 ? text.substring(0, 50) + '...' : text;
+                    currentConversation.date = timestamp.toISOString();
+                    
+                    saveChatHistory();
+                }
+                
+                // Si el chat está cerrado y es un mensaje del bot, mostrar notificación
+                if (sender === 'bot' && !chatbotContainer.classList.contains('active')) {
+                    unreadMessages++;
+                    updateNotificationBadge();
+                }
+            }
+            
+            // Añadir mensaje al DOM del chat
+            function addMessageToChat(text, sender, timestamp, showTime) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chatbot-message ${sender}`;
+                
+                const messageText = document.createElement('div');
+                messageText.textContent = text;
+                
+                messageDiv.appendChild(messageText);
+                
+                if (showTime) {
+                    const timeDiv = document.createElement('div');
+                    timeDiv.className = 'chatbot-message-time';
+                    timeDiv.textContent = formatTime(new Date(timestamp));
+                    messageDiv.appendChild(timeDiv);
+                }
+                
+                chatbotMessages.appendChild(messageDiv);
+                
+                // Scroll al final
+                setTimeout(() => {
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, 100);
+            }
+            
+            // Mostrar indicador de que el bot está escribiendo
+            function showTypingIndicator() {
+                if (isTyping) return;
+                
+                isTyping = true;
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'chatbot-typing-indicator';
+                
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'chatbot-typing-dot';
+                    typingDiv.appendChild(dot);
+                }
+                
+                chatbotMessages.appendChild(typingDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+            
+            // Ocultar indicador de que el bot está escribiendo
+            function hideTypingIndicator() {
+                isTyping = false;
+                const typingIndicator = document.querySelector('.chatbot-typing-indicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+            
+            // Actualizar badge de notificaciones
+            function updateNotificationBadge() {
+                if (unreadMessages > 0) {
+                    notificationBadge.textContent = unreadMessages;
+                    notificationBadge.style.display = 'flex';
+                } else {
+                    notificationBadge.style.display = 'none';
+                }
+            }
+            
+            // Generar botones de acción rápida
+            function generateQuickActions(actions) {
+                quickActions.innerHTML = '';
+                
+                actions.forEach(action => {
+                    const actionBtn = document.createElement('button');
+                    actionBtn.className = 'quick-action';
+                    actionBtn.innerHTML = `<i class="fas fa-${action.icon}"></i> ${action.text}`;
+                    
+                    actionBtn.addEventListener('click', () => {
+                        addMessage(action.text, 'user');
+                        setTimeout(() => {
+                            getBotResponse(action.text);
+                        }, 500);
+                    });
+                    
+                    quickActions.appendChild(actionBtn);
+                });
+            }
+            
+            // Obtener respuesta del bot
+            function getBotResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                let responseCategory = null;
+                
+                // Buscar la categoría que coincida
+                for (const category in chatbotResponses) {
+                    if (category === 'default') continue;
+                    
+                    const patterns = chatbotResponses[category].patterns;
+                    if (patterns && patterns.some(pattern => lowerMessage.includes(pattern))) {
+                        responseCategory = category;
+                        break;
+                    }
+                }
+                
+                // Usar categoría default si no se encontró coincidencia
+                if (!responseCategory) {
+                    responseCategory = 'default';
+                }
+                
+                const responses = chatbotResponses[responseCategory].responses;
+                const quickActions = chatbotResponses[responseCategory].quick_actions || (chatbotResponses['default'] ? chatbotResponses['default'].quick_actions : []);
+                
+                // Seleccionar respuesta aleatoria
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                let finalResponse = randomResponse;
+                
+                // Reemplazar marcadores de posición
+                if (finalResponse.includes('{input}')) {
+                    finalResponse = finalResponse.replace('{input}', message);
+                }
+                
+                // Mostrar respuesta después de un pequeño retraso
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addMessage(finalResponse, 'bot');
+                    if (quickActions) {
+                        generateQuickActions(quickActions);
+                    }
+                }, 1000 + Math.random() * 1000);
+            }
+            
+            // Manejar envío de mensaje
+            function sendMessage() {
+                const message = chatbotInput.value.trim();
+                if (message === '') return;
+                
+                addMessage(message, 'user');
+                chatbotInput.value = '';
+                sendMessageBtn.disabled = true;
+                
+                showTypingIndicator();
+                getBotResponse(message);
+            }
+            
+            // Mostrar mensaje inicial del bot
+            function showInitialMessage() {
+                if (chatbotResponses['saludos']) {
+                    const initialResponse = chatbotResponses['saludos'].responses[0];
+                    const initialActions = chatbotResponses['saludos'].quick_actions;
+                    
+                    addMessage(initialResponse, 'bot', true, false);
+                    if (initialActions) {
+                        generateQuickActions(initialActions);
+                    }
+                }
+            }
+            
+            // Event listeners
+            chatbotToggle.addEventListener('click', () => {
+                chatbotContainer.classList.toggle('active');
+                
+                // Resetear notificaciones cuando se abre el chat
+                if (chatbotContainer.classList.contains('active')) {
+                    unreadMessages = 0;
+                    updateNotificationBadge();
+                }
+            });
+            
+            closeChatbot.addEventListener('click', () => {
+                chatbotContainer.classList.remove('active');
+                
+                // Marcar la conversación actual como cerrada
+                if (chatHistory.length > 0) {
+                    chatHistory[chatHistory.length - 1].isClosed = true;
+                    saveChatHistory();
+                }
+            });
+            
+            chatbotInput.addEventListener('input', () => {
+                sendMessageBtn.disabled = chatbotInput.value.trim() === '';
+            });
+            
+            chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !sendMessageBtn.disabled) {
+                    sendMessage();
+                }
+            });
+            
+            sendMessageBtn.addEventListener('click', sendMessage);
+            
+            chatbotHistoryBtn.addEventListener('click', () => {
+                chatbotHistoryPanel.classList.add('active');
+            });
+            
+            showHistoryBtn.addEventListener('click', () => {
+                chatbotHistoryPanel.classList.add('active');
+            });
+            
+            closeHistoryPanel.addEventListener('click', () => {
+                chatbotHistoryPanel.classList.remove('active');
+            });
+            
+            // Cargar historial al iniciar
+            loadChatHistory();
+            
+            // Cargar respuestas del chatbot desde JSON
+            loadChatbotResponses();
+        });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
