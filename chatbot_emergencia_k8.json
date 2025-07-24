@@ -1,0 +1,218 @@
+{
+  "saludos": {
+    "keywords": ["hola", "hi", "Hello","buenas noches","buenos días","buen día", "buenas tardes"],
+    "respuesta": "¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?"
+  },
+  "despedidas": {
+    "keywords": ["adiós", "gracias", "hasta luego", "chao", "agradezco"],
+    "respuesta": "¡Hasta luego! Recuerda que puedes volver a abrir este chat cuando lo necesites. ¡Cuídate!"
+  },
+  "preguntas": [
+    {
+      "keywords": ["qué es emergencia k8", "definición"],
+      "respuesta": "Emergencia K8 es un sistema de alerta policial inmediata para negocios en la CDMX. ¡Es gratuito!",
+      "followup": ["¿Cómo registro mi negocio?", "¿Qué necesito para configurarlo?"]
+    },
+    {
+      "keywords": ["cómo funciona", "funcionamiento", "proceso de emergencia k8"],
+      "respuesta": "1) Activación desde el establecimiento, 2) C5 recibe alerta y despliega información, 3) Policía más cercano atiende en ~3 minutos.",
+      "followup": ["¿Qué ve C5 al activar Emergencia K8?", "¿Qué emergencias atiende?"]
+    },
+    {
+      "keywords": ["gratis", "cuesta", "precio", "emergencia k8 tiene costo", "es gratuito"],
+      "respuesta": "¡Sí! Emergencia K8 es completamente gratuita. No tiene costos de descarga, suscripción ni uso."
+    },
+    {
+      "keywords": ["emergencia", "cubre", "protege", "qué emergencias atiende", "para qué sirve el botón"],
+      "respuesta": "Puedes reportar cualquier situación de emergencia: robos, asaltos, extorsiones, violencia, incendios o accidentes que requieran intervención de autoridades."
+    },
+    {
+      "keywords": ["internet", "conexión", "datos", "emergencia k8 funciona sin internet", "necesita datos móviles"],
+      "respuesta": "Emergencia K8 requiere conexión a internet (WiFi o datos móviles) para enviar alertas. No funciona sin conexión."
+    },
+    {
+      "keywords": ["configurar", "registrar", "token", "cómo configurar en celular", "guía de configuración"],
+      "respuesta": "Al descargar la app, necesitarás un token único que se proporciona al registrar tu negocio. Luego podrás configurar los datos de tu establecimiento (nombre, giro, ubicación).",
+      "followup": ["¿Qué datos se necesitan?", "¿Cómo obtener latitud y longitud?"]
+    },
+    {
+      "keywords": ["seguridad", "consejos", "recomendaciones", "recomendaciones para usar", "consejos para emergencia k8"],
+      "respuesta": "Consejos de seguridad:\n\n• Mantén siempre visible el área de atención al público.\n• Instala cámaras de seguridad en puntos estratégicos.\n• Establece un código de palabra clave con empleados para alertar discretamente.\n• Mantén solo el efectivo indispensable en caja y realiza depósitos frecuentes.\n• Conoce a tus vecinos comerciales para apoyo mutuo en emergencias."
+    },
+    {
+      "keywords": ["descargar", "instalar", "disponible"],
+      "respuesta": "Puedes descargar Emergencia K8 desde nuestra sección de Descargas. Está disponible para celulares/tabletas (Android) y computadoras (Windows/Mac)."
+    },
+    {
+      "keywords": ["cuál es el objetivo", "para qué sirve"],
+      "respuesta": "El objetivo de Emergencia K8 es dar una respuesta inmediata a emergencias en establecimientos registrados en la Ciudad de México."
+    },
+    {
+      "keywords": ["cómo está dividida la cdmx en seguridad", "división seguridad cdmx"],
+      "respuesta": "La CDMX está dividida en: 5 Zonas Generales, 16 Regiones, 76 Sectores y 847 cuadrantes."
+    },
+    {
+      "keywords": ["qué es un cuadrante", "definición de cuadrante"],
+      "respuesta": "Un cuadrante es una delimitación territorial con personal policial asignado, vehículos y equipo de comunicación para vigilancia las 24 horas."
+    },
+    {
+      "keywords": ["cómo nació", "origen de emergencia k8"],
+      "respuesta": "Emergencia K8 nació en 2014 para reforzar el programa de Cuadrantes y facilitar la solicitud de ayuda policial ante emergencias."
+    },
+    {
+      "keywords": ["ventajas", "beneficios"],
+      "respuesta": "Las ventajas incluyen: es gratuito, comunicación directa con SSC, respuesta rápida, múltiples opciones de activación y configuración en varios dispositivos."
+    },
+    {
+      "keywords": ["qué datos se necesitan", "requisitos"],
+      "respuesta": "Se necesitan: datos del establecimiento (nombre, giro, teléfono), ubicación (dirección, coordenadas) y datos del solicitante (nombre, contacto)."
+    },
+    {
+      "keywords": ["cómo obtener latitud y longitud", "conseguir coordenadas"],
+      "respuesta": "Usando Google Maps: 1) Busca tu ubicación, 2) Haz clic derecho en el globo rojo, 3) Selecciona las coordenadas. El positivo es latitud, negativo es longitud."
+    },
+    {
+      "keywords": ["qué es una url", "para qué sirve la url"],
+      "respuesta": "La URL de Emergencia K8 es un enlace único para cada establecimiento que permite configurar los dispositivos para enviar alertas de emergencia."
+    },
+    {
+      "keywords": ["cómo activar", "modos de activación"],
+      "respuesta": "Se puede activar de forma virtual (celular/computadora) o con botones físicos (botón rojo, control remoto o sensores). Siempre se necesita internet."
+    },
+    {
+      "keywords": ["qué veo al activar", "mensaje de activación"],
+      "respuesta": "Verás 'Enviada' (fondo azul marino) si es real o 'Prueba enviada. 210. ok' (azul turquesa) si es prueba. Los botones físicos muestran luces LED."
+    },
+    {
+      "keywords": ["qué ve c5 al activar", "información que recibe c5"],
+      "respuesta": "C5 ve: nombre y dirección del establecimiento, ubicación exacta, patrulla más cercana (200m) y cámaras C2 cercanas."
+    },
+    {
+      "keywords": ["responsabilidades", "obligaciones"],
+      "respuesta": "Usar Emergencia K8 responsablemente, controlar quién tiene acceso a la URL, reportar anomalías y atender al personal policial que responda."
+    },
+    {
+      "keywords": ["cuántos dispositivos configurar", "límite de equipos"],
+      "respuesta": "No hay límite; puedes configurar todos los celulares y computadoras que necesites."
+    },
+    {
+      "keywords": ["tiempo de respuesta", "cuánto tardan en llegar"],
+      "respuesta": "El tiempo promedio es de 3 minutos, pero puede variar por factores como ubicación, tráfico o disponibilidad policial."
+    },
+    {
+      "keywords": ["dónde funciona", "emergencia k8 en edomex"],
+      "respuesta": "Solo funciona para establecimientos ubicados en la Ciudad de México."
+    },
+    {
+      "keywords": ["activación falsa", "multas"],
+      "respuesta": "No hay multas, pero el servicio puede suspenderse si se detecta mal uso recurrente."
+    },
+    {
+      "keywords": ["cómo incorporarse", "registrarse"],
+      "respuesta": "Debes enviar una solicitud escrita a la SSC con los datos del establecimiento y solicitante. También hay formatos disponibles."
+    },
+    {
+      "keywords": ["botón físico", "cómo conseguir botón"],
+      "respuesta": "La SSC proporciona listas de materiales para armarlo. Debes adquirirlos con un proveedor y luego la SSC lo configura gratuitamente."
+    },
+    {
+      "keywords": ["quién puede usar", "requisitos para usar"],
+      "respuesta": "Todos los negocios y establecimientos ubicados en la CDMX pueden registrarse. El solicitante debe ser dueño, representante o encargado del lugar."
+    },
+    {
+      "keywords": ["qué pasa si pierdo mi celular", "dispositivo perdido"],
+      "respuesta": "Debes configurar Emergencia K8 en un nuevo dispositivo. La URL sigue siendo la misma, pero la configuración anterior quedará inactiva."
+    },
+    {
+      "keywords": ["cómo cancelar una alerta", "detener alerta"],
+      "respuesta": "Las alertas no se pueden cancelar una vez activadas. El personal policial verificará la emergencia al llegar al lugar."
+    },
+    {
+      "keywords": ["qué hacer si no funciona", "problemas técnicos"],
+      "respuesta": "Verifica tu conexión a internet. Si persiste, reporta al 5242-5100 ext. 5647/5664 o envía un correo a xxxxx@ssc.cdmx.gob.mx."
+    },
+    {
+      "keywords": ["dónde entregar la solicitud", "oficina para registro"],
+      "respuesta": "En Oficialía de Partes de la SSC: Liverpool #136, Col. Juárez, Cuauhtémoc, de 09:00 a 18:00 hrs. También puedes coordinar con tu enlace asignado."
+    },
+    {
+      "keywords": ["qué es código águila", "diferencia con emergencia k8"],
+      "respuesta": "Código Águila es un programa de visitas policiales programadas. Emergencia K8 es para emergencias inmediatas con respuesta en minutos."
+    },
+    {
+      "keywords": ["puedo tener botón físico y virtual", "combinar"],
+      "respuesta": "Sí, puedes configurar ambos. El botón físico (con sensores o control remoto) y el virtual (dispositivos móviles/computadoras) son complementarios."
+    },
+    {
+      "keywords": ["cada cuánto probar", "pruebas periódicas"],
+      "respuesta": "Se recomienda mensual o bimestralmente. Los botones físicos hacen pruebas automáticas periódicamente."
+    },
+    {
+      "keywords": ["qué incluye el botón físico", "componentes botón"],
+      "respuesta": "Según el tipo: botón rojo, control remoto, sensores (magnéticos, PIR) o relevadores. La SSC proporciona listas detalladas de materiales."
+    },
+    {
+      "keywords": ["dónde comprar materiales", "proveedores"],
+      "respuesta": "En la calle República del Salvador (Centro Histórico). Adquiere EXACTAMENTE los materiales de la lista proporcionada por la SSC."
+    },
+    {
+      "keywords": ["cuánto tarda el registro", "tiempo de alta"],
+      "respuesta": "El proceso inicia al entregar la solicitud. La URL se genera después de validar datos. Configuración depende de la disponibilidad del usuario."
+    },
+    {
+      "keywords": ["puedo cambiar datos después de registrar", "actualizar información"],
+      "respuesta": "Sí, debes solicitarlo por escrito o correo electrónico para actualizar dirección, contactos u otros datos relevantes."
+    },
+    {
+      "keywords": ["qué pasa si me mudo de local", "cambio de dirección"],
+      "respuesta": "Debes notificar el cambio para actualizar tu georreferenciación. Se generará una nueva URL si la ubicación cambia de cuadrante policial."
+    },
+    {
+      "keywords": ["para escuelas", "emergencia k8 en escuelas"],
+      "respuesta": "Sí, hay un formato especial para escuelas (públicas/privadas) con datos como nivel escolar, turno y responsable."
+    },
+    {
+      "keywords": ["atención a cadenas comerciales", "franquicias"],
+      "respuesta": "Las cadenas pueden registrar múltiples sucursales con un formato EXCEL especial para agilizar el proceso."
+    },
+    {
+      "keywords": ["política de privacidad", "uso de datos"],
+      "respuesta": "Tus datos solo se usan para emergencias. Están protegidos por la ley y no se comparten con terceros sin consentimiento."
+    },
+    {
+      "keywords": ["qué hacer si activo por error", "falsa alarma"],
+      "respuesta": "Informa al policía que fue accidental. Evita sanciones explicando la situación. No hay multas por primeras incidencias."
+    },
+    {
+      "keywords": ["tienda de apps", "tienda", "descarga la app", "obtengo", "app store", "play store", "google play"],
+      "respuesta": "Por el momento solo está disponible para su descarga desde la página web. Puedes ir al apartado de descarga en esta página."
+    }
+  ],
+  "coincidencias": [
+    {
+      "id_pregunta": 1,
+      "palabras_clave": ["botón de pánico", "virtual", "establecimientos comerciales"],
+      "similitud": 0.95
+    },
+    {
+      "id_pregunta": 3,
+      "palabras_clave": ["conexión internet", "token", "dispositivo móvil"],
+      "similitud": 0.92
+    },
+    {
+      "id_pregunta": 4,
+      "palabras_clave": ["privacidad", "datos personales", "mínima intervención"],
+      "similitud": 0.97
+    },
+    {
+      "id_pregunta": 7,
+      "palabras_clave": ["registro negocio", "formato", "punto fijo"],
+      "similitud": 0.90
+    },
+    {
+      "id_pregunta": 10,
+      "palabras_clave": ["no responsable", "canalización", "atención emergencias"],
+      "similitud": 0.98
+    }
+  ]
+}
