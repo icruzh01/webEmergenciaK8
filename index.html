@@ -1012,7 +1012,6 @@
         
         /* Estilos para el simulador de botón de pánico */
         
-
         /* NUEVOS ESTILOS PARA EL BOTÓN NEÓN */
         .panic-button-neon {
             width: 200px;
@@ -1133,7 +1132,7 @@
         
         .panic-button-alert h2 {
             color: var(--white);
-            font-size: 2rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             text-align: center;
         }
@@ -1279,6 +1278,40 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        /* Estilos para datos de activación */
+        .panic-button-alert p.info-line {
+            margin-bottom: 5px;
+            text-align: center;
+            color: white;
+        }
+
+        .panic-alert-message {
+            margin-top: 30px;
+            color: white;
+        }
+
+        /* Estilos para el consejo de seguridad */
+        .security-tip {
+            background-color: var(--gray-light);
+            color: var(--accent-red);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .security-tip-title {
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .security-tip-content {
+            color: var(--primary-blue);
+            font-size: 0.9rem;
         }
         
         /* Responsive Design */
@@ -1587,7 +1620,7 @@
     <div class="panic-button-countdown" id="panicCountdown">
         <div class="panic-countdown-content">
             <div class="panic-countdown-circle">
-                <div class="panic-countdown-number" id="countdownNumber">3</div>
+                <div class="panic-countdown-number" id="countdownNumber">5</div>
             </div>
             <p>Activando alerta de emergencia...</p>
             <div class="panic-countdown-buttons">
@@ -1595,11 +1628,24 @@
             </div>
         </div>
     </div>
-    
-    <!-- Alert Modal -->
+      
+    <!-- Alert Modal - Versión con clases CSS -->
     <div class="panic-button-alert" id="panicAlert">
-        <h2>¡ALERTA DE EMERGENCIA ACTIVADA!</h2>
-        <p>En una situación real, las autoridades ya estarían en camino a tu ubicación con todos los datos de tu negocio.</p>
+        <h2>¡EMERGENCIA ENVIADA!</h2>
+        <div>
+            <p class="info-line">Fecha: <span id="currentDate"></span></p>
+            <p class="info-line">Hora: <span id="currentTime"></span></p>
+            <p class="info-line">Giro: TIENDA DE ABARROTES</p>
+            <p class="info-line">Nombre: LA ESQUINITA</p>
+        </div>
+        
+        <!-- Sección de consejo de seguridad -->
+        <div class="security-tip" id="securityTip">
+            <div class="security-tip-title">CONSEJO DEL DÍA</div>
+            <div class="security-tip-content" id="tipContent"></div>
+        </div>
+        
+        <p class="panic-alert-message">En una situación real, las autoridades ya estarían enteradas de la activación de la alerta y canalizada la emergencia a la ubicación del negocio.</p>
         <button class="panic-button-alert-btn" id="closeAlert">ENTENDIDO</button>
     </div>
     
@@ -2103,6 +2149,54 @@
         
         let countdown;
         
+        // Array de consejos de seguridad
+        const securityTips = [
+            "Mantén siempre visible el área de atención al público y evita obstáculos que dificulten la visibilidad.",
+            "Instala cámaras de seguridad en puntos estratégicos y asegúrate de que estén funcionando correctamente.",
+            "Establece un código de palabra clave con tus empleados para alertar discretamente en situaciones sospechosas.",
+            "Mantén solo el efectivo indispensable en caja y realiza depósitos bancarios con frecuencia.",
+            "Conoce a tus vecinos comerciales y establezcan un sistema de apoyo mutuo para situaciones de emergencia.",
+            "Asegúrate de que todas las salidas de emergencia estén despejadas y accesibles en todo momento.",
+            "Realiza simulacros periódicos con tu personal para que todos sepan cómo actuar en caso de emergencia.",
+            "Evita rutinas predecibles en los horarios de apertura, cierre y manejo de efectivo.",
+            "Mantén una buena iluminación tanto al interior como en los accesos a tu establecimiento.",
+            "Ten a la mano los números de emergencia locales además de Emergencia K8."
+        ];
+
+        // Función para mostrar un consejo aleatorio
+        function showRandomTip() {
+            const randomIndex = Math.floor(Math.random() * securityTips.length);
+            document.getElementById('tipContent').textContent = securityTips[randomIndex];
+        }
+
+        // Función para vibrar el dispositivo
+        function vibrateDevice(pattern) {
+            // Verificar si el navegador soporta la API de vibración
+            if ('vibrate' in navigator) {
+                navigator.vibrate(pattern);
+            }
+        }
+
+        // Función para actualizar fecha y hora
+        function updateDateTime() {
+            const now = new Date();
+            
+            // Formatear fecha como DD/MM/YYYY
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            document.getElementById('currentDate').textContent = `${day}/${month}/${year}`;
+            
+            // Formatear hora como HH:MM:SS
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // Mostrar un consejo aleatorio
+            showRandomTip();
+        }
+        
         panicButton.addEventListener('mousedown', () => {
             panicButton.classList.add('active');
         });
@@ -2134,14 +2228,26 @@
             let count = 5;
             countdownNumber.textContent = count;
             
+            // Vibración corta al iniciar el conteo
+            vibrateDevice(200);
+            
             countdown = setInterval(() => {
                 count--;
                 countdownNumber.textContent = count;
+                
+                // Vibración corta en cada segundo del conteo
+                vibrateDevice(100);
                 
                 if (count <= 0) {
                     clearInterval(countdown);
                     panicCountdown.classList.remove('active');
                     panicAlert.classList.add('active');
+                    
+                    // Actualizar fecha y hora cuando se muestra la alerta
+                    updateDateTime();
+                    
+                    // Vibración larga al finalizar el conteo
+                    vibrateDevice(500);
                 }
             }, 1000);
         });
@@ -2161,6 +2267,7 @@
             panicAlert.classList.remove('active');
             document.body.style.overflow = 'auto';
         });
+        
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
