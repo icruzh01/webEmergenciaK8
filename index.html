@@ -2570,41 +2570,32 @@
             function getBotResponse(message) {
                 const lowerMessage = message.toLowerCase();
                 
-                if (lowerMessage.includes('hola') || lowerMessage.includes('buenos días') || lowerMessage.includes('buenas tardes')) {
-                    return '¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?';
+                if (lowerMessage.includes('hola') || lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('buenos días') || lowerMessage.includes('buenas tardes') || lowerMessage.includes('buenas noches')) {
+                    return '¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte?';
+                }
+
+                if (lowerMessage.includes('llamas') || lowerMessage.includes('tienes nombre') || lowerMessage.includes('nombre') || lowerMessage.includes('llamo')) {
+                    const nombre = [
+                        "Me llamo Ek8. ¿Te puedo ayudar con algo?",
+                        "Mi nombre es Ek8, ¡que hay!",
+                        "Mis amigos me llaman Ek8. ¡Pregúntame!",
+                    ];
+                    // Elige una respuesta aleatoria del array:
+                    return nombre[Math.floor(Math.random() * nombre.length)];
                 }
                 
-                if (lowerMessage.includes('cómo funciona') || lowerMessage.includes('funcionamiento')) {
-                    return 'Emergencia K8 es un botón de pánico virtual. Al activarlo, envía tu ubicación y datos del negocio a las autoridades. Puedes elegir entre diferentes tipos de emergencia (C5, Cuadrante, Extorsión o contacto de confianza).';
+                if (lowerMessage.includes('funciona') || lowerMessage.includes('funcionamiento') || lowerMessage.includes('que es emergencia k8')) {
+                    return 'Emergencia K8 es un botón de pánico virtual. Al activarlo, envía la ubicación y datos del negocio a las autoridades. Puedes elegir entre diferentes tipos de emergencia (C5, Cuadrante, Extorsión o contacto de confianza).';
                 }
-                
-                if (lowerMessage.includes('gratis') || lowerMessage.includes('cuesta') || lowerMessage.includes('precio')) {
-                    return '¡Sí! Emergencia K8 es completamente gratuita. No tiene costos de descarga, suscripción ni uso.';
-                }
-                
-                if (lowerMessage.includes('emergencia') || lowerMessage.includes('cubre') || lowerMessage.includes('protege')) {
+                                
+                if (lowerMessage.includes('emergencia') || lowerMessage.includes('cubre') || lowerMessage.includes('protege') || lowerMessage.includes('sirve')) {
                     return 'Puedes reportar cualquier situación de emergencia: robos, asaltos, extorsiones, violencia, incendios o accidentes que requieran intervención de autoridades.';
                 }
                 
-                if (lowerMessage.includes('internet') || lowerMessage.includes('conexión') || lowerMessage.includes('datos')) {
+                if (lowerMessage.includes('internet') || lowerMessage.includes('conexión') || lowerMessage.includes('conexion') || lowerMessage.includes('datos moviles') || lowerMessage.includes('datos móviles')) {
                     return 'Emergencia K8 requiere conexión a internet (WiFi o datos móviles) para enviar alertas. La app no funciona sin conexión.';
                 }
-                
-                if (lowerMessage.includes('configurar') || lowerMessage.includes('registrar') || lowerMessage.includes('token')) {
-                    return 'Al descargar la app, necesitarás un token único que se proporciona al registrar tu negocio. Luego podrás configurar los datos de tu establecimiento (nombre, giro, ubicación).';
-                }
-                
-                if (lowerMessage.includes('seguridad') || lowerMessage.includes('consejos') || lowerMessage.includes('recomendaciones')) {
-                    const tips = [
-                        "Mantén siempre visible el área de atención al público.",
-                        "Instala cámaras de seguridad en puntos estratégicos.",
-                        "Establece un código de palabra clave con empleados para alertar discretamente.",
-                        "Mantén solo el efectivo indispensable en caja y realiza depósitos frecuentes.",
-                        "Conoce a tus vecinos comerciales para apoyo mutuo en emergencias."
-                    ];
-                    return 'Consejos de seguridad:\n\n' + tips.join('\n• ');
-                }
-                
+                                                                               
                 if (lowerMessage.includes('descargar') || lowerMessage.includes('instalar') || lowerMessage.includes('disponible')) {
                     return 'Puedes descargar Emergencia K8 desde nuestra sección de Descargas. Está disponible para celulares/tabletas (Android) y computadoras (Windows/Mac).';
                 }
@@ -2617,42 +2608,26 @@
                     return '¡Hasta luego! Recuerda que puedes volver a abrir este chat cuando lo necesites. ¡Cuídate!';
                 }
 
-                if (lowerMessage.includes('hola') || lowerMessage.includes('hi') || lowerMessage.includes('hello') || lowerMessage.includes('buenas noches') || lowerMessage.includes('buenos días') || lowerMessage.includes('buen día') || lowerMessage.includes('buenas tardes')) {
-                    return '¡Hola! Soy tu asistente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?';
-                }
-
-                if (lowerMessage.includes('adiós') || lowerMessage.includes('gracias') || lowerMessage.includes('hasta luego') || lowerMessage.includes('chao') || lowerMessage.includes('agradezco')) {
-                    return '¡Hasta luego! Recuerda que puedes volver a abrir este chat cuando lo necesites. ¡Cuídate!';
-                }
-
-                if (lowerMessage.includes('qué es emergencia k8') || lowerMessage.includes('definición')) {
-                    return 'Emergencia K8 es un sistema de alerta policial inmediata para negocios en la CDMX. ¡Es gratuito!';
-                }
-
-                if (lowerMessage.includes('cómo funciona') || lowerMessage.includes('funcionamiento') || lowerMessage.includes('proceso de emergencia k8')) {
+                if (lowerMessage.includes('cómo funciona') || lowerMessage.includes('como funciona') || lowerMessage.includes('funcionamiento') || lowerMessage.includes('proceso de emergencia k8')) {
                     return '1) Activación desde el establecimiento, 2) C5 recibe alerta y despliega información, 3) Policía más cercano atiende en ~3 minutos.';
                 }
 
-                if (lowerMessage.includes('gratis') || lowerMessage.includes('cuesta') || lowerMessage.includes('precio') || lowerMessage.includes('emergencia k8 tiene costo') || lowerMessage.includes('es gratuito')) {
+                if (lowerMessage.includes('es gratuita') || lowerMessage.includes('es gratis') || lowerMessage.includes('es gratuito')) {
                     return '¡Sí! Emergencia K8 es completamente gratuita. No tiene costos de descarga, suscripción ni uso.';
                 }
 
-                if (lowerMessage.includes('emergencia') || lowerMessage.includes('cubre') || lowerMessage.includes('protege') || lowerMessage.includes('qué emergencias atiende') || lowerMessage.includes('para qué sirve el botón')) {
-                    return 'Puedes reportar cualquier situación de emergencia: robos, asaltos, extorsiones, violencia, incendios o accidentes que requieran intervención de autoridades.';
+                if (lowerMessage.includes('cuesta') || lowerMessage.includes('costo') || lowerMessage.includes('precio') || lowerMessage.includes('cobrar') || lowerMessage.includes('pagar')) {
+                    return 'No, actualmente la aplicación no tiene costos de descarga, suscripción ni uso.';
                 }
 
-                if (lowerMessage.includes('internet') || lowerMessage.includes('conexión') || lowerMessage.includes('datos') || lowerMessage.includes('emergencia k8 funciona sin internet') || lowerMessage.includes('necesita datos móviles')) {
-                    return 'Emergencia K8 requiere conexión a internet (WiFi o datos móviles) para enviar alertas. No funciona sin conexión.';
+                if (lowerMessage.includes('emergencia') || lowerMessage.includes('cubre') || lowerMessage.includes('protege') || lowerMessage.includes('qué emergencias atiende') || lowerMessage.includes('para qué sirve el botón') || lowerMessage.includes('sirve el boton')) {
+                    return 'Puedes reportar cualquier situación de emergencia: robos, asaltos, extorsiones, violencia, incendios o accidentes que requieran intervención de autoridades.';
                 }
 
                 if (lowerMessage.includes('configurar') || lowerMessage.includes('registrar') || lowerMessage.includes('token') || lowerMessage.includes('cómo configurar en celular') || lowerMessage.includes('guía de configuración')) {
                     return 'Al descargar la app, necesitarás un token único que se proporciona al registrar tu negocio. Luego podrás configurar los datos de tu establecimiento (nombre, giro, ubicación).';
                 }
-
-                if (lowerMessage.includes('seguridad') || lowerMessage.includes('consejos') || lowerMessage.includes('recomendaciones') || lowerMessage.includes('recomendaciones para usar') || lowerMessage.includes('consejos para emergencia k8')) {
-                    return 'Consejos de seguridad:\n\n• Mantén siempre visible el área de atención al público.\n• Instala cámaras de seguridad en puntos estratégicos.\n• Establece un código de palabra clave con empleados para alertar discretamente.\n• Mantén solo el efectivo indispensable en caja y realiza depósitos frecuentes.\n• Conoce a tus vecinos comerciales para apoyo mutuo en emergencias.';
-                }
-
+               
                 if (lowerMessage.includes('descargar') || lowerMessage.includes('instalar') || lowerMessage.includes('disponible')) {
                     return 'Puedes descargar Emergencia K8 desde nuestra sección de Descargas. Está disponible para celulares/tabletas (Android) y computadoras (Windows/Mac).';
                 }
@@ -2661,16 +2636,12 @@
                     return 'El objetivo de Emergencia K8 es dar una respuesta inmediata a emergencias en establecimientos registrados en la Ciudad de México.';
                 }
 
-                if (lowerMessage.includes('cómo está dividida la cdmx en seguridad') || lowerMessage.includes('división seguridad cdmx')) {
-                    return 'La CDMX está dividida en: 5 Zonas Generales, 16 Regiones, 76 Sectores y 847 cuadrantes.';
-                }
-
-                if (lowerMessage.includes('qué es un cuadrante') || lowerMessage.includes('definición de cuadrante')) {
+                if (lowerMessage.includes('qué es un cuadrante') || lowerMessage.includes('que es un cuadrante') || lowerMessage.includes('definición de cuadrante')) {
                     return 'Un cuadrante es una delimitación territorial con personal policial asignado, vehículos y equipo de comunicación para vigilancia las 24 horas.';
                 }
 
-                if (lowerMessage.includes('cómo nació') || lowerMessage.includes('origen de emergencia k8')) {
-                    return 'Emergencia K8 nació en 2014 para reforzar el programa de Cuadrantes y facilitar la solicitud de ayuda policial ante emergencias.';
+                if (lowerMessage.includes('cómo nació') || lowerMessage.includes('como nacio') || lowerMessage.includes('desde cuando') ||  lowerMessage.includes('origen de emergencia k8')) {
+                    return 'Emergencia K8 nace en 2025 para reforzar el programa Mi Policía en Mi Negocio y facilitar la solicitud de ayuda policial ante emergencias.';
                 }
 
                 if (lowerMessage.includes('ventajas') || lowerMessage.includes('beneficios')) {
@@ -2678,23 +2649,19 @@
                 }
 
                 if (lowerMessage.includes('qué datos se necesitan') || lowerMessage.includes('requisitos')) {
-                    return 'Se necesitan: datos del establecimiento (nombre, giro, teléfono), ubicación (dirección, coordenadas) y datos del solicitante (nombre, contacto).';
+                    return 'Se necesitan: datos del establecimiento (nombre, giro, teléfono), ubicación (dirección y coordenadas)';
                 }
 
-                if (lowerMessage.includes('cómo obtener latitud y longitud') || lowerMessage.includes('conseguir coordenadas')) {
-                    return 'Usando Google Maps: 1) Busca tu ubicación, 2) Haz clic derecho en el globo rojo, 3) Selecciona las coordenadas. El positivo es latitud, negativo es longitud.';
-                }
-
-                if (lowerMessage.includes('qué es una url') || lowerMessage.includes('para qué sirve la url')) {
-                    return 'La URL de Emergencia K8 es un enlace único para cada establecimiento que permite configurar los dispositivos para enviar alertas de emergencia.';
+                if (lowerMessage.includes('qué es un token') || lowerMessage.includes('que es un token') || lowerMessage.includes('sirve un token')) {
+                    return 'El token de Emergencia K8 es un enlace único para cada establecimiento que permite configurar la aplicaciòn para enviar alertas de emergencia.';
                 }
 
                 if (lowerMessage.includes('cómo activar') || lowerMessage.includes('modos de activación')) {
-                    return 'Se puede activar de forma virtual (celular/computadora) o con botones físicos (botón rojo, control remoto o sensores). Siempre se necesita internet.';
+                    return 'Emergencia K8 se activa pulsando el botón rojo ubicada en la pantalla principal. Siempre se necesita internet.';
                 }
 
-                if (lowerMessage.includes('qué veo al activar') || lowerMessage.includes('mensaje de activación')) {
-                    return 'Verás "Enviada" (fondo azul marino) si es real o "Prueba enviada. 210. ok" (azul turquesa) si es prueba. Los botones físicos muestran luces LED.';
+                if (lowerMessage.includes('veo al activar') || lowerMessage.includes('mensaje de activación')) {
+                    return 'Verás "Enviada" (fondo azul marino) si es real o "Prueba enviada. 210. ok" (azul turquesa) si es prueba.';
                 }
 
                 if (lowerMessage.includes('qué ve c5 al activar') || lowerMessage.includes('información que recibe c5')) {
@@ -2714,81 +2681,49 @@
                 }
 
                 if (lowerMessage.includes('dónde funciona') || lowerMessage.includes('emergencia k8 en edomex')) {
-                    return 'Solo funciona para establecimientos ubicados en la Ciudad de México.';
+                    return 'Si el token es de la Ciudad de Mèxico, entonces solo funcionaría para establecimientos ubicados en la Ciudad de México.';
                 }
 
                 if (lowerMessage.includes('activación falsa') || lowerMessage.includes('multas')) {
                     return 'No hay multas, pero el servicio puede suspenderse si se detecta mal uso recurrente.';
                 }
 
-                if (lowerMessage.includes('cómo incorporarse') || lowerMessage.includes('registrarse')) {
+                if (lowerMessage.includes('cómo incorporarse') || lowerMessage.includes('como incorporarse') || lowerMessage.includes('registrarse')) {
                     return 'Debes enviar una solicitud escrita a la SSC con los datos del establecimiento y solicitante. También hay formatos disponibles.';
                 }
 
-                if (lowerMessage.includes('botón físico') || lowerMessage.includes('cómo conseguir botón')) {
-                    return 'La SSC proporciona listas de materiales para armarlo. Debes adquirirlos con un proveedor y luego la SSC lo configura gratuitamente.';
-                }
-
                 if (lowerMessage.includes('quién puede usar') || lowerMessage.includes('requisitos para usar')) {
-                    return 'Todos los negocios y establecimientos ubicados en la CDMX pueden registrarse. El solicitante debe ser dueño, representante o encargado del lugar.';
+                    return 'Todos los negocios y establecimientos ubicados en la CDMX pueden hacer uso de la aplicación.';
                 }
 
                 if (lowerMessage.includes('qué pasa si pierdo mi celular') || lowerMessage.includes('dispositivo perdido')) {
-                    return 'Debes configurar Emergencia K8 en un nuevo dispositivo. La URL sigue siendo la misma, pero la configuración anterior quedará inactiva.';
+                    return 'Debes configurar Emergencia K8 en un nuevo dispositivo. El Token sigue siendo el mismo, pero la configuración anterior quedará inactiva.';
                 }
 
                 if (lowerMessage.includes('cómo cancelar una alerta') || lowerMessage.includes('detener alerta')) {
-                    return 'Las alertas no se pueden cancelar una vez activadas. El personal policial verificará la emergencia al llegar al lugar.';
+                    return 'Cuando se activa el botón, la app pide confirmación, y comeinza un conteo regresivo de 5 segundos que se puede cancelar.';
                 }
 
-                if (lowerMessage.includes('qué hacer si no funciona') || lowerMessage.includes('problemas técnicos')) {
-                    return 'Verifica tu conexión a internet. Si persiste, reporta al 5242-5100 ext. 5647/5664 o envía un correo a xxxxx@ssc.cdmx.gob.mx.';
+                if (lowerMessage.includes('qué hacer si no funciona') || lowerMessage.includes('no funciona') || lowerMessage.includes('problemas técnicos')) {
+                    return 'Verifica tu conexión a internet. Si persiste, manda un correo electrónico reportando la anomalia.';
                 }
 
-                if (lowerMessage.includes('dónde entregar la solicitud') || lowerMessage.includes('oficina para registro')) {
-                    return 'En Oficialía de Partes de la SSC: Liverpool #136, Col. Juárez, Cuauhtémoc, de 09:00 a 18:00 hrs. También puedes coordinar con tu enlace asignado.';
+                if (lowerMessage.includes('puedo tener varios botones en la misma aplicación') || lowerMessage.includes('combinar')) {
+                    return 'La aplicación tiene cuatro botones, cada una con sus propias caracterìsticas y funcionamiento.';
                 }
-
-                if (lowerMessage.includes('qué es código águila') || lowerMessage.includes('diferencia con emergencia k8')) {
-                    return 'Código Águila es un programa de visitas policiales programadas. Emergencia K8 es para emergencias inmediatas con respuesta en minutos.';
-                }
-
-                if (lowerMessage.includes('puedo tener botón físico y virtual') || lowerMessage.includes('combinar')) {
-                    return 'Sí, puedes configurar ambos. El botón físico (con sensores o control remoto) y el virtual (dispositivos móviles/computadoras) son complementarios.';
-                }
-
-                if (lowerMessage.includes('cada cuánto probar') || lowerMessage.includes('pruebas periódicas')) {
-                    return 'Se recomienda mensual o bimestralmente. Los botones físicos hacen pruebas automáticas periódicamente.';
-                }
-
-                if (lowerMessage.includes('qué incluye el botón físico') || lowerMessage.includes('componentes botón')) {
-                    return 'Según el tipo: botón rojo, control remoto, sensores (magnéticos, PIR) o relevadores. La SSC proporciona listas detalladas de materiales.';
-                }
-
-                if (lowerMessage.includes('dónde comprar materiales') || lowerMessage.includes('proveedores')) {
-                    return 'En la calle República del Salvador (Centro Histórico). Adquiere EXACTAMENTE los materiales de la lista proporcionada por la SSC.';
-                }
-
-                if (lowerMessage.includes('cuánto tarda el registro') || lowerMessage.includes('tiempo de alta')) {
-                    return 'El proceso inicia al entregar la solicitud. La URL se genera después de validar datos. Configuración depende de la disponibilidad del usuario.';
-                }
-
+                
                 if (lowerMessage.includes('puedo cambiar datos después de registrar') || lowerMessage.includes('actualizar información')) {
-                    return 'Sí, debes solicitarlo por escrito o correo electrónico para actualizar dirección, contactos u otros datos relevantes.';
+                    return 'Sí, en el menú de servicios de la aplicación se pueden modificar la información del establecimiento, los cuales se veran en la pantalla principal del teléfono..';
                 }
 
                 if (lowerMessage.includes('qué pasa si me mudo de local') || lowerMessage.includes('cambio de dirección')) {
-                    return 'Debes notificar el cambio para actualizar tu georreferenciación. Se generará una nueva URL si la ubicación cambia de cuadrante policial.';
+                    return 'La aplicación seguira funcionando, pero debes notificar el cambio a la institución que te brindo el Token para actualizar tu georreferenciación.';
                 }
 
                 if (lowerMessage.includes('para escuelas') || lowerMessage.includes('emergencia k8 en escuelas')) {
-                    return 'Sí, hay un formato especial para escuelas (públicas/privadas) con datos como nivel escolar, turno y responsable.';
+                    return 'Sí, la aplicación funciona para escuelas, comercios, establecimientos, negocios, entre otros.';
                 }
-
-                if (lowerMessage.includes('atención a cadenas comerciales') || lowerMessage.includes('franquicias')) {
-                    return 'Las cadenas pueden registrar múltiples sucursales con un formato EXCEL especial para agilizar el proceso.';
-                }
-
+                
                 if (lowerMessage.includes('política de privacidad') || lowerMessage.includes('uso de datos')) {
                     return 'Tus datos solo se usan para emergencias. Están protegidos por la ley y no se comparten con terceros sin consentimiento.';
                 }
@@ -2798,7 +2733,11 @@
                 }
 
                 if (lowerMessage.includes('tienda de apps') || lowerMessage.includes('tienda') || lowerMessage.includes('descarga la app') || lowerMessage.includes('obtengo') || lowerMessage.includes('app store') || lowerMessage.includes('play store') || lowerMessage.includes('google play')) {
-                    return 'Por el momento solo está disponible para su descarga desde la página web. Puedes ir al apartado de descarga en esta página.';
+                    return 'Por el momento Emergencia K8 solo está disponible para su descarga desde la página web. Puedes ir al apartado de descarga en esta página.';
+                }
+
+                if (lowerMessage.includes('manual') || lowerMessage.includes('guía') || lowerMessage.includes('guia') || lowerMessage.includes('ayudar') || lowerMessage.includes('ayuda')) {
+                    return 'Puedo mandarte un manual y guía de configuración para que configures tu dispositivo moviles o computadoras.';
                 }
                 
                 return 'Entiendo que preguntas sobre: "' + message + '". Como asistente de Emergencia K8, puedo ayudarte con información sobre:\n\n• Funcionamiento de la app\n• Tipos de emergencias\n• Configuración\n• Consejos de seguridad\n\n¿En qué más puedo ayudarte?';
