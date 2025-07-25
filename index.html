@@ -2740,6 +2740,34 @@
                     return 'Puedo mandarte un manual y guía de configuración para que configures tu dispositivo moviles o computadoras.';
                 }
                 
+                if (lowerMessage.includes('política de privacidad') || lowerMessage.includes('privacidad') || lowerMessage.includes('datos personales') || lowerMessage.includes('protección de datos')) {
+                    return 'La política de privacidad de Emergencia K8 garantiza que no se recopilan datos personales de los usuarios. Puedes consultar el documento completo en la sección correspondiente de nuestra página web.';
+                }
+
+                if (lowerMessage.includes('funcionamiento') || lowerMessage.includes('cómo funciona') || lowerMessage.includes('como funciona') || lowerMessage.includes('uso de la app')) {
+                    return 'Emergencia K8 opera como un botón de pánico virtual para establecimientos en la Ciudad de México. Requiere conexión a internet y un token de acceso único. Consulta la sección "Del Uso y Funcionamiento" en nuestra política de privacidad para más detalles.';
+                }
+
+                if (lowerMessage.includes('obtener un token') || lowerMessage.includes('obtener token') || lowerMessage.includes('código de acceso') || lowerMessage.includes('codigo de acceso') || lowerMessage.includes('registro')) {
+                    return 'Para obtener un token de acceso, el establecimiento debe registrarse en la Plataforma Tecnológica Emergencia K8 y cumplir con los requisitos. Más información en la sección "Del Uso y Funcionamiento" de nuestra política de privacidad.';
+                }
+
+                if (lowerMessage.includes('ubicación') || lowerMessage.includes('localización') || lowerMessage.includes('localizacion') || lowerMessage.includes('GPS')) {
+                    return 'Emergencia K8 NO requiere acceso a la ubicación del dispositivo ni utiliza la ubicación en segundo plano. Puedes verificar esta información en la sección "Del Uso y Funcionamiento" de nuestra política de privacidad.';
+                }
+
+                if (lowerMessage.includes('responsabilidad') || lowerMessage.includes('canalización de emergencias') || lowerMessage.includes('atención de emergencias')) {
+                    return 'La canalización y atención de emergencias no es responsabilidad de Emergencia K8. Consulta la sección "De la Responsabilidad" en nuestra política de privacidad para más información.';
+                }
+
+                if (lowerMessage.includes('actualización') || lowerMessage.includes('modificación') || lowerMessage.includes('cambios en la app')) {
+                    return 'Cualquier modificación en la política de privacidad o funcionalidades de la app será notificada a través de la misma aplicación. La última actualización fue el 23 de mayo de 2025.';
+                }
+
+                if (lowerMessage.includes('propiedad intelectual') || lowerMessage.includes('derechos de autor') || lowerMessage.includes('uso no autorizado')) {
+                    return 'Todo el contenido de Emergencia K8 está protegido por derechos de autor y propiedad industrial. No se permite su uso con fines distintos a los previstos. Más detalles en la sección "De la Propiedad Intelectual" de nuestra política de privacidad.';
+                }
+
                 return 'Entiendo que preguntas sobre: "' + message + '". Como asistente de Emergencia K8, puedo ayudarte con información sobre:\n\n• Funcionamiento de la app\n• Tipos de emergencias\n• Configuración\n• Consejos de seguridad\n\n¿En qué más puedo ayudarte?';
             }
         });
