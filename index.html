@@ -1077,7 +1077,8 @@
         /* Estilos para los modales del simulador */
         .panic-button-confirm,
         .panic-button-countdown,
-        .panic-button-alert {
+        .panic-button-alert,
+        .panic-button-survey {
             position: fixed;
             top: 0;
             left: 0;
@@ -1105,15 +1106,21 @@
             background-color: rgba(204, 0, 0, 0.9);
         }
         
+        .panic-button-survey {
+            background-color: rgba(0, 51, 102, 0.95);
+        }
+        
         .panic-button-confirm.active,
         .panic-button-countdown.active,
-        .panic-button-alert.active {
+        .panic-button-alert.active,
+        .panic-button-survey.active {
             opacity: 1;
             visibility: visible;
         }
         
         .panic-confirm-content,
-        .panic-countdown-content {
+        .panic-countdown-content,
+        .panic-survey-content {
             background: var(--white);
             padding: 2rem;
             border-radius: 10px;
@@ -1123,7 +1130,8 @@
         }
         
         .panic-button-confirm h2,
-        .panic-button-countdown h2 {
+        .panic-button-countdown h2,
+        .panic-button-survey h2 {
             color: var(--primary-blue);
             font-size: 2rem;
             margin-bottom: 1rem;
@@ -1138,7 +1146,8 @@
         }
         
         .panic-button-confirm p,
-        .panic-button-countdown p {
+        .panic-button-countdown p,
+        .panic-button-survey p {
             color: var(--gray-dark);
             font-size: 1.2rem;
             margin-bottom: 2rem;
@@ -1314,6 +1323,200 @@
             font-size: 0.9rem;
         }
         
+        /* Estilos para la encuesta de satisfacción */
+        .survey-form {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .survey-question {
+            margin-bottom: 1.5rem;
+        }
+
+        .survey-question h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .rating-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+
+        .rating-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .rating-option input {
+            display: none;
+        }
+
+        .rating-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .rating-option input:checked + .rating-circle {
+            background-color: var(--light-red);
+            color: white;
+        }
+
+        .rating-option:hover .rating-circle {
+            transform: scale(1.1);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .rating-label {
+            font-size: 0.8rem;
+            color: var(--gray-dark);
+        }
+
+        .survey-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .survey-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .compliment-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .complaint-btn {
+            background-color: var(--light-red);
+            color: white;
+        }
+
+        .survey-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilos para el formulario de queja/felicitación */
+        .feedback-form {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+            display: none;
+        }
+
+        .feedback-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .required-field::after {
+            content: " *";
+            color: var(--light-red);
+        }
+
+        .feedback-type {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .feedback-compliment {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .feedback-complaint {
+            background-color: var(--light-red);
+            color: white;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover i {
+            transform: translateX(-3px);
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .showcase-container {
@@ -1386,32 +1589,43 @@
                 padding: 3rem 1rem;
             }
             
-            .panic-button-simulator {
+            .panic-button-neon {
                 width: 180px;
                 height: 180px;
             }
             
             .panic-button-confirm h2,
             .panic-button-countdown h2,
-            .panic-button-alert h2 {
+            .panic-button-alert h2,
+            .panic-button-survey h2 {
                 font-size: 1.8rem;
             }
             
             .panic-button-confirm p,
             .panic-button-countdown p,
-            .panic-button-alert p {
+            .panic-button-alert p,
+            .panic-button-survey p {
                 font-size: 1rem;
                 padding: 0 1rem;
             }
             
             .panic-confirm-buttons,
-            .panic-countdown-buttons {
+            .panic-countdown-buttons,
+            .survey-buttons {
                 flex-direction: column;
             }
             
             .panic-confirm-btn,
-            .panic-countdown-btn {
+            .panic-countdown-btn,
+            .survey-btn {
                 width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .rating-circle {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
             }
         }
         
@@ -1442,7 +1656,7 @@
                 max-width: 250px;
             }
             
-            .panic-button-simulator {
+            .panic-button-neon {
                 width: 150px;
                 height: 150px;
             }
@@ -1855,6 +2069,144 @@
         
         <p class="panic-alert-message">En una situación real, las autoridades ya estarían enteradas de la activación de la alerta y canalizada la emergencia a la ubicación del negocio.</p>
         <button class="panic-button-alert-btn" id="closeAlert">ENTENDIDO</button>
+    </div>
+
+    <!-- Encuesta de Satisfacción -->
+    <div class="panic-button-survey" id="panicSurvey">
+        <div class="panic-survey-content">
+            <h2>Encuesta de Satisfacción</h2>
+            <p>Por favor, califica la atención recibida después de activar la alerta de emergencia.</p>
+            
+            <form class="survey-form" id="surveyForm">
+                <div class="survey-question">
+                    <h3>1. ¿Se presentó un agente de policía tras su alerta?</h3>
+                    <div class="rating-container" style="justify-content: center; ; gap: 2rem;">
+                        <label class="rating-option">
+                            <input type="radio" name="problemResolution" value="1" required>
+                            <div class="rating-circle">1</div>
+                            <span class="rating-label">Si</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="problemResolution" value="2">
+                            <div class="rating-circle">2</div>
+                            <span class="rating-label">NO</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="survey-question">
+                    <h3>2. ¿Cuál fue el tiempo de respuesta de la policía?</h3>
+                    <div class="rating-container">
+                        <label class="rating-option">
+                            <input type="radio" name="responseTime" value="1" required>
+                            <div class="rating-circle">1</div>
+                            <span class="rating-label">1-5 min</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="responseTime" value="2">
+                            <div class="rating-circle">2</div>
+                            <span class="rating-label">6-10 min</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="responseTime" value="3">
+                            <div class="rating-circle">3</div>
+                            <span class="rating-label">11-15 min</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="responseTime" value="4">
+                            <div class="rating-circle">4</div>
+                            <span class="rating-label">16-20 min</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="responseTime" value="5">
+                            <div class="rating-circle">5</div>
+                            <span class="rating-label">más de 20 min</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="survey-question">
+                    <h3>3. ¿Cómo calificarías la atención recibida?</h3>
+                    <div class="rating-container">
+                        <label class="rating-option">
+                            <input type="radio" name="attentionQuality" value="1" required>
+                            <div class="rating-circle">1</div>
+                            <span class="rating-label">Mala</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="attentionQuality" value="2">
+                            <div class="rating-circle">2</div>
+                            <span class="rating-label">Regular</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="attentionQuality" value="3">
+                            <div class="rating-circle">3</div>
+                            <span class="rating-label">Aceptable</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="attentionQuality" value="4">
+                            <div class="rating-circle">4</div>
+                            <span class="rating-label">Buena</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="attentionQuality" value="5">
+                            <div class="rating-circle">5</div>
+                            <span class="rating-label">Excelente</span>
+                        </label>
+                    </div>
+                </div>
+                             
+                <div class="survey-buttons">
+                    <button type="button" class="survey-btn compliment-btn" id="complimentBtn">
+                        <i class="fas fa-thumbs-up"></i> Enviar Felicitación
+                    </button>
+                    <button type="button" class="survey-btn complaint-btn" id="complaintBtn">
+                        <i class="fas fa-thumbs-down"></i> Presentar Queja
+                    </button>
+                </div>
+                
+                <!-- Botón para enviar solo la encuesta -->
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button type="button" class="survey-btn" id="sendSurveyOnly" 
+                            style="background-color: var(--primary-blue); color: white;">
+                        <i class="fas fa-check"></i> Enviar solo encuesta
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Formulario de Felicitación/Queja -->
+            <form class="feedback-form" id="feedbackForm">
+                <div id="feedbackTypeDisplay" class="feedback-type feedback-compliment">Felicitación</div>
+                
+                <div class="form-group">
+                    <label for="feedbackName">Nombre (Opcional)</label>
+                    <input type="text" id="feedbackName" name="name" placeholder="Tu nombre">
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedbackEmail" class="required-field">Correo electrónico</label>
+                    <input type="email" id="feedbackEmail" name="email" required placeholder="tu@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedbackComments" class="required-field">Comentario (Mínimo 10 caracteres)</label>
+                    <textarea id="feedbackComments" name="comments" required minlength="10" placeholder="Describe tu experiencia..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Fecha y hora del evento</label>
+                    <input type="text" id="feedbackEventDate" name="eventDate" readonly>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitFeedback">
+                    <i class="fas fa-paper-plane"></i> Enviar
+                </button>
+                
+                <button type="button" class="back-btn" id="backToSurvey">
+                    <i class="fas fa-arrow-left"></i> Volver a la encuesta
+                </button>
+            </form>
+        </div>
     </div>
     
     <!-- App Showcase Section -->
@@ -2379,11 +2731,22 @@
         const panicConfirm = document.getElementById('panicConfirm');
         const panicCountdown = document.getElementById('panicCountdown');
         const panicAlert = document.getElementById('panicAlert');
+        const panicSurvey = document.getElementById('panicSurvey');
         const confirmAlert = document.getElementById('confirmAlert');
         const cancelAlert = document.getElementById('cancelAlert');
         const cancelCountdown = document.getElementById('cancelCountdown');
         const closeAlert = document.getElementById('closeAlert');
         const countdownNumber = document.getElementById('countdownNumber');
+        
+        // Encuesta de satisfacción
+        const surveyForm = document.getElementById('surveyForm');
+        const feedbackForm = document.getElementById('feedbackForm');
+        const complimentBtn = document.getElementById('complimentBtn');
+        const complaintBtn = document.getElementById('complaintBtn');
+        const backToSurvey = document.getElementById('backToSurvey');
+        const submitFeedback = document.getElementById('submitFeedback');
+        const feedbackTypeDisplay = document.getElementById('feedbackTypeDisplay');
+        const feedbackEventDate = document.getElementById('feedbackEventDate');
         
         let countdown;
         
@@ -2451,6 +2814,9 @@
             
             // Mostrar un consejo aleatorio
             showRandomTip();
+
+            // Actualizar fecha y hora en el formulario de feedback
+            feedbackEventDate.value = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
         }
         
         panicButton.addEventListener('mousedown', () => {
@@ -2521,9 +2887,115 @@
         
         closeAlert.addEventListener('click', () => {
             panicAlert.classList.remove('active');
+            // Mostrar encuesta de satisfacción
+            panicSurvey.classList.add('active');
+        });
+
+        // Manejo de la encuesta de satisfacción
+        complimentBtn.addEventListener('click', () => {
+            surveyForm.style.display = 'none';
+            feedbackForm.style.display = 'block';
+            feedbackForm.classList.add('active');
+            feedbackTypeDisplay.textContent = 'Felicitación';
+            feedbackTypeDisplay.className = 'feedback-type feedback-compliment';
+        });
+
+        complaintBtn.addEventListener('click', () => {
+            surveyForm.style.display = 'none';
+            feedbackForm.style.display = 'block';
+            feedbackForm.classList.add('active');
+            feedbackTypeDisplay.textContent = 'Queja';
+            feedbackTypeDisplay.className = 'feedback-type feedback-complaint';
+        });
+
+        backToSurvey.addEventListener('click', () => {
+            feedbackForm.style.display = 'none';
+            surveyForm.style.display = 'block';
+        });
+
+        // Envío del formulario de feedback
+        feedbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Validar campos obligatorios
+            const email = document.getElementById('feedbackEmail').value;
+            const comments = document.getElementById('feedbackComments').value;
+            
+            if (!email || !comments || comments.length < 50) {
+                alert('Por favor completa todos los campos obligatorios y asegúrate que el comentario tenga al menos 50 caracteres.');
+                return;
+            }
+            
+            // Obtener datos del formulario
+            const formData = new FormData(feedbackForm);
+            const data = {
+                type: feedbackTypeDisplay.textContent,
+                name: formData.get('name'),
+                email: formData.get('email'),
+                comments: formData.get('comments'),
+                eventDate: formData.get('eventDate'),
+                surveyData: {
+                    responseTime: document.querySelector('input[name="responseTime"]:checked')?.value,
+                    attentionQuality: document.querySelector('input[name="attentionQuality"]:checked')?.value,
+                    problemResolution: document.querySelector('input[name="problemResolution"]:checked')?.value
+                }
+            };
+            
+            // Simular envío (en producción sería una petición AJAX)
+            console.log('Datos del feedback:', data);
+            
+            // Enviar por correo (simulado)
+            const mailtoLink = `mailto:vanvandrago@gmail.com?subject=${encodeURIComponent(data.type + ' - Emergencia K8')}&body=${encodeURIComponent(
+                `Tipo: ${data.type}\n\n` +
+                `Nombre: ${data.name || 'No proporcionado'}\n` +
+                `Email: ${data.email}\n` +
+                `Fecha y hora del evento: ${data.eventDate}\n\n` +
+                `Calificación tiempo de respuesta: ${data.surveyData.responseTime || 'No respondido'}\n` +
+                `Calificación atención recibida: ${data.surveyData.attentionQuality || 'No respondido'}\n` +
+                `Resolución del problema: ${data.surveyData.problemResolution || 'No respondido'}\n\n` +
+                `Comentarios:\n${data.comments}`
+            )}`;
+            
+            window.location.href = mailtoLink;
+            
+            // Mostrar mensaje de éxito y cerrar
+            alert('¡Gracias por tu feedback! Tu mensaje ha sido enviado.');
+            panicSurvey.classList.remove('active');
             document.body.style.overflow = 'auto';
         });
 
+        // Función del Botón Enviar Encuesta
+        document.getElementById('sendSurveyOnly').addEventListener('click', function() {
+            // Validar que todas las preguntas estén respondidas
+            const questionsAnswered = 
+                document.querySelector('input[name="problemResolution"]:checked') &&
+                document.querySelector('input[name="responseTime"]:checked') &&
+                document.querySelector('input[name="attentionQuality"]:checked');
+            
+            if (!questionsAnswered) {
+                alert('Por favor responde todas las preguntas antes de enviar.');
+                return;
+            }
+            
+            // Simular envío de datos
+            const surveyData = {
+                problemResolution: document.querySelector('input[name="problemResolution"]:checked').value,
+                responseTime: document.querySelector('input[name="responseTime"]:checked').value,
+                attentionQuality: document.querySelector('input[name="attentionQuality"]:checked').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            console.log('Datos de encuesta enviados:', surveyData);
+            
+            // Mostrar mensaje de confirmación
+            alert('¡Gracias por completar la encuesta! Tu feedback es muy valioso para nosotros.');
+            
+            // Cerrar el modal
+            panicSurvey.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        
         // Chatbot functionality
         document.addEventListener('DOMContentLoaded', function() {
             const chatbotToggle = document.getElementById('chatbotToggle');
