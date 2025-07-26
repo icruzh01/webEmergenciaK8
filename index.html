@@ -1014,8 +1014,8 @@
         
         /* NUEVOS ESTILOS PARA EL BOTÓN NEÓN */
         .panic-button-neon {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(255,0,0,0.8) 0%, rgba(200,0,0,0.9) 70%);
             box-shadow: 
@@ -1535,6 +1535,11 @@
             .download-buttons {
                 flex-wrap: wrap;
             }
+
+            .panic-button-neon {
+                width: 220px;
+                height: 220px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -1590,8 +1595,8 @@
             }
             
             .panic-button-neon {
-                width: 180px;
-                height: 180px;
+                width: 210px;
+                height: 210px;
             }
             
             .panic-button-confirm h2,
@@ -1627,6 +1632,50 @@
                 height: 30px;
                 font-size: 0.8rem;
             }
+
+            .panic-survey-content {
+                max-height: 80vh;
+                overflow-y: auto;
+                padding: 1rem;
+                width: 95%;
+            }
+            
+            .survey-form {
+                padding-bottom: 80px;
+            }
+            
+            .survey-buttons {
+                position: sticky;
+                bottom: 0;
+                background: white;
+                padding: 10px 0;
+                margin-top: 1rem;
+                z-index: 10;
+                border-top: 1px solid var(--gray-light);
+            }
+            
+            .feedback-form {
+                padding-bottom: 100px;
+            }
+            
+            .submit-btn {
+                position: sticky;
+                bottom: 10px;
+                margin-top: 1rem;
+            }
+            
+            .rating-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .rating-option {
+                width: 20%;
+                min-width: 60px;
+            }
+
+
         }
         
         @media (max-width: 480px) {
@@ -1657,12 +1706,34 @@
             }
             
             .panic-button-neon {
-                width: 150px;
-                height: 150px;
+                width: 200px;
+                height: 200px;
             }
             
             .panic-button-text {
                 font-size: 1.2rem;
+            }
+
+            .panic-survey-content {
+                max-height: 85vh;
+            }
+            
+            .rating-option {
+                width: 25%;
+                min-width: 50px;
+            }
+            
+            .survey-buttons {
+                flex-direction: column;
+            }
+            
+            .survey-btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            #sendSurveyOnly {
+                margin-top: 1rem;
             }
         }
         
@@ -1916,7 +1987,7 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="imagenes/logo.svg" alt="Emergencia K8 Logo">
+                <img src="imagenes/logo.png" alt="Emergencia K8 Logo">
                 <div class="logo-text">Emergencia <span>K8</span></div>
             </div>
             
@@ -2073,7 +2144,7 @@
 
     <!-- Encuesta de Satisfacción -->
     <div class="panic-button-survey" id="panicSurvey">
-        <div class="panic-survey-content">
+        <div class="panic-survey-content" style="max-height: calc(100vh - 40px); overflow-y: auto;">
             <h2>Encuesta de Satisfacción</h2>
             <p>Por favor, califica la atención recibida después de activar la alerta de emergencia.</p>
             
@@ -2456,7 +2527,7 @@
         <div class="footer-container">
             <div class="footer-about">
                 <div class="footer-logo">
-                    <img src="imagenes/logo.svg" alt="Emergencia K8 Logo" loading="lazy">
+                    <img src="imagenes/logo.png" alt="Emergencia K8 Logo" loading="lazy">
                 </div>
                 <p>Emergencia K8 es el botón de pánico virtual diseñado para proteger negocios y establecimientos en situaciones de emergencia.</p>
                 <div class="social-links">
@@ -2511,9 +2582,6 @@
             <button id="closeChatbot"><i class="fas fa-times"></i></button>
         </div>
         <div class="chatbot-messages" id="chatbotMessages">
-            <div class="chatbot-email-icon" id="chatbotEmailIcon" title="Enviar correo electrónico">
-                <i class="fas fa-envelope"></i>
-            </div>
             <div class="chatbot-message bot">
                 <p>¡Hola! Soy un Agente de seguridad de Emergencia K8. ¿En qué puedo ayudarte hoy?</p>
             </div>
@@ -2921,8 +2989,8 @@
             const email = document.getElementById('feedbackEmail').value;
             const comments = document.getElementById('feedbackComments').value;
             
-            if (!email || !comments || comments.length < 50) {
-                alert('Por favor completa todos los campos obligatorios y asegúrate que el comentario tenga al menos 50 caracteres.');
+            if (!email || !comments || comments.length < 10) {
+                alert('Por favor completa todos los campos obligatorios y asegúrate que el comentario tenga al menos 10 caracteres.');
                 return;
             }
             
@@ -2945,7 +3013,7 @@
             console.log('Datos del feedback:', data);
             
             // Enviar por correo (simulado)
-            const mailtoLink = `mailto:vanvandrago@gmail.com?subject=${encodeURIComponent(data.type + ' - Emergencia K8')}&body=${encodeURIComponent(
+            const mailtoLink = `mailto:lic.icruzh@gmail.com?subject=${encodeURIComponent(data.type + ' - Emergencia K8')}&body=${encodeURIComponent(
                 `Tipo: ${data.type}\n\n` +
                 `Nombre: ${data.name || 'No proporcionado'}\n` +
                 `Email: ${data.email}\n` +
@@ -3005,8 +3073,7 @@
             const chatbotInput = document.getElementById('chatbotInput');
             const chatbotMessages = document.getElementById('chatbotMessages');
             const quickQuestions = document.querySelectorAll('.quick-question');
-            const chatbotEmailIcon = document.getElementById('chatbotEmailIcon');
-            
+                        
             // Toggle chatbot visibility
             chatbotToggle.addEventListener('click', () => {
                 chatbotContainer.classList.toggle('active');
@@ -3014,11 +3081,6 @@
             
             closeChatbot.addEventListener('click', () => {
                 chatbotContainer.classList.remove('active');
-            });
-
-            // Email icon functionality
-            chatbotEmailIcon.addEventListener('click', () => {
-                window.location.href = 'mailto:contacto@emergenciak8.com';
             });
             
             // Send message function
@@ -3333,7 +3395,7 @@
                     return 'Actualmente la app Emergencia K8 funciona solo en la Ciudad de México, sin embargo si te interesa y estás en otra ciudad o estado manda un correo electrónico para brindarte sugerencias y más información sobre este tema.';
                 }
 
-                if (lowerMessage.includes('no atendieron') || lowerMessage.includes('no acudieron') || lowerMessage.includes('no vinieron') || lowerMessage.includes('no respondieron') || lowerMessage.includes('no vino') || lowerMessage.includes('no respondio') || lowerMessage.includes('no atendio') || lowerMessage.includes('no acudio')) {
+                if (lowerMessage.includes('no atendieron') || lowerMessage.includes('no acudieron') || lowerMessage.includes('no vinieron') || lowerMessage.includes('no respondieron') || lowerMessage.includes('no vino') || lowerMessage.includes('no respondio') || lowerMessage.includes('no atendio') || lowerMessage.includes('no acudio') || lowerMessage.includes('no atendió') || lowerMessage.includes('no llegaron') || lowerMessage.includes('si llegan') || lowerMessage.includes('si llega')) {
                     return 'La canalización de apoyos y/o atención de las emergencias, tanto de seguridad como de cualquier otro tipo, NO ES RESPONSABILIDAD de la Aplicación Emergencia K8. Te recomiendo realizar tu queja tu queja a la Unidad de Contacto del área correspondiente.';
                 }
 
