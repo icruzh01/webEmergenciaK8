@@ -2947,6 +2947,13 @@
             document.body.style.overflow = 'auto';
         });
         
+        // Cerrar al hacer clic fuera del modal
+        document.addEventListener('click', function(e) {
+            if (e.target === panicSurvey) {
+                closeSurveyModal();
+            }
+        });
+
         cancelCountdown.addEventListener('click', () => {
             clearInterval(countdown);
             panicCountdown.classList.remove('active');
@@ -2957,6 +2964,7 @@
             panicAlert.classList.remove('active');
             // Mostrar encuesta de satisfacción
             panicSurvey.classList.add('active');
+            resetSurveyForm(); // Asegurarse de que esté limpia al abrir
         });
 
         // Manejo de la encuesta de satisfacción
@@ -2985,7 +2993,6 @@
         feedbackForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Validar campos obligatorios
             const email = document.getElementById('feedbackEmail').value;
             const comments = document.getElementById('feedbackComments').value;
             
@@ -2994,7 +3001,6 @@
                 return;
             }
             
-            // Obtener datos del formulario
             const formData = new FormData(feedbackForm);
             const data = {
                 type: feedbackTypeDisplay.textContent,
@@ -3009,10 +3015,7 @@
                 }
             };
             
-            // Simular envío (en producción sería una petición AJAX)
             console.log('Datos del feedback:', data);
-            
-            // Enviar por correo (simulado)
             const mailtoLink = `mailto:lic.icruzh@gmail.com?subject=${encodeURIComponent(data.type + ' - Emergencia K8')}&body=${encodeURIComponent(
                 `Tipo: ${data.type}\n\n` +
                 `Nombre: ${data.name || 'No proporcionado'}\n` +
@@ -3025,16 +3028,12 @@
             )}`;
             
             window.location.href = mailtoLink;
-            
-            // Mostrar mensaje de éxito y cerrar
             alert('¡Gracias por tu feedback! Tu mensaje ha sido enviado.');
-            panicSurvey.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            closeSurveyModal();
         });
 
-        // Función del Botón Enviar Encuesta
+        // En el botón "Enviar solo encuesta"
         document.getElementById('sendSurveyOnly').addEventListener('click', function() {
-            // Validar que todas las preguntas estén respondidas
             const questionsAnswered = 
                 document.querySelector('input[name="problemResolution"]:checked') &&
                 document.querySelector('input[name="responseTime"]:checked') &&
@@ -3045,7 +3044,6 @@
                 return;
             }
             
-            // Simular envío de datos
             const surveyData = {
                 problemResolution: document.querySelector('input[name="problemResolution"]:checked').value,
                 responseTime: document.querySelector('input[name="responseTime"]:checked').value,
@@ -3054,14 +3052,32 @@
             };
             
             console.log('Datos de encuesta enviados:', surveyData);
-            
-            // Mostrar mensaje de confirmación
             alert('¡Gracias por completar la encuesta! Tu feedback es muy valioso para nosotros.');
+            closeSurveyModal();
+        });
+        
+        function resetSurveyForm() {
+            // Desmarcar todos los radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
             
-            // Cerrar el modal
+            // Restablecer el formulario de feedback si está visible
+            if (feedbackForm.style.display === 'block') {
+                feedbackForm.reset();
+                feedbackForm.style.display = 'none';
+            }
+            
+            // Asegurarse de que el formulario de encuesta sea visible
+            surveyForm.style.display = 'block';
+        }
+
+        // Función para cerrar el modal de encuesta
+        function closeSurveyModal() {
             panicSurvey.classList.remove('active');
             document.body.style.overflow = 'auto';
-        });
+            resetSurveyForm();
+        }
         
         
         // Chatbot functionality
