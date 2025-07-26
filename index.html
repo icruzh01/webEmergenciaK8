@@ -1516,6 +1516,28 @@
         .back-btn:hover i {
             transform: translateX(-3px);
         }
+
+        /* Estilos para el "botón Salir sin enviar" */
+        .survey-footer {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        #skipSurvey {
+            background-color: var(--gray-dark);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        #skipSurvey:hover {
+            background-color: var(--gray-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
         
         /* Responsive Design */
         @media (max-width: 992px) {
@@ -2243,6 +2265,14 @@
                         <i class="fas fa-check"></i> Enviar solo encuesta
                     </button>
                 </div>
+
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button type="button" class="survey-btn" id="skipSurvey" 
+                            style="background-color: var(--gray-dark); color: white;">
+                        <i class="fas fa-times"></i> Salir sin enviar
+                    </button>
+                </div>
+
             </form>
             
             <!-- Formulario de Felicitación/Queja -->
@@ -2988,6 +3018,9 @@
             feedbackForm.style.display = 'none';
             surveyForm.style.display = 'block';
         });
+
+        // Para regresar a la pantalla principal después de pulsar "Salir sin enviar"
+        document.getElementById('skipSurvey').addEventListener('click', closeSurveyModal);
 
         // Envío del formulario de feedback
         feedbackForm.addEventListener('submit', (e) => {
