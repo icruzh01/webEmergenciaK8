@@ -213,13 +213,55 @@
                 font-size: 1.5rem;
             }
         }
+        /* Estilo para el logo clickeable */
+        .logo-link {
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .logo-link:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-link::after {
+            content: 'Regresar al inicio';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light-red);
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .logo-link:hover::after {
+            opacity: 1;
+        }
+
+        /* Efecto de pulso al cargar la página */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .login-logo {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
     </style>
 </head>
 <body>
     <div class="login-wrapper">
         <div class="login-container">
             <div class="login-header">
-                <img src="imagenes/logo.png" alt="Emergencia K8 Logo" class="login-logo">
+                <a href="index.html" class="logo-link" title="Regresar al inicio">
+                    <img src="imagenes/logo.png" alt="Emergencia K8 Logo" class="login-logo">
+                </a>
                 <h1>Acceso Administrativo</h1>
                 <p>Ingresa tus credenciales para acceder al panel de control</p>
             </div>
@@ -365,6 +407,14 @@
                     }, 800); // Simular tiempo de respuesta del servidor
                 });
             }
+        });
+
+        document.querySelector('.logo-link').addEventListener('click', function(e) {
+            // Opcional: agregar animación de salida
+            document.querySelector('.login-container').style.animation = 'fadeInUp 0.5s ease reverse forwards';
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 500);
         });
     </script>
 </body>
