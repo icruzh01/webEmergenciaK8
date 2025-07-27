@@ -1947,8 +1947,47 @@
             background-color: var(--gray-light);
         }
 
+        /* Estilos para el efecto "escribiendo" del chatbot */
+        .chatbot-typing {
+            display: flex;
+            padding: 10px 15px;
+        }
+
+        .chatbot-typing-dot {
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            background-color: var(--gray-dark);
+            border-radius: 50%;
+            opacity: 0;
+            animation: typingAnimation 1.5s infinite ease-in-out;
+        }
+
+        .chatbot-typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .chatbot-typing-dot:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .chatbot-typing-dot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 100% {
+                opacity: 0.2;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-5px);
+            }
+        }
+
         /* Icono de correo en el chatbot */
-        .chatbot-email-icon {
+        /*.chatbot-email-icon {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -1963,12 +2002,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 10;
-        }
+        }*/
 
-        .chatbot-email-icon:hover {
+        /*.chatbot-email-icon:hover {
             transform: scale(1.1);
             background-color: var(--accent-red);
-        }
+        }*/
         
         @keyframes fadeInUp {
             from {
@@ -3139,6 +3178,31 @@
                 chatbotContainer.classList.remove('active');
             });
             
+            // Función para mostrar el efecto "escribiendo"
+            function showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.classList.add('chatbot-message', 'bot', 'chatbot-typing');
+                
+                // Crear los tres puntos de la animación
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('chatbot-typing-dot');
+                    typingDiv.appendChild(dot);
+                }
+                
+                chatbotMessages.appendChild(typingDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                
+                return typingDiv;
+            }
+
+            // Función para ocultar el efecto "escribiendo"
+            function hideTypingIndicator(typingElement) {
+                if (typingElement && typingElement.parentNode) {
+                    typingElement.parentNode.removeChild(typingElement);
+                }
+            }
+
             // Send message function
             function sendMessage() {
                 const message = chatbotInput.value.trim();
@@ -3148,14 +3212,22 @@
                 addMessage(message, 'user');
                 chatbotInput.value = '';
                 
-                // Simulate typing
+                // Mostrar indicador de que está escribiendo
+                const typingElement = showTypingIndicator();
+                
+                // Simular tiempo de respuesta variable (entre 0.5 y 2 segundos)
+                const typingTime = Math.random() * 1500 + 500;
+                
                 setTimeout(() => {
+                    // Ocultar indicador de escritura
+                    hideTypingIndicator(typingElement);
+                    
                     const botResponse = getBotResponse(message);
                     addMessage(botResponse, 'bot');
                     
                     // Scroll to bottom
                     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                }, 500);
+                }, typingTime);
             }
             
             // Send message on button click
@@ -3174,11 +3246,20 @@
                     const message = question.textContent;
                     addMessage(message, 'user');
                     
+                    // Mostrar indicador de que está escribiendo
+                    const typingElement = showTypingIndicator();
+                    
+                    // Simular tiempo de respuesta variable
+                    const typingTime = Math.random() * 1500 + 500;
+                    
                     setTimeout(() => {
+                        // Ocultar indicador de escritura
+                        hideTypingIndicator(typingElement);
+                        
                         const botResponse = getBotResponse(message);
                         addMessage(botResponse, 'bot');
                         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                    }, 500);
+                    }, typingTime);
                 });
             });
             
