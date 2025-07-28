@@ -3129,6 +3129,19 @@
             // Mostrar un consejo aleatorio
             showRandomTip();
         }
+
+        // Convertir a mayúsculas los campos Nombre y Comentario, y mantener email en minúsculas
+        document.getElementById('feedbackName').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+
+        document.getElementById('feedbackComments').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+
+        document.getElementById('feedbackEmail').addEventListener('input', function() {
+            this.value = this.value.toLowerCase();
+        });
         
         panicButton.addEventListener('mousedown', () => {
             panicButton.classList.add('active');
