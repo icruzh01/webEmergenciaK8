@@ -1078,8 +1078,7 @@
         .panic-button-confirm,
         .panic-button-countdown,
         .panic-button-alert,
-        .panic-button-survey,
-        .panic-button-thankyou {
+        .panic-button-survey {
             position: fixed;
             top: 0;
             left: 0;
@@ -1110,24 +1109,18 @@
         .panic-button-survey {
             background-color: rgba(0, 51, 102, 0.95);
         }
-
-        .panic-button-thankyou {
-            background-color: rgba(0, 51, 102, 0.95);
-        }
         
         .panic-button-confirm.active,
         .panic-button-countdown.active,
         .panic-button-alert.active,
-        .panic-button-survey.active,
-        .panic-button-thankyou.active {
+        .panic-button-survey.active {
             opacity: 1;
             visibility: visible;
         }
         
         .panic-confirm-content,
         .panic-countdown-content,
-        .panic-survey-content,
-        .panic-thankyou-content {
+        .panic-survey-content {
             background: var(--white);
             padding: 2rem;
             border-radius: 10px;
@@ -1138,8 +1131,7 @@
         
         .panic-button-confirm h2,
         .panic-button-countdown h2,
-        .panic-button-survey h2,
-        .panic-button-thankyou h2 {
+        .panic-button-survey h2 {
             color: var(--primary-blue);
             font-size: 2rem;
             margin-bottom: 1rem;
@@ -1155,8 +1147,7 @@
         
         .panic-button-confirm p,
         .panic-button-countdown p,
-        .panic-button-survey p,
-        .panic-button-thankyou p {
+        .panic-button-survey p {
             color: var(--gray-dark);
             font-size: 1.2rem;
             margin-bottom: 2rem;
@@ -1425,19 +1416,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Deshabilitar botones de encuesta */
-        .survey-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
-        .survey-btn:disabled:hover {
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
         /* Estilos para el formulario de queja/felicitación */
         .feedback-form {
             width: 100%;
@@ -1560,105 +1538,6 @@
             transform: translateY(-2px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-
-        /* Estilos para el mensaje de agradecimiento */
-        .thankyou-icon {
-            font-size: 4rem;
-            color: var(--light-red);
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        .thankyou-btn {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            font-size: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .thankyou-btn:hover {
-            background-color: var(--secondary-blue);
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Estilos para el mensaje de advertencia */
-        .panic-button-warning {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            background-color: var(--secondary-blue);
-        }
-
-        .panic-button-warning.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .panic-warning-content {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-
-        .panic-button-warning h2 {
-            color: var(--primary-blue);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .panic-button-warning p {
-            color: var(--gray-dark);
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            text-align: center;
-        }
-
-        .warning-icon {
-            font-size: 4rem;
-            color: var(--light-red);
-            margin-bottom: 1.5rem;
-        }
-
-        .warning-btn {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            font-size: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .warning-btn:hover {
-            background-color: var(--secondary-blue);
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
         
         /* Responsive Design */
         @media (max-width: 992px) {
@@ -1745,16 +1624,14 @@
             .panic-button-confirm h2,
             .panic-button-countdown h2,
             .panic-button-alert h2,
-            .panic-button-survey h2,
-            .panic-button-thankyou h2 {
+            .panic-button-survey h2 {
                 font-size: 1.8rem;
             }
             
             .panic-button-confirm p,
             .panic-button-countdown p,
             .panic-button-alert p,
-            .panic-button-survey p,
-            .panic-button-thankyou p {
+            .panic-button-survey p {
                 font-size: 1rem;
                 padding: 0 1rem;
             }
@@ -1767,8 +1644,7 @@
             
             .panic-confirm-btn,
             .panic-countdown-btn,
-            .survey-btn,
-            .thankyou-btn {
+            .survey-btn {
                 width: 100%;
                 margin-bottom: 0.5rem;
             }
@@ -2159,7 +2035,6 @@
                 font-size: 1.2rem;
             }
         }
-        
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
@@ -2472,30 +2347,6 @@
                     <i class="fas fa-arrow-left"></i> Volver a la encuesta
                 </button>
             </form>
-        </div>
-    </div>
-
-    <!-- Mensaje de agradecimiento -->
-    <div class="panic-button-thankyou" id="panicThankyou">
-        <div class="panic-thankyou-content">
-            <div class="thankyou-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h2>¡Gracias por tu participación!</h2>
-            <p>Tu feedback es muy valioso para nosotros y nos ayuda a mejorar nuestros servicios.</p>
-            <button class="thankyou-btn" id="closeThankyou">Cerrar</button>
-        </div>
-    </div>
-
-    <!-- Mensaje de advertencia (nuevo) -->
-    <div class="panic-button-warning" id="panicWarning">
-        <div class="panic-warning-content">
-            <div class="warning-icon">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <h2>Encuesta incompleta</h2>
-            <p>Por favor responde todas las preguntas antes de enviar.</p>
-            <button class="warning-btn" id="closeWarning">Entendido</button>
         </div>
     </div>
     
@@ -3027,12 +2878,10 @@
         const panicCountdown = document.getElementById('panicCountdown');
         const panicAlert = document.getElementById('panicAlert');
         const panicSurvey = document.getElementById('panicSurvey');
-        const panicThankyou = document.getElementById('panicThankyou');
         const confirmAlert = document.getElementById('confirmAlert');
         const cancelAlert = document.getElementById('cancelAlert');
         const cancelCountdown = document.getElementById('cancelCountdown');
         const closeAlert = document.getElementById('closeAlert');
-        const closeThankyou = document.getElementById('closeThankyou');
         const countdownNumber = document.getElementById('countdownNumber');
         
         // Encuesta de satisfacción
@@ -3044,16 +2893,7 @@
         const submitFeedback = document.getElementById('submitFeedback');
         const feedbackTypeDisplay = document.getElementById('feedbackTypeDisplay');
         const feedbackEventDate = document.getElementById('feedbackEventDate');
-        const sendSurveyOnly = document.getElementById('sendSurveyOnly');
         
-        // Deshabilitar botones inicialmente
-        complimentBtn.disabled = true;
-        complaintBtn.disabled = true;
-
-        // Nuevas variables para el mensaje de advertencia
-        const panicWarning = document.getElementById('panicWarning');
-        const closeWarning = document.getElementById('closeWarning');
-
         let countdown;
         
         // Array de consejos de seguridad
@@ -3110,24 +2950,19 @@
             const day = String(now.getDate()).padStart(2, '0');
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const year = now.getFullYear();
-            const formattedDate = `${day}/${month}/${year}`;
-            document.getElementById('currentDate').textContent = formattedDate;
+            document.getElementById('currentDate').textContent = `${day}/${month}/${year}`;
             
             // Formatear hora como HH:MM:SS
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
-            const formattedTime = `${hours}:${minutes}:${seconds}`;
-            document.getElementById('currentTime').textContent = formattedTime;
-            
-            // Actualizar el campo del formulario de feedback
-            const feedbackEventDate = document.getElementById('feedbackEventDate');
-            if (feedbackEventDate) {
-                feedbackEventDate.value = `${formattedDate} ${formattedTime}`;
-            }
+            document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
             
             // Mostrar un consejo aleatorio
             showRandomTip();
+
+            // Actualizar fecha y hora en el formulario de feedback
+            feedbackEventDate.value = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
         }
         
         panicButton.addEventListener('mousedown', () => {
@@ -3207,36 +3042,11 @@
             panicAlert.classList.remove('active');
             // Mostrar encuesta de satisfacción
             panicSurvey.classList.add('active');
-            resetSurveyForm(); // Esto deshabilitará los botones
+            resetSurveyForm(); // Asegurarse de que esté limpia al abrir
         });
-
-        // Cerrar el mensaje de agradecimiento
-        closeThankyou.addEventListener('click', () => {
-            panicThankyou.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        // Función para verificar si todas las preguntas están contestadas
-        function checkSurveyCompletion() {
-            const question1Answered = document.querySelector('input[name="problemResolution"]:checked');
-            const question2Answered = document.querySelector('input[name="responseTime"]:checked');
-            const question3Answered = document.querySelector('input[name="attentionQuality"]:checked');
-            
-            const allAnswered = question1Answered && question2Answered && question3Answered;
-            
-            complimentBtn.disabled = !allAnswered;
-            complaintBtn.disabled = !allAnswered;
-            
-            return allAnswered;
-        }
 
         // Manejo de la encuesta de satisfacción
         complimentBtn.addEventListener('click', () => {
-            if (!checkSurveyCompletion()) {
-                panicWarning.classList.add('active');
-                return;
-            }
-            updateDateTime(); // Asegurar que la fecha/hora esté actualizada
             surveyForm.style.display = 'none';
             feedbackForm.style.display = 'block';
             feedbackForm.classList.add('active');
@@ -3245,11 +3055,6 @@
         });
 
         complaintBtn.addEventListener('click', () => {
-            if (!checkSurveyCompletion()) {
-                panicWarning.classList.add('active');
-                return;
-            }
-            updateDateTime(); // Asegurar que la fecha/hora esté actualizada
             surveyForm.style.display = 'none';
             feedbackForm.style.display = 'block';
             feedbackForm.classList.add('active');
@@ -3265,60 +3070,43 @@
         // Para regresar a la pantalla principal después de pulsar "Salir sin enviar"
         document.getElementById('skipSurvey').addEventListener('click', closeSurveyModal);
 
-        // Envío del formulario de feedback
+        // Envío del formulario de feedback - Versión sin envío de correo
         feedbackForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const email = document.getElementById('feedbackEmail').value;
-            const comments = document.getElementById('feedbackComments').value;
+            const email = document.getElementById('feedbackEmail').value.trim();
+            const comments = document.getElementById('feedbackComments').value.trim();
             
-            if (!email || !comments || comments.length < 10) {
-                alert('Por favor completa todos los campos obligatorios y asegúrate que el comentario tenga al menos 10 caracteres.');
+            // Validación básica
+            if (!email || !isValidEmail(email)) {
+                alert('Por favor ingresa un correo electrónico válido.');
                 return;
             }
             
-            const formData = new FormData(feedbackForm);
-            const data = {
-                type: feedbackTypeDisplay.textContent,
-                name: formData.get('name'),
-                email: formData.get('email'),
-                comments: formData.get('comments'),
-                eventDate: formData.get('eventDate'),
-                surveyData: {
-                    responseTime: document.querySelector('input[name="responseTime"]:checked')?.value,
-                    attentionQuality: document.querySelector('input[name="attentionQuality"]:checked')?.value,
-                    problemResolution: document.querySelector('input[name="problemResolution"]:checked')?.value
-                }
-            };
+            if (!comments || comments.length < 10) {
+                alert('Por favor escribe un comentario de al menos 10 caracteres.');
+                return;
+            }
             
-            console.log('Datos del feedback:', data);
-            const mailtoLink = `mailto:lic.icruzh@gmail.com?subject=${encodeURIComponent(data.type + ' - Emergencia K8')}&body=${encodeURIComponent(
-                `Tipo: ${data.type}\n\n` +
-                `Nombre: ${data.name || 'No proporcionado'}\n` +
-                `Email: ${data.email}\n` +
-                `Fecha y hora del evento: ${data.eventDate}\n\n` +
-                `Calificación tiempo de respuesta: ${data.surveyData.responseTime || 'No respondido'}\n` +
-                `Calificación atención recibida: ${data.surveyData.attentionQuality || 'No respondido'}\n` +
-                `Resolución del problema: ${data.surveyData.problemResolution || 'No respondido'}\n\n` +
-                `Comentarios:\n${data.comments}`
-            )}`;
+            // Función para validar email (se mantiene para la validación)
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
             
-            window.location.href = mailtoLink;
-            
-            // Mostrar mensaje de agradecimiento
+            // Simplemente mostrar el mensaje de agradecimiento
             showThankyouMessage();
         });
-        
+
         // En el botón "Enviar solo encuesta"
-        sendSurveyOnly.addEventListener('click', function() {
+        document.getElementById('sendSurveyOnly').addEventListener('click', function() {
             const questionsAnswered = 
                 document.querySelector('input[name="problemResolution"]:checked') &&
                 document.querySelector('input[name="responseTime"]:checked') &&
                 document.querySelector('input[name="attentionQuality"]:checked');
             
             if (!questionsAnswered) {
-                // Mostrar mensaje de advertencia en lugar de alert()
-                panicWarning.classList.add('active');
+                alert('Por favor responde todas las preguntas antes de enviar.');
                 return;
             }
             
@@ -3330,164 +3118,441 @@
             };
             
             console.log('Datos de encuesta enviados:', surveyData);
-            // Mostrar mensaje de agradecimiento
-            showThankyouMessage();
+            alert('¡Gracias por completar la encuesta! Tu feedback es muy valioso para nosotros.');
+            closeSurveyModal();
         });
-
-        // Función para mostrar el mensaje de agradecimiento
-        function showThankyouMessage() {
-            panicSurvey.classList.remove('active');
-            feedbackForm.style.display = 'none';
-            surveyForm.style.display = 'block';
-            resetSurveyForm();
-            panicThankyou.classList.add('active');
-            
-            // Desplazarse al inicio del mensaje de agradecimiento
-            setTimeout(() => {
-                panicThankyou.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
-        }
-
-        // Función para resetear el formulario de la encuesta
+        
         function resetSurveyForm() {
-            surveyForm.reset();
-            feedbackForm.reset();
-            feedbackForm.style.display = 'none';
+            // Desmarcar todos los radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            
+            // Restablecer el formulario de feedback si está visible
+            if (feedbackForm.style.display === 'block') {
+                feedbackForm.reset();
+                feedbackForm.style.display = 'none';
+            }
+            
+            // Asegurarse de que el formulario de encuesta sea visible
             surveyForm.style.display = 'block';
-            complimentBtn.disabled = true;
-            complaintBtn.disabled = true;
         }
 
-        // Función para cerrar el modal de la encuesta
+        // Función para cerrar el modal de encuesta
         function closeSurveyModal() {
             panicSurvey.classList.remove('active');
             document.body.style.overflow = 'auto';
             resetSurveyForm();
         }
-
-        // Escuchar cambios en los inputs de la encuesta
-        document.querySelectorAll('.rating-option input').forEach(input => {
-            input.addEventListener('change', checkSurveyCompletion);
-        });
-
-        //Agrega este evento para cerrar el mensaje de advertencia
-        closeWarning.addEventListener('click', () => {
-            panicWarning.classList.remove('active');
-        });
-      
+        
+        
         // Chatbot functionality
-        const chatbotToggle = document.getElementById('chatbotToggle');
-        const chatbotContainer = document.getElementById('chatbotContainer');
-        const closeChatbot = document.getElementById('closeChatbot');
-        const chatbotMessages = document.getElementById('chatbotMessages');
-        const chatbotInput = document.getElementById('chatbotInput');
-        const sendMessage = document.getElementById('sendMessage');
-        const quickQuestions = document.querySelectorAll('.quick-question');
-
-        // Toggle chatbot visibility
-        chatbotToggle.addEventListener('click', () => {
-            chatbotContainer.classList.toggle('active');
-        });
-
-        closeChatbot.addEventListener('click', () => {
-            chatbotContainer.classList.remove('active');
-        });
-
-        // Send message function
-        function sendChatbotMessage(message, isUser = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('chatbot-message');
-            messageDiv.classList.add(isUser ? 'user' : 'bot');
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatbotContainer = document.getElementById('chatbotContainer');
+            const closeChatbot = document.getElementById('closeChatbot');
+            const sendMessageBtn = document.getElementById('sendMessage');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const quickQuestions = document.querySelectorAll('.quick-question');
+                        
+            // Toggle chatbot visibility
+            chatbotToggle.addEventListener('click', () => {
+                chatbotContainer.classList.toggle('active');
+            });
             
-            const messageContent = document.createElement('p');
-            messageContent.textContent = message;
+            closeChatbot.addEventListener('click', () => {
+                chatbotContainer.classList.remove('active');
+            });
             
-            messageDiv.appendChild(messageContent);
-            chatbotMessages.appendChild(messageDiv);
-            
-            // Scroll to bottom
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        }
-
-        // Bot responses
-        const botResponses = {
-            "hola": "¡Hola! ¿En qué puedo ayudarte hoy?",
-            "como funciona": "Emergencia K8 es un botón de pánico virtual. Al activarlo, envía una alerta a las autoridades con tu ubicación exacta. Puedes probar el simulador en nuestra página.",
-            "es gratuita": "¡Sí! Emergencia K8 es completamente gratuita. No tiene costos de descarga ni uso.",
-            "que emergencias": "Puedes reportar robos, asaltos, extorsiones, violencia, incendios o cualquier situación que requiera autoridades.",
-            "descargar": "Puedes descargar la app en la sección de Descarga de nuestra página. Está disponible para celulares y computadoras.",
-            "default": "Lo siento, no entendí tu pregunta. ¿Podrías reformularla? También puedes preguntarme sobre cómo funciona la app, si es gratuita o qué tipo de emergencias cubre."
-        };
-
-        // Handle user message
-        function handleUserMessage() {
-            const message = chatbotInput.value.trim();
-            if (message === '') return;
-            
-            sendChatbotMessage(message, true);
-            chatbotInput.value = '';
-            
-            // Show typing indicator
-            const typingIndicator = document.createElement('div');
-            typingIndicator.classList.add('chatbot-typing');
-            typingIndicator.innerHTML = `
-                <div class="chatbot-typing-dot"></div>
-                <div class="chatbot-typing-dot"></div>
-                <div class="chatbot-typing-dot"></div>
-            `;
-            chatbotMessages.appendChild(typingIndicator);
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            
-            // Simulate bot thinking
-            setTimeout(() => {
-                typingIndicator.remove();
+            // Función para mostrar el efecto "escribiendo"
+            function showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.classList.add('chatbot-message', 'bot', 'chatbot-typing');
                 
-                const lowerMessage = message.toLowerCase();
-                let response = botResponses.default;
-                
-                if (lowerMessage.includes('hola') || lowerMessage.includes('buenos días') || lowerMessage.includes('buenas tardes')) {
-                    response = botResponses["hola"];
-                } else if (lowerMessage.includes('funciona') || lowerMessage.includes('cómo funciona') || lowerMessage.includes('como funciona')) {
-                    response = botResponses["como funciona"];
-                } else if (lowerMessage.includes('gratis') || lowerMessage.includes('gratuita') || lowerMessage.includes('cuesta')) {
-                    response = botResponses["es gratuita"];
-                } else if (lowerMessage.includes('emergencia') || lowerMessage.includes('cubre') || lowerMessage.includes('situaciones')) {
-                    response = botResponses["que emergencias"];
-                } else if (lowerMessage.includes('descargar') || lowerMessage.includes('instalar') || lowerMessage.includes('obtener')) {
-                    response = botResponses["descargar"];
+                // Crear los tres puntos de la animación
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('chatbot-typing-dot');
+                    typingDiv.appendChild(dot);
                 }
                 
-                sendChatbotMessage(response);
-            }, 1000 + Math.random() * 1000);
-        }
-
-        // Event listeners for chatbot
-        sendMessage.addEventListener('click', handleUserMessage);
-        
-        chatbotInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleUserMessage();
+                chatbotMessages.appendChild(typingDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                
+                return typingDiv;
             }
-        });
 
-        // Quick questions
-        quickQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                chatbotInput.value = question.textContent;
-                handleUserMessage();
-            });
-        });
+            // Función para ocultar el efecto "escribiendo"
+            function hideTypingIndicator(typingElement) {
+                if (typingElement && typingElement.parentNode) {
+                    typingElement.parentNode.removeChild(typingElement);
+                }
+            }
 
-        // Initialize AOS (Animate On Scroll)
-        document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-                mirror: false
+            // Send message function
+            function sendMessage() {
+                const message = chatbotInput.value.trim();
+                if (message === '') return;
+                
+                // Add user message
+                addMessage(message, 'user');
+                chatbotInput.value = '';
+                
+                // Mostrar indicador de que está escribiendo
+                const typingElement = showTypingIndicator();
+                
+                // Simular tiempo de respuesta variable (entre 0.5 y 2 segundos)
+                const typingTime = Math.random() * 1500 + 500;
+                
+                setTimeout(() => {
+                    // Ocultar indicador de escritura
+                    hideTypingIndicator(typingElement);
+                    
+                    const botResponse = getBotResponse(message);
+                    addMessage(botResponse, 'bot');
+                    
+                    // Scroll to bottom
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, typingTime);
+            }
+            
+            // Send message on button click
+            sendMessageBtn.addEventListener('click', sendMessage);
+            
+            // Send message on Enter key
+            chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
             });
-        });
+            
+            // Quick questions
+            quickQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const message = question.textContent;
+                    addMessage(message, 'user');
+                    
+                    // Mostrar indicador de que está escribiendo
+                    const typingElement = showTypingIndicator();
+                    
+                    // Simular tiempo de respuesta variable
+                    const typingTime = Math.random() * 1500 + 500;
+                    
+                    setTimeout(() => {
+                        // Ocultar indicador de escritura
+                        hideTypingIndicator(typingElement);
+                        
+                        const botResponse = getBotResponse(message);
+                        addMessage(botResponse, 'bot');
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    }, typingTime);
+                });
+            });
+            
+            // Add message to chat
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('chatbot-message', sender);
+                
+                const messageText = document.createElement('p');
+                messageText.textContent = text;
+                
+                messageDiv.appendChild(messageText);
+                chatbotMessages.appendChild(messageDiv);
+                
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+            
+            // Bot responses
+            function getBotResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                if (lowerMessage.includes('hola') || lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('buenos días') || lowerMessage.includes('buenas tardes') || lowerMessage.includes('buenas noches') || lowerMessage.includes('que hay')) {
+                    return '¡Hola! Soy el Agente de Seguridad de Emergencia K8. ¿En qué puedo ayudarte?';
+                }
+
+                if (lowerMessage.includes('llamas') || lowerMessage.includes('tienes nombre') || lowerMessage.includes('nombre') || lowerMessage.includes('llamo')) {
+                    const nombre = [
+                        "Me llamo Ek8. ¿Te puedo ayudar con algo?",
+                        "Mi nombre es Ek8, ¡que hay!",
+                        "Mis amigos me llaman Ek8. ¡Pregúntame!",
+                    ];
+                    // Elige una respuesta aleatoria del array:
+                    return nombre[Math.floor(Math.random() * nombre.length)];
+                }
+                
+                if (lowerMessage.includes('que es') || lowerMessage.includes('funcionamiento') || lowerMessage.includes('que es emergencia k8')) {
+                    return 'Emergencia K8 es un botón de pánico virtual. Al activarlo, envía la ubicación y datos del negocio a las autoridades. Puedes elegir entre diferentes tipos de emergencia (C5, Cuadrante, Extorsión o Avisar a conocido).';
+                }
+                
+                if (lowerMessage.includes('internet') || lowerMessage.includes('conexión') || lowerMessage.includes('conexion') || lowerMessage.includes('datos moviles') || lowerMessage.includes('datos móviles')) {
+                    return 'Emergencia K8 requiere conexión a internet (WiFi o datos móviles) para enviar alertas. La app no funciona sin conexión.';
+                }
+                                                                               
+                if (lowerMessage.includes('descargar') || lowerMessage.includes('instalar') || lowerMessage.includes('encontrar')) {
+                    return 'Puedes descargar Emergencia K8 desde nuestra sección de Descargas. Está disponible para celulares/tabletas (Android) y computadoras (Windows/Mac).';
+                }
+
+                if (lowerMessage.includes('ocupa') || lowerMessage.includes('espacio') || lowerMessage.includes('pesa')) {
+                    return 'No, la app no ocupa mucho espacio en tu dispotivo. Pesa más una foto de tu celular que la app Emergencia K8';
+                }
+
+                if (lowerMessage.includes('cualquier dispositivo') || lowerMessage.includes('cualquier celular') || lowerMessage.includes('computadora') || lowerMessage.includes('compatible') || lowerMessage.includes('tableta')) {
+                    return 'Si, es compatible con cualquier dispositivo. Puedes descargar la app Emergencia K8 desde nuestra sección de Descargas. Está disponible para celulares/tabletas y computadoras (Windows/Mac).';
+                }
+                
+                if (lowerMessage.includes('gracias') || lowerMessage.includes('agradezco')) {
+                    return '¡De nada! Estoy aquí para ayudarte. ¿Hay algo más sobre lo que necesites información?';
+                }
+                
+                if (lowerMessage.includes('adiós') || lowerMessage.includes('adios')  || lowerMessage.includes('chao') || lowerMessage.includes('hasta luego') || lowerMessage.includes('en nada')) {
+                    return '¡Hasta luego! Recuerda que puedes volver a abrir este chat cuando lo necesites. ¡Cuídate!';
+                }
+
+                if (lowerMessage.includes('no sirves') || lowerMessage.includes('porqueria') || lowerMessage.includes('porquería') || lowerMessage.includes('eres basura')) {
+                    return 'Lamento leer eso, espero que en el futuro pueda brindarte una mejor ayuda. ¡Cuidate mucho!';
+                }
+
+                if (lowerMessage.includes('cómo funciona') || lowerMessage.includes('como funciona') || lowerMessage.includes('funcionamiento') || lowerMessage.includes('proceso de emergencia k8')) {
+                    return '1) Activación desde el establecimiento\n2) C5 recibe alerta y despliega información\n3) Policía más cercano atiende en -3 minutos.';
+                }
+
+                if (lowerMessage.includes('es gratuita') || lowerMessage.includes('es gratis') || lowerMessage.includes('es gratuito')) {
+                    return '¡Sí! Emergencia K8 es completamente gratuita. No tiene costos de descarga, suscripción ni uso.';
+                }
+
+                if (lowerMessage.includes('cuesta') || lowerMessage.includes('costo') || lowerMessage.includes('precio') || lowerMessage.includes('cobrar') || lowerMessage.includes('pagar') || lowerMessage.includes('cobran')) {
+                    return 'No, actualmente la aplicación no tiene costos de descarga, suscripción ni uso.';
+                }
+
+                if (lowerMessage.includes('tipos de emergencia') || lowerMessage.includes('cubre') || lowerMessage.includes('protege') || lowerMessage.includes('qué emergencias atiende') || lowerMessage.includes('para qué sirve el botón') || lowerMessage.includes('sirve el boton')) {
+                    return 'Puedes reportar cualquier situación de emergencia: robos, asaltos, extorsiones, violencia, incendios o accidentes que requieran intervención de autoridades.';
+                }
+
+                if (lowerMessage.includes('configurar') || lowerMessage.includes('configuracion') || lowerMessage.includes('configuración') || lowerMessage.includes('registrar') || lowerMessage.includes('token') || lowerMessage.includes('cómo configurar en celular') || lowerMessage.includes('guía de configuración')) {
+                    return 'Al descargar la app, necesitarás un token único que se proporciona al registrar tu negocio. Luego podrás configurar los datos de tu establecimiento (nombre, giro, ubicación).';
+                }
+               
+                if (lowerMessage.includes('cuál es el objetivo') || lowerMessage.includes('para qué sirve')) {
+                    return 'El objetivo de Emergencia K8 es dar una respuesta inmediata a emergencias en establecimientos registrados en la Ciudad de México.';
+                }
+
+                if (lowerMessage.includes('qué es un cuadrante') || lowerMessage.includes('que es un cuadrante') || lowerMessage.includes('definición de cuadrante')) {
+                    return 'Un cuadrante es una delimitación territorial con personal policial asignado, vehículos y equipo de comunicación para vigilancia las 24 horas.';
+                }
+
+                if (lowerMessage.includes('cómo nació') ||  lowerMessage.includes('nacio') ||  lowerMessage.includes('nació') || lowerMessage.includes('como nacio') || lowerMessage.includes('desde cuando') ||  lowerMessage.includes('origen de emergencia k8') ||  lowerMessage.includes('lleva funcionando')) {
+                    return 'Emergencia K8 nace en 2025 para reforzar el programa Mi Policía en Mi Negocio y facilitar la solicitud de ayuda policial ante emergencias.';
+                }
+
+                if (lowerMessage.includes('ventajas') || lowerMessage.includes('beneficios')) {
+                    return 'Las ventajas incluyen: es gratuito, comunicación directa con SSC, respuesta rápida, múltiples opciones de activación y configuración en varios dispositivos.';
+                }
+
+                if (lowerMessage.includes('qué datos se necesitan') || lowerMessage.includes('requisitos')) {
+                    return 'Se necesitan: datos del establecimiento (nombre, giro, teléfono), ubicación (dirección y coordenadas)';
+                }
+
+                if (lowerMessage.includes('qué es un token') || lowerMessage.includes('que es un token') || lowerMessage.includes('sirve un token')) {
+                    return 'El token de Emergencia K8 es un enlace único para cada establecimiento que permite configurar la aplicaciòn para enviar alertas de emergencia.';
+                }
+
+                if (lowerMessage.includes('cómo activar') || lowerMessage.includes('modos de activación')) {
+                    return 'Emergencia K8 se activa pulsando el botón rojo ubicada en la pantalla principal. Siempre se necesita internet.';
+                }
+
+                if (lowerMessage.includes('veo al activar') || lowerMessage.includes('mensaje de activación')) {
+                    return 'Verás "Enviada" (fondo azul marino) si es real o "Prueba enviada. 210. ok" (azul turquesa) si es prueba.';
+                }
+
+                if (lowerMessage.includes('qué ve c5 al activar') || lowerMessage.includes('información que recibe c5')) {
+                    return 'C5 ve: nombre y dirección del establecimiento, ubicación exacta, patrulla más cercana (200m) y cámaras C2 cercanas.';
+                }
+
+                if (lowerMessage.includes('responsabilidades') || lowerMessage.includes('obligaciones')) {
+                    return 'Usar Emergencia K8 responsablemente, controlar quién tiene acceso a la URL, reportar anomalías y atender al personal policial que responda.';
+                }
+
+                if (lowerMessage.includes('cuántos dispositivos configurar') || lowerMessage.includes('límite de equipos')) {
+                    return 'No hay límite; puedes configurar todos los celulares y computadoras que necesites.';
+                }
+
+                if (lowerMessage.includes('tiempo de respuesta') || lowerMessage.includes('cuánto tardan en llegar')  || lowerMessage.includes('reaccion') || lowerMessage.includes('reacción') || lowerMessage.includes('demoran en atender') || lowerMessage.includes('cuando presionar el botón') )  {
+                    return 'El tiempo promedio es de 3 minutos, pero puede variar por factores como ubicación, tráfico o disponibilidad policial.';
+                }
+
+                if (lowerMessage.includes('dónde funciona') || lowerMessage.includes('emergencia k8 en edomex')) {
+                    return 'Si el token es de la Ciudad de Mèxico, entonces solo funcionaría para establecimientos ubicados en la Ciudad de México.';
+                }
+
+                if (lowerMessage.includes('activación falsa') || lowerMessage.includes('multas')) {
+                    return 'No hay multas, pero el servicio puede suspenderse si se detecta mal uso recurrente.';
+                }
+
+                if (lowerMessage.includes('cómo incorporarse') || lowerMessage.includes('como incorporarse') || lowerMessage.includes('registrarse')) {
+                    return 'Debes enviar una solicitud escrita a la SSC con los datos del establecimiento y solicitante. También hay formatos disponibles.';
+                }
+
+                if (lowerMessage.includes('quién puede usar') || lowerMessage.includes('requisitos para usar')) {
+                    return 'Todos los negocios y establecimientos ubicados en la CDMX pueden hacer uso de la aplicación.';
+                }
+
+                if (lowerMessage.includes('qué pasa si pierdo mi celular') || lowerMessage.includes('dispositivo perdido')) {
+                    return 'Debes configurar Emergencia K8 en un nuevo dispositivo. El Token sigue siendo el mismo, pero la configuración anterior quedará inactiva.';
+                }
+
+                if (lowerMessage.includes('cómo cancelar una alerta') || lowerMessage.includes('detener alerta')) {
+                    return 'Cuando se activa el botón, la app pide confirmación, y comeinza un conteo regresivo de 5 segundos que se puede cancelar.';
+                }
+
+                if (lowerMessage.includes('qué hacer si no funciona') || lowerMessage.includes('no funciona') || lowerMessage.includes('problemas técnicos')) {
+                    return 'Verifica tu conexión a internet. Si persiste, manda un correo electrónico reportando la anomalia.';
+                }
+
+                if (lowerMessage.includes('puedo tener varios botones en la misma aplicación') || lowerMessage.includes('combinar')) {
+                    return 'La aplicación tiene cuatro botones, cada una con sus propias caracterìsticas y funcionamiento.';
+                }
+                
+                if (lowerMessage.includes('puedo cambiar datos después de registrar') || lowerMessage.includes('actualizar información')) {
+                    return 'Sí, en el menú de servicios de la aplicación se pueden modificar la información del establecimiento, los cuales se veran en la pantalla principal del teléfono..';
+                }
+
+                if (lowerMessage.includes('qué pasa si me mudo de local') || lowerMessage.includes('cambio de dirección')) {
+                    return 'La aplicación seguira funcionando, pero debes notificar el cambio a la institución que te brindo el Token para actualizar tu georreferenciación.';
+                }
+
+                if (lowerMessage.includes('para escuelas') || lowerMessage.includes('emergencia k8 en escuelas')) {
+                    return 'Sí, la aplicación funciona para escuelas, comercios, establecimientos, negocios, entre otros.';
+                }
+                
+                if (lowerMessage.includes('política de privacidad') || lowerMessage.includes('uso de datos')) {
+                    return 'Tus datos solo se usan para emergencias. Están protegidos por la ley y no se comparten con terceros sin consentimiento.';
+                }
+
+                if (lowerMessage.includes('si activo por error') || lowerMessage.includes('que hacer si activo por error') || lowerMessage.includes('si se activa por error')|| lowerMessage.includes('falsa alarma')) {
+                    return 'Informa al policía que fue accidental. Evita sanciones explicando la situación. No hay multas por primeras incidencias.';
+                }
+
+                if (lowerMessage.includes('tienda de apps') || lowerMessage.includes('tienda') || lowerMessage.includes('descarga la app') || lowerMessage.includes('obtengo') || lowerMessage.includes('app store') || lowerMessage.includes('play store') || lowerMessage.includes('google play')) {
+                    return 'Por el momento Emergencia K8 solo está disponible para su descarga desde la página web. Puedes ir al apartado de descarga en esta página.';
+                }
+
+                if (lowerMessage.includes('manual') || lowerMessage.includes('guía') || lowerMessage.includes('guia') || lowerMessage.includes('ayudar') || lowerMessage.includes('ayuda')) {
+                    return 'Puedo mandarte un manual y guía de configuración para que configures tu dispositivo moviles o computadoras.';
+                }
+                
+                if (lowerMessage.includes('política de privacidad') || lowerMessage.includes('politica de privacidad') || lowerMessage.includes('datos personales') || lowerMessage.includes('protección de datos')) {
+                    return 'La política de privacidad de Emergencia K8 garantiza que no se recopilan datos personales de los usuarios. Puedes consultar el documento completo en la sección correspondiente de nuestra página web.';
+                }
+
+                if (lowerMessage.includes('aviso de privacidad') || lowerMessage.includes('condiciones de uso') || lowerMessage.includes('terminos')) {
+                    return 'Puedes consultar las Condiciones de Uso y Aviso Privacidad en la sección correspondiente de nuestra página web.';
+                }
+
+                if (lowerMessage.includes('funcionamiento') || lowerMessage.includes('cómo funciona') || lowerMessage.includes('como funciona') || lowerMessage.includes('uso de la app')) {
+                    return 'Emergencia K8 opera como un botón de pánico virtual para establecimientos en la Ciudad de México. Requiere conexión a internet y un token de acceso único. Consulta la sección "Del Uso y Funcionamiento" en nuestra política de privacidad para más detalles.';
+                }
+
+                if (lowerMessage.includes('obtener un token') || lowerMessage.includes('obtener token') || lowerMessage.includes('código de acceso') || lowerMessage.includes('codigo de acceso') || lowerMessage.includes('registro')) {
+                    return 'Para obtener un token de acceso, el establecimiento debe registrarse en la Plataforma Tecnológica Emergencia K8 y cumplir con los requisitos. Más información en la sección "Del Uso y Funcionamiento" de nuestra política de privacidad.';
+                }
+
+                if (lowerMessage.includes('ubicación') || lowerMessage.includes('localización') || lowerMessage.includes('localizacion') || lowerMessage.includes('GPS')) {
+                    return 'Emergencia K8 NO requiere acceso a la ubicación del dispositivo ni utiliza la ubicación en segundo plano. Puedes verificar esta información en la sección "Del Uso y Funcionamiento" de nuestra política de privacidad.';
+                }
+
+                if (lowerMessage.includes('responsabilidad') || lowerMessage.includes('canalización de emergencias') || lowerMessage.includes('atención de emergencias')) {
+                    return 'La canalización y atención de emergencias no es responsabilidad de Emergencia K8. Consulta la sección "De la Responsabilidad" en nuestra política de privacidad para más información.';
+                }
+
+                if (lowerMessage.includes('actualización') || lowerMessage.includes('modificación') || lowerMessage.includes('cambios en la app')) {
+                    return 'Cualquier modificación en la política de privacidad o funcionalidades de la app será notificada a través de la misma aplicación. La última actualización fue el 23 de mayo de 2025.';
+                }
+
+                if (lowerMessage.includes('propiedad intelectual') || lowerMessage.includes('derechos de autor') || lowerMessage.includes('uso no autorizado')) {
+                    return 'Todo el contenido de Emergencia K8 está protegido por derechos de autor y propiedad industrial. No se permite su uso con fines distintos a los previstos. Más detalles en la sección "De la Propiedad Intelectual" de nuestra política de privacidad.';
+                }
+
+                if (lowerMessage.includes('quien recibe la emergencia') || lowerMessage.includes('recibe la emergencia') || lowerMessage.includes('canalizan la emergencia')) {
+                    return 'Dependiendo tu localidad, sería el área donde se canalizan las emergencias, ej. C5, Puesto de Mando, Policía local, autoridades de gobierno, etc.';
+                }
+
+                if (lowerMessage.includes('quien atiende la emergencia') || lowerMessage.includes('atiende la emergencia') || lowerMessage.includes('responden a la emergencia')) {
+                    return 'Dependiendo de tu ciudad, podría ser atendida por la policía local (principalmente), o por alguna autoridad que esté ligada a la app Emergencia k8.';
+                }
+
+                if (lowerMessage.includes('cuando presionar el botón') || lowerMessage.includes('cuando usar el botón') || lowerMessage.includes('cuando activar el botón')) {
+                    return 'El botón se puede presionar cuando te sientas en peligro, en riesgo o cuando seas víctima o testigo de algún delito.';
+                }
+
+                if (lowerMessage.includes('cuantas veces presionar') || lowerMessage.includes('veces usar el botón') || lowerMessage.includes('limite de usos')) {
+                    return 'Puedes presionar el botón las veces que sean necesarias, siempre y cuando sea por alguna situación donde realmente se requiera la presencia policial o de otra autoridad.';
+                }
+
+                if (lowerMessage.includes('presionar por error') || lowerMessage.includes('activación accidental') || lowerMessage.includes('error con el botón')) {
+                    return 'El botón cuenta con mecanismos para evitar las falsas alarmas, pidiendo una confirmación además de un conteo regresivo de 5 segundos que se puede cancelar antes de que concluya el tiempo.';
+                }
+
+                if (lowerMessage.includes('saben mi ubicación') || lowerMessage.includes('conocen mi ubicación') || lowerMessage.includes('rastrean ubicación')) {
+                    return 'No, Emergencia K8, al día de hoy no trabaja con la ubicación del dispositivo, sino con los datos del establecimiento registrado.';
+                }
+
+                if (lowerMessage.includes('siguen mi ubicación') || lowerMessage.includes('rastreo en tiempo real') || lowerMessage.includes('monitorean ubicación')) {
+                    return 'No, Emergencia K8 no sigue la ubicación en tiempo real de ningún dispositivo.';
+                }
+
+                if (lowerMessage.includes('saben donde estoy') || lowerMessage.includes('localizan al presionar') || lowerMessage.includes('ubicación al activar')) {
+                    return 'No, pero la emergencia sería canalizada al establecimiento registrado cuya ubicación estaría en nuestro sistema.';
+                }
+
+                if (lowerMessage.includes('quien lo puede usar') || lowerMessage.includes('quien lo puede descargar') || lowerMessage.includes('requisitos para su uso') || lowerMessage.includes('quien lo puede utilizar') || lowerMessage.includes('ocupar')) {
+                    return 'Cualquier persona que sea dueño, empleado, encargado, o que tenga algún interés legítimo en un establecimiento puede descargar y utilizar la app Emergencia K8.';
+                }
+
+                if (lowerMessage.includes('que necesito para usar') || lowerMessage.includes('requisitos para registrar') || lowerMessage.includes('como registro la app')) {
+                    return 'Para el botón de emergencia es necesario hacer un registro previo ante el área correspondiente de tu localidad, el cual generará un Token único que mantendrá comunicados tu establecimiento con las áreas de seguridad.';
+                }
+
+                if (lowerMessage.includes('solo para ciudad de mexico') || lowerMessage.includes('funciona en otro estado') || lowerMessage.includes('disponible en') || lowerMessage.includes('donde esta disponible la app') || lowerMessage.includes('esta disponible en') || lowerMessage.includes('está disponible en') || lowerMessage.includes('donde funciona') || lowerMessage.includes('donde aplica') || lowerMessage.includes('funciona en') || lowerMessage.includes('funciona para')) {
+                    return 'Actualmente la app Emergencia K8 funciona solo en la Ciudad de México, sin embargo si te interesa y estás en otra ciudad o estado manda un correo electrónico para brindarte sugerencias y más información sobre este tema.';
+                }
+
+                if (lowerMessage.includes('no atendieron') || lowerMessage.includes('no acudieron') || lowerMessage.includes('no vinieron') || lowerMessage.includes('no respondieron') || lowerMessage.includes('no vino') || lowerMessage.includes('no respondio') || lowerMessage.includes('no atendio') || lowerMessage.includes('no acudio') || lowerMessage.includes('no atendió') || lowerMessage.includes('no llegaron') || lowerMessage.includes('si llegan') || lowerMessage.includes('si llega') || lowerMessage.includes('quien atiende')) {
+                    return 'La canalización de apoyos y/o atención de las emergencias, tanto de seguridad como de cualquier otro tipo, NO ES RESPONSABILIDAD de la Aplicación Emergencia K8. Te recomiendo realizar tu queja tu queja a la Unidad de Contacto del área correspondiente.';
+                }
+
+                if (lowerMessage.includes('correo') || lowerMessage.includes('correo electronico') || lowerMessage.includes('correo electrónico') || lowerMessage.includes('mensaje') || lowerMessage.includes('medios de contacto') || lowerMessage.includes('contactar')) {
+                    const contacto = [
+                        '\n',
+                        'Correo Electrónico: contacto@emergenciak8.com.mx',
+                        'Whatsapp: 56 5696 7628'
+                        ];
+                        return 'Puedes comunicarte a través de los siguiente medios de contaco:\n\n' + contacto.join('\n• ');
+                }
+
+                if (lowerMessage.includes('mas informacion') || lowerMessage.includes('más información') || lowerMessage.includes('información')) {
+                    const contacto = [
+                        '\n',
+                        'Correo Electrónico: contacto@emergenciak8.com.mx',
+                        'Whatsapp: 56 5696 7628'
+                        ];
+                        return 'Si requieres más información, puedes comunicarte a través de los siguiente medios de contaco:\n\n' + contacto.join('\n• ');
+                }
+
+                    return 'Podrías reformular la pregunta, puedo ayudarte con información sobre:\n\n• Funcionamiento de la app\n• Tipos de emergencias\n• Configuración\n\n¿En qué más puedo ayudarte?';
+                }
+            });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+    </script>
+
 </body>
 </html>
