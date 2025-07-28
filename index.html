@@ -3298,6 +3298,12 @@
             showThankyouMessage();
         });
         
+        // Función para validar email (debe estar fuera del event listener)
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
         // Envío del formulario de feedback - Versión sin envío de correo
         feedbackForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -3319,12 +3325,6 @@
             if (!comments || comments.length < 10) {
                 alert('Por favor escribe un comentario de al menos 10 caracteres.');
                 return;
-            }
-            
-            // Función para validar email (se mantiene para la validación)
-            function isValidEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
             }
             
             // Simplemente mostrar el mensaje de agradecimiento
