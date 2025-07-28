@@ -3298,36 +3298,28 @@
             showThankyouMessage();
         });
         
-        // Función para validar email (debe estar fuera del event listener)
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        // Envío del formulario de feedback - Versión sin envío de correo
-        feedbackForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        // En el botón "Enviar solo encuesta"
+        sendSurveyOnly.addEventListener('click', function() {
+            const questionsAnswered = 
+                document.querySelector('input[name="problemResolution"]:checked') &&
+                document.querySelector('input[name="responseTime"]:checked') &&
+                document.querySelector('input[name="attentionQuality"]:checked');
             
-            // Vibración corta al enviar
-            if (navigator.vibrate) {
-                navigator.vibrate(100); // 100ms de vibración
-            }
-            
-            const email = document.getElementById('feedbackEmail').value.trim();
-            const comments = document.getElementById('feedbackComments').value.trim();
-            
-            // Validación básica
-            if (!email || !isValidEmail(email)) {
-                alert('Por favor ingresa un correo electrónico válido.');
+            if (!questionsAnswered) {
+                // Mostrar mensaje de advertencia en lugar de alert()
+                panicWarning.classList.add('active');
                 return;
             }
             
-            if (!comments || comments.length < 10) {
-                alert('Por favor escribe un comentario de al menos 10 caracteres.');
-                return;
-            }
+            const surveyData = {
+                problemResolution: document.querySelector('input[name="problemResolution"]:checked').value,
+                responseTime: document.querySelector('input[name="responseTime"]:checked').value,
+                attentionQuality: document.querySelector('input[name="attentionQuality"]:checked').value,
+                timestamp: new Date().toISOString()
+            };
             
-            // Simplemente mostrar el mensaje de agradecimiento
+            console.log('Datos de encuesta enviados:', surveyData);
+            // Mostrar mensaje de agradecimiento
             showThankyouMessage();
         });
 
