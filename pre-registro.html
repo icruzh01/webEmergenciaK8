@@ -288,6 +288,10 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
         }
+
+        .preregistration-form input[type="email"] {
+            text-transform: none !important;
+        }
         
         .preregistration-form input:focus,
         .preregistration-form select:focus,
@@ -1102,7 +1106,9 @@
         
         // Convertir texto a mayúsculas en tiempo real
         document.querySelectorAll('input[type="text"], input[type="tel"], textarea, select').forEach(input => {
-            if (input.tagName === 'SELECT' && input.value) {
+            if (input.id === 'applicantEmail') {
+                input.value = input.value.toLowerCase();
+            } else if (input.tagName === 'SELECT' && input.value) {
                 const option = input.options[input.selectedIndex];
                 option.text = option.text.toUpperCase();
             } else {
@@ -1110,21 +1116,45 @@
             }
         });
 
-        // Convertir texto a mayúsculas en tiempo real
+        // Convertir texto a mayúsculas en tiempo real (excepto email)
         document.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(input => {
-            input.addEventListener('input', function() {
-                this.value = this.value.toUpperCase();
-            });
+            if (input.id !== 'applicantEmail') {
+                // Convertir a mayúsculas al escribir
+                input.addEventListener('input', function() {
+                    this.value = this.value.toUpperCase();
+                });
+                
+                // Convertir valor existente a mayúsculas
+                if (input.value) {
+                    input.value = input.value.toUpperCase();
+                }
+            }
         });
+
+        // Forzar minúsculas en el campo de correo (al escribir y valor existente)
+        const emailField = document.getElementById('applicantEmail');
+        emailField.addEventListener('input', function() {
+            this.value = this.value.toLowerCase();
+        });
+        if (emailField.value) {
+            emailField.value = emailField.value.toLowerCase();
+        }
 
         // Para los select
         document.querySelectorAll('select').forEach(select => {
+            // Convertir opciones a mayúsculas al cambiar
             select.addEventListener('change', function() {
                 if (this.value) {
                     const option = this.options[this.selectedIndex];
                     option.text = option.text.toUpperCase();
                 }
             });
+            
+            // Convertir opción seleccionada inicial a mayúsculas
+            if (select.value) {
+                const option = select.options[select.selectedIndex];
+                option.text = option.text.toUpperCase();
+            }
         });
     </script>
 </body>
